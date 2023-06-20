@@ -42,9 +42,7 @@ You should now see a log message in the browser console when you click the **Del
 
 To delete the conversation, we'll use TalkJS's [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/). You'll need to call the API from a backend web server rather than in your existing frontend code to avoid exposing your secret API key, which has full admin access to your TalkJS account. In this section we'll create a backend server and send it the conversation ID, which we'll later use to delete the conversation.
 
-We’ll be using [Express](https://expressjs.com/) in this tutorial, but feel free to use your favourite web server library instead. We'll also use the [`cors`](https://expressjs.com/en/resources/middleware/cors.html) package to handle [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
-
-!!expand on CORS
+We’ll be using [Express](https://expressjs.com/) in this tutorial, but feel free to use your favourite web server library instead. You'll also need to set up CORS support on your server. In this case we'll use the [`cors`](https://expressjs.com/en/resources/middleware/cors.html) package.
 
 In your server code, create a `/conversationAction` endpoint to post the conversation ID to:
 
