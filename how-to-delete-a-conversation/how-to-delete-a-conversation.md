@@ -1,6 +1,6 @@
 # How to delete a conversation
 
-TalkJS's [Conversation Actions](https://talkjs.com/docs/Features/Customizations/Conversation_Actions/) feature makes it easy to add new custom options to the conversation menu. In this tutorial, we'll demonstrate how to add a new 'Delete conversation' action. We'll then set up a backend server and call TalkJS's REST API from there to delete the conversation.
+TalkJS's [Conversation Actions](https://talkjs.com/docs/Features/Customizations/Conversation_Actions/) feature makes it easy to add new custom options to your conversations. In this tutorial, we'll demonstrate how to add a new action that sends a web request to your backend server. The server then calls TalkJS's REST API to delete the conversation.
 
 To follow along, you’ll need:
 
@@ -8,27 +8,27 @@ To follow along, you’ll need:
 - An existing TalkJS project using the [JavaScript Chat SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/). See our [Getting Started guide](https://talkjs.com/docs/Getting_Started/) for an example of how to set this up.
 - An installation of [Node.js](https://nodejs.org/) along with the [npm](https://www.npmjs.com/) package manager. We’ll use this to create our backend server.
 
-We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the Github repo for this tutorial.
+We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-delete-a-conversation) for this tutorial.
 
-!!add Github repo link
+## Add a delete option to the menu
 
-## Add a 'Delete' conversation action
+First, we need add a way to trigger the delete action in the frontend. You can configure which actions a user is able to take based on their [user role](https://talkjs.com/docs/Reference/Concepts/Roles/). In this example we'll apply a custom conversation action to the "default" role.
 
-You can configure which actions a user is able to take based on their [user role](https://talkjs.com/docs/Reference/Concepts/Roles/). In this example we'll apply a custom conversation action to the `"default"` role.
+In the **Roles** tab of the TalkJS dashboard, select the "default" role option. In the **Custom conversation actions** section, add a new custom conversation action with a **Name** of "delete" and a **Label** of "Delete conversation". The name will be used in our code, while the label is what appears in the UI:
 
-In the **Roles** tab of the TalkJS dashboard, select the **default** role option. In the **Custom conversation actions** section, add a new custom conversation action with a **Name** of "delete" and a **Label** of "Delete conversation". The name will be the event name we'll listen for in our event handler, while the label is what will show up in the chat UI.
+!! add 1-conversation-actions-dashboard.jpg
 
-If you're using TalkJS's default theme, you should now see a new **Delete conversation** option in the menu at the top of your conversation:
+If you're using a preset theme, you should now see a new **Delete conversation** option in the menu at the top of your conversation:
 
-!! add 1-delete-conversation-ui.jpg
+!! add 2-delete-conversation-ui.jpg
 
-If you're using a legacy theme, or customised a theme before the custom conversation actions feature was released, you'll need to add this menu to your theme before it will show up. See [our docs](https://talkjs.com/docs/Features/Customizations/Conversation_Actions/#the-action-menu-does-not-show-up) for details on how to edit the theme.
+If you're using a legacy theme, or customized a theme before the custom conversation actions feature was released, you'll need to add this menu to your theme before it will show up. See [our docs](https://talkjs.com/docs/Features/Customizations/Conversation_Actions/#the-action-menu-does-not-show-up) for details on how to edit the theme.
 
-## Handle the 'Delete' conversation action event
+## Listen for the "Delete conversation" event
 
-Next, listen for the new custom conversation action using the [`onCustomConversationAction` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Chatbox/#Chatbox__onCustomConversationAction) in TalkJS's JavaScript SDK.
+Next, listen for your new conversation action using the [`onCustomConversationAction` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Chatbox/#Chatbox__onCustomConversationAction) in TalkJS's JavaScript SDK.
 
-As a first test, add the following to your `index.html` file:
+As a test, add the following to your TalkJS code:
 
 ```js
 inbox.onCustomConversationAction("delete", (event) => {
@@ -40,11 +40,11 @@ You should now see a log message in the browser console when you click the **Del
 
 ## Send the conversation ID to your backend server
 
-To delete the conversation, we'll use TalkJS's [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/). You'll need to call the API from a backend web server rather than in your existing frontend code to avoid exposing your secret API key, which has full admin access to your TalkJS account. In this section we'll create a backend server and send it the conversation ID, which we'll later use to delete the conversation.
+In this section we'll create a backend server and send it the conversation ID. Later, we'll pass that ID to TalkJS's [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/) to delete the conversation. You'll need to call the API from a backend web server rather than in your existing frontend code to avoid exposing your secret API key, which has full admin access to your TalkJS account.
 
-We’ll be using [Express](https://expressjs.com/) in this tutorial, but feel free to use your favourite web server library instead. You'll also need to set up CORS support on your server. In this case we'll use the [`cors`](https://expressjs.com/en/resources/middleware/cors.html) package.
+We’ll be using [Express](https://expressjs.com/) in this tutorial, but feel free to use your favorite web server library instead. You'll also need to set up CORS support on your server. In this case we'll use the [`cors`](https://expressjs.com/en/resources/middleware/cors.html) package.
 
-In your server code, create a `/conversationAction` endpoint to post the conversation ID to:
+In your server code, create a `/deleteConversation` endpoint to receive the conversation ID:
 
 ```js
 import express from "express";
@@ -56,19 +56,19 @@ app.use(express.json());
 
 app.listen(3000, () => console.log("Server is up"));
 
-app.post("/conversationAction", async (req, res) => {
+app.post("/deleteConversation", async (req, res) => {
   console.log(req.body["conversationId"]);
   res.status(200).end();
 });
 ```
 
-Then update the `onCustomConversationAction` method in your `index.html` file to post the conversation ID to the server endpoint:
+Then update your `onCustomConversationAction` call to post the conversation ID to the server endpoint:
 
 ```js
 inbox.onCustomConversationAction("delete", (event) => {
   async function postConversationId() {
     // Send conversation id to your backend server
-    const response = await fetch("http://localhost:3000/conversationAction", {
+    const response = await fetch("http://localhost:3000/deleteConversation", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +83,7 @@ inbox.onCustomConversationAction("delete", (event) => {
 });
 ```
 
-Start your server, click the **Delete conversation** option in the conversation menu again and confirm that you would like to delete the conversation. You should now see the conversation ID logged to your server console.
+Start your server and click the **Delete conversation** option in the conversation menu again. You should now see the conversation ID logged to your server console as well.
 
 ## Delete the conversation
 
@@ -121,9 +121,11 @@ app.post("/conversationAction", async (req, res) => {
 });
 ```
 
+This code sends the conversation ID in an HTTP request to the [delete conversation](https://talkjs.com/docs/Reference/REST_API/Conversations/#deleting-a-conversation) endpoint on the TalkJS REST API.
+
 You'll find your app ID and secret API in your TalkJS dashboard.
 
-Finally, restart the server and try deleting the conversation again. This time, the conversation will be deleted and removed from the inbox.
+Finally, restart the server and click "Delete the conversation" again. This time, the conversation will be deleted and removed from the inbox.
 
 ## Conclusion
 
@@ -133,9 +135,7 @@ You now have a working demonstration of how to delete a conversation! To recap, 
 - Created a backend server and sent it the conversation ID.
 - Called TalkJS's REST API to delete the conversation.
 
-For the full example code for this tutorial, see our Github repo.
-
-!!insert link to repo
+For the full example code for this tutorial, see [our GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-delete-a-conversation).
 
 If you want to learn more about TalkJS, here are some good places to start:
 
