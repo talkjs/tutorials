@@ -114,7 +114,7 @@ async function deleteConversation(conversationId) {
   });
 }
 
-app.post("/conversationAction", async (req, res) => {
+app.post("/deleteConversation", async (req, res) => {
   const conversationId = req.body["conversationId"];
   await deleteConversation(conversationId);
   res.status(200).end();
