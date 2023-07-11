@@ -10,9 +10,7 @@ To follow along, you’ll need:
 - An existing TalkJS project using the [JavaScript Chat SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/). See our [Getting Started guide](https://talkjs.com/docs/Getting_Started/) for an example of how to set this up.
 - An installation of [Node.js](https://nodejs.org/) along with the [npm](https://www.npmjs.com/) package manager. We’ll use this to create our backend server.
 
-We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the
-
-!! [GitHub repo]() for this tutorial.
+We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-mute-a-conversation) for this tutorial.
 
 ## Add a mute option to the menu
 
@@ -152,9 +150,7 @@ You now have a working demonstration of how to mute a conversation! To recap, in
 
 You may want to extend this demonstration by adding a way to unmute the conversation. Conversation actions only allow a fixed label for the menu option and cannot be shown or hidden based on the current state, so adding an **Unmute conversation** menu option will mean that both options will be visible. Instead, you could replace your **Mute conversation** menu option with a **Configure notifications** menu option that triggers a modal dialog. You could then provide mute and unmute options within the dialog.
 
-For the full example code for this tutorial,
-
-!!see our [GitHub repo]().
+For the full example code for this tutorial, see our [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-mute-a-conversation).
 
 If you want to learn more about TalkJS, here are some good places to start:
 
