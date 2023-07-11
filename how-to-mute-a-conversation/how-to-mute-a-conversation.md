@@ -150,7 +150,7 @@ You now have a working demonstration of how to mute a conversation! To recap, in
 - Used TalkJS's JavaScript SDK to mute notifications for the conversation.
 - Tested that you no longer receive email notifications after you mute the conversation.
 
-To extend this so that you can also unmute a conversation, you can add a second "Unmute a conversation" conversation action that sets the `notify` field to `false`. Conversation actions only allow a fixed label for the action and cannot be shown or hidden based on the current state, so both actions with be visible.
+Conversation actions only allow a fixed label for the menu option and cannot be shown or hidden based on the current state, so adding an **Unmute conversation** menu option will mean that both options will be visible. To extend this demonstration so that you can unmute a conversation, you could instead create a **Configure notifications** menu option that triggers a modal dialog which allows you to mute or unmute the conversation.
 
 For the full example code for this tutorial,
 
