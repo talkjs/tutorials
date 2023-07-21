@@ -163,9 +163,11 @@ This code sends an automatic [system message](https://talkjs.com/docs/Reference/
 
 ## Improve the reply logic
 
-Currently, our code sends an automatic reply to every out-of-hours message from a customer. To avoid annoying customers with too many replies, we can alter the logic to send a reply to the first out-of-hours message from a customer in a conversation, and then only send another automatic message if a customer sends another message in the conversation after getting a response from a support agent.
+Currently, if a customer sends multiple messages in a row, we'll reply to each one. That could get annoying, so we should only reply to the first of their messages.
 
-To do this, we'll keep track of messages we've already replied to with an `alreadyReplied` object. We'll add conversation IDs to this as keys, with the date as the value, and only send automatic replies to conversations that aren't yet stored in `alreadyReplied`. We'll then remove keys when the conversation is replied to by a support agent:
+To do this, we'll keep track of messages we've already replied to with an `alreadyReplied` object. We'll add conversation IDs to this as keys, with the date as the value, and only send automatic replies to conversations that aren't yet stored in `alreadyReplied`.
+
+Once a support agent has replied, we'll remove the keys from `alreadyReplied`, so that if the customer messages again out-of-hours, they'll get another automatic reply.
 
 ```js
 // Track when we auto-replied to each conversation ID so we don't send multiple replies in a row
