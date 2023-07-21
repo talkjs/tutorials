@@ -193,7 +193,7 @@ app.post("/talkjs", async (req, res) => {
 });
 ```
 
-Note that in an application you're running in production you may also need a way to remove old keys from `alreadyReplied` for any messages that don't get answered by support – this is just a demonstration for the purposes of the tutorial.
+Note that when running in production you may need to remove keys from `alreadyReplied` eventually even if support never responds. Otherwise the code will slowly consume more and more memory over time. This is a simplified demonstration for the tutorial.
 
 You can now test your application. You should receive an automatic system reply to your first customer message when you send it out of support hours:
 
