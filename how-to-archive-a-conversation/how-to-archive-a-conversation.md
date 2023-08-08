@@ -80,6 +80,84 @@ inbox.setFeedFilter({ custom: { answered: ["!=", "true"] } });
 
 Now, test your archive feature by selecting **Archive a conversation** from the menu. The conversation should be removed from your inbox.
 
+## Add an archived conversations view
+
+We also need a way of viewing the archived conversations. To do this, we'll add a button that toggles the state of the inbox between archived and unarchived conversations.
+
+First, update your chat UI to include a **View archived chats** button. The details of the layout will depend on your site, but for this example we'll wrap the `"talkjs-container"` div in a `"chat-container"` div that also contains a button, and apply some basic styling:
+
+```html
+  <body>
+    <div id="chat-container">
+      <div id="button-row">
+        <button type="button" id="archive-button">View archived chats</button>
+      </div>
+      <!-- container element in which TalkJS will display a chat UI -->
+      <div id="talkjs-container" style="margin: 30px; height: 500px">
+        <i>Loading chat...</i>
+      </div>
+    </div>
+  </body>
+</html>
+```
+
+Next we'll listen for button click events. Replace your previous `setFeedFilter` call with the following code:
+
+```js
+const button = document.getElementById("archive-button");
+let isArchived = false;
+
+button.addEventListener("click", (event) => {
+  if (isArchived) {
+    inbox.setFeedFilter({ custom: { archived: ["!=", "true"] } });
+    button.innerHTML = "View archived chats";
+    isArchived = false;
+  } else {
+    inbox.setFeedFilter({ custom: { archived: ["==", "true"] } });
+    button.innerHTML = "Back to inbox";
+    isArchived = true;
+  }
+});
+```
+
+When you click the **View archived chats** button, it filters the inbox to show chats with the `archived` field set to `true`. Clicking it again toggles you back to the normal inbox view, which shows all other messages.
+
+Finally, we'll style the button to match the rest of the TalkJS default theme UI by adding the following to the `<head>` section:
+
+```html
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700"
+/>
+
+<style>
+  button {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    background-color: #ececec;
+    border: 1px solid #d4d4d4;
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  button:hover {
+    background-color: #d0d8dc;
+  }
+
+  #button-row {
+    width: 100%;
+    max-width: 750px;
+    margin: auto;
+    height: 2em;
+    display: flex;
+  }
+</style>
+```
+
+For more on themes, see our documentation on the [Theme Editor](https://talkjs.com/docs/Features/Themes/The_Theme_Editor/).
+
+!! add screenshot
+
 ## Conclusion
 
 You now have a working demonstration of how to archive a conversation! To recap, in this tutorial you have:
