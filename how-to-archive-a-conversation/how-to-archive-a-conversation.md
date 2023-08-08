@@ -12,127 +12,17 @@ We’ll build up the feature step by step in the following sections. If you woul
 
 !! see the [GitHub repo]() for this tutorial.
 
-## Get notified about new messages
+## Add archive and unarchive options to the menu
 
-First we’ll enable TalkJS [webhooks](https://talkjs.com/docs/Reference/Webhooks/), which allow the TalkJS server to notify your server when a message is sent. Webhooks let you use an event-driven architecture, where you get told about events when they happen rather than having to constantly check for new messages. There are lots of events you can listen for, but we’re only interested in new messages being sent.
-
-Webhooks are server-side only, so we’ll need a web server. We’ll be using [Express](https://expressjs.com/) in this tutorial, but feel free to use your favorite web server library instead:
-
-```js
-import express from "express";
-const app = express().use(express.json()); // creates http server
-
-app.listen(3000, () => console.log("Server is up"));
-
-app.post("/addCustomData", (req, res) => {
-  console.log(req.body);
-  res.status(200).end();
-});
-```
-
-This sets up a POST endpoint at `/addCustomData` that monitors incoming events from the TalkJS server. In the next section, we'll use this to add a custom `archived` field to the conversation.
-
-For TalkJS to communicate with your server, you must expose it to the internet. This can be very difficult when developing locally, with endless firewalls and port forwarding to set up. Instead, we’ll use [ngrok](https://ngrok.com/) to create a secure tunnel to your local server. See our tutorial on [How to integrate ngrok with TalkJS](https://talkjs.com/resources/how-to-integrate-ngrok-with-talkjs-to-receive-webhooks-locally/#setting-up-ngrok) for instructions on how to install ngrok.
-
-Once you have installed ngrok, run the following command:
-
-```sh
-ngrok http 3000
-```
-
-This command starts a secure tunnel to your local port 3000. The output should include the URL that ngrok exposes:
-
-```sh
-Forwarding                    https://<YOUR_SITE>.ngrok-free.app -> http://localhost:3000
-```
-
-You’re now ready to enable webhooks. You can do this in the TalkJS dashboard under **Webhooks**. Paste the URL above into the **Webhook URL** field, including the `/addCustomData` path: `https://<YOUR_SITE>.ngrok-free.app/addCustomData`.
-
-Select the **message.sent** option:
-
-!! 3-webhooks-ui.jpg - The list of webhook options in the TalkJS dashboard.
-
-TalkJS will now send a web request to your server when a message is sent. To test this, write another message in your chat UI. You should see the event in your server’s console:
-
-```sh
-{
-  createdAt: 1683276915840,
-  data: {
-    conversation: {
-      createdAt: 1683275536667,
-      custom: [Object],
-      id: '15966c817cb1473d9b0a',
-      // ... more fields here ...
-    },
-    message: {
-      // ... message fields here ...
-    },
-    sender: {
-      // ... sender fields here ...
-    }
-  },
-  id: 'evt_AVL7tDG9V7CPSXBfG4',
-  type: 'message.sent'
-}
-```
-
-## Add a custom `archived` field
-
-Next, we’ll react to the events by calling the [TalkJS REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/) to add custom data to conversations. We’ll use this to set an `archived: false` custom property on the conversation every time we receive a new message. (Later, we'll add an **Archive this conversation** menu option that sets this property to `true`.)
-
-In this tutorial we will use the [node-fetch](https://github.com/node-fetch/node-fetch) module to send the HTTP requests, but you can use another library if you prefer:
-
-```js
-import fetch from "node-fetch";
-
-const appId = "<APP_ID>";
-const secretKey = "<SECRET_KEY>";
-
-const basePath = "https://api.talkjs.com";
-const path = basePath + "/v1/" + appId + "/conversations/";
-```
-
-This imports the `node-fetch` module and sets up the URLs you will need to call. Fill in the app ID and secret key with the values from your TalkJS dashboard. Make sure you protect that secret key and never expose it in frontend code – it has full admin access to your TalkJS account.
-
-Next, we’ll use a PUT request to update the conversation data when a sent message event arrives at your local server. The conversation data includes a custom field which you can use to add an extra `archived` property. We'll set this to `false`, because we don't want conversations with new messages to be archived. Update your call to `app.post` to include the following:
-
-```js
-async function setArchived(conversationId, isOn) {
-  console.log("Setting archived on", conversationId, "to", isOn);
-  return fetch(`${basePath}/v1/${appId}/conversations/${conversationId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${secretKey}`,
-    },
-    body: JSON.stringify({
-      custom: {
-        archived: isOn ? "true" : "false",
-      },
-    }),
-  });
-}
-
-app.post("/addCustomData", async (req, res) => {
-  const data = req.body.data;
-  const conversationId = data.conversation.id;
-
-  await setArchived(conversationId, false);
-  res.status(200).end();
-});
-```
-
-This now calls the `setArchived` function, which calls the REST API to add the custom `archived` property.
-
-## Add an "Archive conversation" option to the menu
-
-Next, we need add a way to trigger the archive action in the frontend. You can configure which actions a user is able to take based on their [user role](https://talkjs.com/docs/Reference/Concepts/Roles/). In this example we'll add a custom conversation action to the "default" role.
+First, we need add a way to trigger the archive actions in the frontend. You can configure which actions a user is able to take based on their [user role](https://talkjs.com/docs/Reference/Concepts/Roles/). In this example we'll add a custom conversation action to the "default" role.
 
 In the **Roles** tab of the TalkJS dashboard, select the "default" role option. In the **Custom conversation actions** section, add a new custom conversation action with a **Name** of "archive" and a **Label** of "Archive conversation". The name will be used in our code, while the label is what appears in the UI:
 
 !! add 1-conversation-actions-dashboard.jpg
 
-If you're using a preset theme, you should now see a new **Archive conversation** option in the menu at the top of your conversation:
+Now add a second custom conversation action with a **Name** of "unarchive" and a **Label** of "Unarchive conversation".
+
+If you're using a preset theme, you should now a new **Archive conversation** and **Unarchive conversation** options in the menu at the top of your conversation:
 
 !! add 2-archive-conversation-ui.jpg
 
@@ -140,7 +30,7 @@ If you're using a legacy theme, or customized a theme before the custom conversa
 
 ## Mark the conversation as archived
 
-You can now listen for your new conversation action using the [`onCustomConversationAction` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Chatbox/#Chatbox__onCustomConversationAction) in TalkJS's JavaScript SDK.
+You can now listen for your new conversation actions using the [`onCustomConversationAction` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Chatbox/#Chatbox__onCustomConversationAction) in TalkJS's JavaScript SDK.
 
 As a test, add the following to your TalkJS code:
 
@@ -152,63 +42,35 @@ inbox.onCustomConversationAction("archive", (event) => {
 
 You should now see the conversation ID logged to your browser console when you click the **Mute conversation** menu option.
 
-Next, create a `/archiveConversation` endpoint in your server code to receive the conversation ID. You'll need to set up CORS support on your server. In this case we'll use the [`cors`](https://expressjs.com/en/resources/middleware/cors.html) package with Express:
-
-```js
-import express from "express";
-import cors from "cors";
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-app.listen(3000, () => console.log("Server is up"));
-
-app.post("/archiveConversation", async (req, res) => {
-  const conversationId = req.body.conversationId;
-
-  await setArchived(conversationId, true);
-  res.status(200).end();
-});
-```
-
-Next, update
+Next, update your call to `onCustomConversationAction` to call the [`setAttributes` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder__setAttributes) on the conversation. We'll use this to add a custom `archived` field and set it to `true`:
 
 ```js
 inbox.onCustomConversationAction("archive", async (event) => {
-  async function postConversationId() {
-    // Send conversation id to your backend server
-    const response = await fetch("http://localhost:3000/archiveConversation", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ conversationId: event.conversation.id }),
-    });
-  }
-
-  await postConversationId();
+  let conv = talkSession.getOrCreateConversation(event.conversation.id);
+  conv.setAttributes({ custom: { archived: "true" } });
+  inbox.select(conv);
 
   console.log("Archived conversation with id:", event.conversation.id);
 });
 ```
 
-then
+Similarly, listen for `unarchive` events and set `archived` to `false`:
 
 ```js
-app.post("/archiveConversation", async (req, res) => {
-  const conversationId = req.body.conversationId;
+inbox.onCustomConversationAction("unarchive", async (event) => {
+  let conv = talkSession.getOrCreateConversation(event.conversation.id);
+  conv.setAttributes({ custom: { archived: "false" } });
+  inbox.select(conv);
 
-  await setArchived(conversationId, true);
-  res.status(200).end();
+  console.log("Unarchived conversation with id:", event.conversation.id);
 });
 ```
 
-!! more explanation...
+Note that if you have [browser synchronisation](https://talkjs.com/docs/Features/Security_Settings/Browser_Synchronization/) disabled, you will instead need to send the conversation ID to your backend server and call the [REST API](https://talkjs.com/docs/Reference/REST_API/Conversations/#setting-conversation-data) from there to set a custom field on the property.
 
 ## Filter the inbox
 
-Finally, we want to filter conversations so that only unarchived ones appear in the inbox. To do this, use the setFeedFilter method.
+Next, we want to filter conversations so that only unarchived ones appear in the inbox. To do this, use the [`setFeedFilter`](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Inbox/#Inbox__setFeedFilter) method on the inbox.
 
 Add the following line before mounting your inbox, to only show conversations where `custom.answered` is not `true`. This means that any pre-existing conversations that are missing the `archived` property will still appear:
 
@@ -222,7 +84,9 @@ Now, test your archive feature by selecting **Archive a conversation** from the 
 
 You now have a working demonstration of how to archive a conversation! To recap, in this tutorial you have:
 
-!!summarise
+- Added new "Archive conversation" and "Unarchive conversation" custom conversation actions.
+- Used TalkJS's JavaScript SDK to add a custom `archived` field to the conversation.
+- Added a button to filter the inbox to show archived or unarchived conversations.
 
 For the full example code for this tutorial,
 
