@@ -22,7 +22,7 @@ In the **Roles** tab of the TalkJS dashboard, select the "default" role option. 
 
 Now add a second custom conversation action with a **Name** of "unarchive" and a **Label** of "Unarchive conversation".
 
-If you're using a preset theme, you should now a new **Archive conversation** and **Unarchive conversation** options in the menu at the top of your conversation:
+If you're using a preset theme, you should now see new **Archive conversation** and **Unarchive conversation** options in the menu at the top of your conversation:
 
 !! add 2-archive-conversation-ui.jpg
 
