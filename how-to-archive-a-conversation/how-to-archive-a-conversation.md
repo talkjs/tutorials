@@ -2,6 +2,8 @@
 
 When you're dealing with a cluttered inbox, it can be useful to have a way to archive old messages. This tutorial walks you through how to add an "Archive this conversation" menu option to your TalkJS inbox with [Conversation Actions](https://talkjs.com/docs/Features/Customizations/Conversation_Actions/), [webhooks](https://talkjs.com/docs/Reference/Webhooks/) and the [REST API](https://docs.google.com/document/d/1DGUW4zIyWSx_F128tXPfFheOkuJcGpAXyKFcN9K7n1k/edit#:~:text=09%3A37%20Today-,https%3A//talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/,-30).
 
+!! add demo.gif
+
 To follow along, you’ll need:
 
 - A [TalkJS account](https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
@@ -155,8 +157,6 @@ Finally, we'll style the button to match the rest of the TalkJS default theme UI
 ```
 
 For more on themes, see our documentation on the [Theme Editor](https://talkjs.com/docs/Features/Themes/The_Theme_Editor/).
-
-!! add screenshot
 
 ## Conclusion
 
