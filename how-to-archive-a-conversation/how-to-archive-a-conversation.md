@@ -56,7 +56,7 @@ inbox.onCustomConversationAction("archive", async (event) => {
 });
 ```
 
-This code calls the [`select`] method on the inbox after it adds the `archived` field, to sync your changes with the TalkJS server. Note that if you have [browser synchronisation](https://talkjs.com/docs/Features/Security_Settings/Browser_Synchronization/) disabled, you will instead need to send the conversation ID to your backend server and call the [REST API](https://talkjs.com/docs/Reference/REST_API/Conversations/#setting-conversation-data) from there to set a custom field on the property.
+TalkJS only updates the conversation's details when it gets passed to the inbox, so this code recreates the current conversation, adds the custom field and then calls the [`select`] method on the inbox to sync your changes. Note that if you have [browser synchronization](https://talkjs.com/docs/Features/Security_Settings/Browser_Synchronization/) disabled, you will instead need to send the conversation ID to your backend server and call the [REST API](https://talkjs.com/docs/Reference/REST_API/Conversations/#setting-conversation-data) from there to set a custom field on the property.
 
 Similarly, listen for `unarchive` events and set `archived` to `false`:
 
