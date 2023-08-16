@@ -10,9 +10,7 @@ To follow along, you’ll need:
 - An existing TalkJS project using the [JavaScript Chat SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/). See our [Getting Started guide](https://talkjs.com/docs/Getting_Started/) for an example of how to set this up.
 - An installation of [Node.js](https://nodejs.org/) along with the [npm](https://www.npmjs.com/) package manager. We’ll use this to create our backend server.
 
-We’ll build up the feature step by step in the following sections. If you would rather see the complete example code,
-
-!! see the [GitHub repo]() for this tutorial.
+We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-archive-a-conversation) for this tutorial.
 
 ## Add archive and unarchive options to the menu
 
@@ -166,9 +164,7 @@ You now have a working demonstration of how to archive a conversation! To recap,
 - Used TalkJS's JavaScript SDK to add a custom `archived` field to the conversation.
 - Added a button to filter the inbox to show archived or unarchived conversations.
 
-For the full example code for this tutorial,
-
-!!see our [GitHub repo]().
+For the full example code for this tutorial, see our [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-archive-a-conversation).
 
 If you want to learn more about TalkJS, here are some good places to start:
 
