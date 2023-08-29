@@ -20,11 +20,13 @@ We’ll build up the feature step by step in the following sections. If you woul
 
 ## Create a conversation with the REST API
 
-As a starting point, we'll use TalkJS's [Inbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Inbox/), with chat history on the left and the current selected conversation on the right:
+In this tutorial, we'll use TalkJS's [Inbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Inbox/), with chat history on the left and the current selected conversation on the right, as in the demo image above. You could also build a notification center based on the [Chatbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Chatbox/), which displays a single conversation:
 
-!! 2-inbox-ui.jpg
+!! 2-chatbox-demo.jpg
 
-Next, we need to send some notifications! We'll do this with TalkJS's [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/). The REST API needs a secret API key, which has full admin access to your TalkJS account, so we'll need a backend to call it from.
+In this case you would follow the same steps as for an inbox, but add all notifications to a single conversation.
+
+To send the notifications, we'll use TalkJS's [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/). The REST API needs a secret API key, which has full admin access to your TalkJS account, so we'll need a backend to call it from.
 
 In this tutorial we will use the [`node-fetch` module](https://github.com/node-fetch/node-fetch) to send the HTTP requests to the API, but you can use another library if you prefer. Import `node-fetch` at the start of your backend code:
 
@@ -60,31 +62,6 @@ await fetch(`${basePath}/v1/${appId}/conversations/${conversationId}`, {
 
 You can find your App ID and secret key in the TalkJS dashboard.
 
-## Make the conversation read-only
-
-Notifications are normally read-only. TalkJS lets you enforce this by setting the [access type](https://talkjs.com/docs/Reference/Concepts/Participants/#access) to `"Read"` for the notification receiver. To do this with the REST API, you can use the [Modify participation](https://talkjs.com/docs/Reference/REST_API/Participation/#modify-participation) endpoint:
-
-```js
-// Set conversation to read-only for receiver
-await fetch(
-  `${basePath}/v1/${appId}/conversations/${conversationId}/participants/${receiverId}`,
-  {
-    method: "put",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${secretKey}`,
-    },
-    body: JSON.stringify({
-      access: "Read",
-    }),
-  }
-);
-```
-
-You should now see the warning "You can read, but not send messages":
-
-!! 3-read-only.jpg
-
 ## Send a notification
 
 We can now test sending a notification. For this, we'll [add a message](https://talkjs.com/docs/Reference/REST_API/Messages/#sending-on-behalf-of-a-user) to the conversation with the REST API:
@@ -116,7 +93,7 @@ await fetch(
 
 You should see the message in your inbox:
 
-!! 4-send-message.jpg
+!! 3-send-message.jpg
 
 You can include links in messages that you send from the REST API with TalkJS's [link markup](https://talkjs.com/docs/Features/Customizations/Formatting/#links). This is useful when you want to send a notification to view information elsewhere. In this example, we've included a link to the TalkJS [Getting Started guide](https://talkjs.com/docs/Getting_Started/).
 
@@ -135,15 +112,40 @@ const me = new Talk.User({
 
 For more information on notifications, [see our docs](https://talkjs.com/docs/Features/Notifications/).
 
+## Make the conversation read-only
+
+Notifications are normally read-only. TalkJS lets you enforce this by setting the [access type](https://talkjs.com/docs/Reference/Concepts/Participants/#access) to `"Read"` for the notification receiver. To do this with the REST API, you can use the [Modify participation](https://talkjs.com/docs/Reference/REST_API/Participation/#modify-participation) endpoint for the conversation:
+
+```js
+// Set conversation to read-only for receiver
+await fetch(
+  `${basePath}/v1/${appId}/conversations/${conversationId}/participants/${receiverId}`,
+  {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${secretKey}`,
+    },
+    body: JSON.stringify({
+      access: "Read",
+    }),
+  }
+);
+```
+
+You should now see the warning "You can read, but not send messages":
+
+!! 4-read-only.jpg
+
 ## Remove the message field from the inbox
 
-Our notifications are read-only so we don't need the message field where the customer would type a response. We can remove this by setting the [message field visibility](https://talkjs.com/docs/Features/Customizations/The_Message_Field/#message-field-visibility) to `false`:
+As our notifications are read-only, we can reflect this in the UI by removing the message field where the customer would type a response. We can do this by setting the [message field visibility](https://talkjs.com/docs/Features/Customizations/The_Message_Field/#message-field-visibility) to `false`:
 
 ```js
 inbox.messageField.setVisible(false);
 ```
 
-5-remove-message-field.jpg
+!! 5-remove-message-field.jpg
 
 ## Summary
 
