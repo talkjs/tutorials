@@ -1,0 +1,164 @@
+# How to create a notification center with TalkJS
+
+To keep your customers informed about important updates, it's useful to include a notification center in your application. For example, you may want customers to receive an in-app notification if your terms and conditions change, or to let them know that they've received new documents.
+
+TalkJS makes it easy to add a notification center to your application, with built-in support for sending email or SMS notifications at the same time:
+
+!! 1-demo.jpg
+
+In this tutorial, we'll walk you through how to send messages with the TalkJS [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/) and customize your inbox for read-only notifications.
+
+To follow along, you’ll need:
+
+- A [TalkJS account](https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
+- An existing TalkJS project using the [JavaScript Chat SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/). See our [Getting Started guide](https://talkjs.com/docs/Getting_Started/) for an example of how to set this up.
+- An installation of [Node.js](https://nodejs.org/) along with the [npm](https://www.npmjs.com/) package manager. We’ll use this to create our backend server.
+
+We’ll build up the feature step by step in the following sections. If you would rather see the complete example code,
+
+!! see the [Github repo]() for this tutorial.
+
+## Create a conversation with the REST API
+
+As a starting point, we'll use TalkJS's [Inbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Inbox/), with chat history on the left and the current selected conversation on the right:
+
+!! 2-inbox-ui.jpg
+
+Next, we need to send some notifications! We'll do this with TalkJS's [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/). The REST API needs a secret API key, which has full admin access to your TalkJS account, so we'll need a backend to call it from.
+
+In this tutorial we will use the [`node-fetch` module](https://github.com/node-fetch/node-fetch) to send the HTTP requests to the API, but you can use another library if you prefer. Import `node-fetch` at the start of your backend code:
+
+```js
+import fetch from "node-fetch";
+```
+
+Next, we'll call the REST API to [create a conversation](https://talkjs.com/docs/Reference/REST_API/Conversations/#setting-conversation-data) between two participants, the notification sender and the notification receiver. We'll also set a subject for the conversation, which will be the title for the notification.
+
+```js
+const appId = "<APP_ID>";
+const secretKey = "<SECRET_KEY>";
+const basePath = "https://api.talkjs.com";
+
+const conversationId = `notificationsExample`;
+const senderId = `notificationsExampleSender`;
+const receiverId = `notificationsExampleReceiver`;
+const conversationSubject = "Welcome to TalkJS 👋";
+
+// Create a new conversation
+await fetch(`${basePath}/v1/${appId}/conversations/${conversationId}`, {
+  method: "put",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${secretKey}`,
+  },
+  body: JSON.stringify({
+    participants: [receiverId, senderId],
+    subject: conversationSubject,
+  }),
+});
+```
+
+You can find your App ID and secret key in the TalkJS dashboard.
+
+## Make the conversation read-only
+
+Notifications are normally read-only. TalkJS lets you enforce this by setting the [access type](https://talkjs.com/docs/Reference/Concepts/Participants/#access) to `"Read"` for the notification receiver. To do this with the REST API, you can use the [Modify participation](https://talkjs.com/docs/Reference/REST_API/Participation/#modify-participation) endpoint:
+
+```js
+// Set conversation to read-only for receiver
+await fetch(
+  `${basePath}/v1/${appId}/conversations/${conversationId}/participants/${receiverId}`,
+  {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${secretKey}`,
+    },
+    body: JSON.stringify({
+      access: "Read",
+    }),
+  }
+);
+```
+
+You should now see the warning "You can read, but not send messages":
+
+!! 3-read-only.jpg
+
+## Send a notification
+
+We can now test sending a notification. For this, we'll [add a message](https://talkjs.com/docs/Reference/REST_API/Messages/#sending-on-behalf-of-a-user) to the conversation with the REST API:
+
+```js
+const conversationId = `notificationsExample`;
+const messageText =
+  "Check out our <https://talkjs.com/docs/Getting_Started/|Getting Started guide>!";
+
+// Send a message from the user to make sure it will show up in the conversation list
+await fetch(
+  `${basePath}/v1/${appId}/conversations/${conversationId}/messages`,
+  {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${secretKey}`,
+    },
+    body: JSON.stringify([
+      {
+        text: messageText,
+        sender: senderId,
+        type: "UserMessage",
+      },
+    ]),
+  }
+);
+```
+
+You should see the message in your inbox:
+
+!! 4-send-message.jpg
+
+You can include links in messages that you send from the REST API with TalkJS's [link markup](https://talkjs.com/docs/Features/Customizations/Formatting/#links). This is useful when you want to send a notification to view information elsewhere. In this example, we've included a link to the TalkJS [Getting Started guide](https://talkjs.com/docs/Getting_Started/).
+
+You can also send the notification as an email or SMS. To test this, the user receiving the notifications needs to have an [email address](https://talkjs.com/docs/Reference/Concepts/Users/#email) and [phone number](https://talkjs.com/docs/Reference/Concepts/Users/#phone). The user must also have a [role](https://talkjs.com/docs/Reference/Concepts/Roles/). In our example, the user has the `"default"` role:
+
+```js
+const me = new Talk.User({
+  id: "notificationsExampleReceiver",
+  name: "Alice",
+  email: "alice@example.com",
+  phone: "+447700900000",
+  photoUrl: "https://talkjs.com/images/avatar-1.jpg",
+  role: "default",
+});
+```
+
+For more information on notifications, [see our docs](https://talkjs.com/docs/Features/Notifications/).
+
+## Remove the message field from the inbox
+
+Our notifications are read-only so we don't need the message field where the customer would type a response. We can remove this by setting the [message field visibility](https://talkjs.com/docs/Features/Customizations/The_Message_Field/#message-field-visibility) to `false`:
+
+```js
+inbox.messageField.setVisible(false);
+```
+
+5-remove-message-field.jpg
+
+## Summary
+
+You now have a working demonstration of how to build a notification center with TalkJS. To recap, in this tutorial we have:
+
+- Used the TalkJS REST API to create conversations and messages
+- Set up email and SMS notifications
+- Removed the message field from the inbox
+
+For the full example code for this tutorial, see
+
+!! [our Github repo]().
+
+If you want to learn more about TalkJS, here are some good places to start:
+
+- The [TalkJS Docs](https://talkjs.com/docs/) help you get started with TalkJS.
+- [TalkJS tutorials](https://talkjs.com/resources/tag/tutorials/) provide how-to guides for many common TalkJS use cases.
+- The [talkjs-examples Github repo](https://github.com/talkjs/talkjs-examples) has larger complete examples that demonstrate how to integrate with other libraries and frameworks.
