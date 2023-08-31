@@ -2,12 +2,14 @@
 
 To keep your customers informed about important updates, it's useful to include a message center in your application. For example, you may want customers to receive an in-app message if your terms and conditions change, or to let them know that they've received new documents.
 
-TalkJS makes it easy to [add a message center to your application](https://talkjs.com/use-cases/message-center/), with built-in support for sending email or SMS notifications at the same time:
+Although TalkJS is best known as a chat API, it's a [great fit for customer updates and notifications](https://talkjs.com/use-cases/message-center/) as well. After all, a customer update is a lot like a chat conversation, except that messages are only sent in one direction, from the company to the customer.
 
 <figure class="kg-image-card">
   <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/08/1-demo.jpg" alt="An example message center"/>
   <figcaption>An example message center</figcaption>
 </figure>
+
+TalkJS has built-in support for email and SMS notifications, so users can still receive messages when they are not logged in to your application.
 
 In this tutorial, we'll walk you through how to send messages with the TalkJS [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/) and customize your inbox for read-only messages.
 
@@ -21,7 +23,7 @@ We’ll build up the feature step by step in the following sections. If you woul
 
 ## Create a conversation with the REST API
 
-The first step is to create a [conversation](https://talkjs.com/docs/Reference/Concepts/Conversations/) between the message sender and receiver. In this tutorial, we'll create a new conversation for each message. To display the conversations we'll use TalkJS's [Inbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Inbox/), with chat history on the left and the current selected conversation on the right, as in the demo image above.
+The first step is to create a [conversation](https://talkjs.com/docs/Reference/Concepts/Conversations/) between the message sender and the customer who will receive it. In this tutorial, we'll create a new conversation for each message. To display the conversations we'll use TalkJS's [Inbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Inbox/), with chat history on the left and the current selected conversation on the right, as in the demo image above.
 
 Another option would be to build a message center based on the [Chatbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Chatbox/), which displays a single conversation:
 
@@ -105,6 +107,8 @@ You should see the message in your inbox:
 </figure>
 
 You can include links in messages that you send from the REST API with TalkJS's [link markup](https://talkjs.com/docs/Features/Customizations/Formatting/#links). This is useful when you want to send a message to view information elsewhere. In this example, we've included a link to the TalkJS [Getting Started guide](https://talkjs.com/docs/Getting_Started/).
+
+Often, you'll want to send the same message to multiple users at once. In this case, your backend code will need to create a conversation for each user and then send the same message text to each conversation.
 
 ## Send email and SMS notifications
 
