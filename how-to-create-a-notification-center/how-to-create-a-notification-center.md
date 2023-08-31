@@ -20,13 +20,15 @@ We’ll build up the feature step by step in the following sections. If you woul
 
 ## Create a conversation with the REST API
 
-In this tutorial, we'll use TalkJS's [Inbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Inbox/), with chat history on the left and the current selected conversation on the right, as in the demo image above. You could also build a message center based on the [Chatbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Chatbox/), which displays a single conversation:
+The first step is to create a [conversation](https://talkjs.com/docs/Reference/Concepts/Conversations/) between the message sender and receiver. In this tutorial, we'll create a new conversation for each message. To display the conversations we'll use TalkJS's [Inbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Inbox/), with chat history on the left and the current selected conversation on the right, as in the demo image above.
+
+Another option would be to build a message center based on the [Chatbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Chatbox/), which displays a single conversation:
 
 !! 2-chatbox-demo.jpg
 
 In this case you would follow the same steps as for an inbox, but add all messages to a single conversation.
 
-To send the messages, we'll use TalkJS's [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/). The REST API needs a secret API key, which has full admin access to your TalkJS account, so we'll need a backend to call it from.
+To create the conversation, we'll use TalkJS's [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/). The REST API needs a secret API key, which has full admin access to your TalkJS account, so we'll need a backend to call it from.
 
 In this tutorial we will use the [`node-fetch` module](https://github.com/node-fetch/node-fetch) to send the HTTP requests to the API, but you can use another library if you prefer. Import `node-fetch` at the start of your backend code:
 
@@ -34,7 +36,7 @@ In this tutorial we will use the [`node-fetch` module](https://github.com/node-f
 import fetch from "node-fetch";
 ```
 
-Next, we'll call the REST API to [create a conversation](https://talkjs.com/docs/Reference/REST_API/Conversations/#setting-conversation-data) between two participants, the message sender and the message receiver. We'll also set a subject for the conversation, which will be the title for the message.
+Next, we'll call the [create a conversation](https://talkjs.com/docs/Reference/REST_API/Conversations/#setting-conversation-data) endpoint. We'll also set a subject for the conversation, which will be the title for the message.
 
 ```js
 const appId = "<APP_ID>";
@@ -60,7 +62,7 @@ await fetch(`${basePath}/v1/${appId}/conversations/${conversationId}`, {
 });
 ```
 
-You can find your App ID and secret key in the TalkJS dashboard.
+You can find your App ID and secret key under **Settings** in the TalkJS dashboard.
 
 ## Send a message
 
@@ -97,7 +99,9 @@ You should see the message in your inbox:
 
 You can include links in messages that you send from the REST API with TalkJS's [link markup](https://talkjs.com/docs/Features/Customizations/Formatting/#links). This is useful when you want to send a message to view information elsewhere. In this example, we've included a link to the TalkJS [Getting Started guide](https://talkjs.com/docs/Getting_Started/).
 
-You can also send an email or SMS notification. To test this, the user receiving the notifications needs to have an [email address](https://talkjs.com/docs/Reference/Concepts/Users/#email) and [phone number](https://talkjs.com/docs/Reference/Concepts/Users/#phone). The user must also have a [role](https://talkjs.com/docs/Reference/Concepts/Roles/). In our example, the user has the `"default"` role:
+## Send email and SMS notifications
+
+TalkJS also lets you send email and SMS notifications along with your messages. To test this, you need to provide an [email address](https://talkjs.com/docs/Reference/Concepts/Users/#email) and [phone number](https://talkjs.com/docs/Reference/Concepts/Users/#phone) for the user receiving the notifications. You must also give the user a [role](https://talkjs.com/docs/Reference/Concepts/Roles/). In our example, we give the user the `"default"` role:
 
 ```js
 const me = new Talk.User({
