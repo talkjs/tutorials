@@ -100,7 +100,7 @@ await fetch(
 You should see the message in your inbox:
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/08/3-send-message.jpg" alt="An example message linking to the TalkJS Getting Started guid"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/08/3-send-message.jpg" alt="An example message linking to the TalkJS Getting Started guide"/>
   <figcaption>An example message</figcaption>
 </figure>
 
