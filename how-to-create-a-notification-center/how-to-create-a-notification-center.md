@@ -2,7 +2,7 @@
 
 To keep your customers informed about important updates, it's useful to include a message center in your application. For example, you may want customers to receive an in-app message if your terms and conditions change, or to let them know that they've received new documents.
 
-TalkJS makes it easy to add a message center to your application, with built-in support for sending email or SMS notifications at the same time:
+TalkJS makes it easy to [add a message center to your application](https://talkjs.com/use-cases/message-center/), with built-in support for sending email or SMS notifications at the same time:
 
 !! 1-demo.jpg
 
