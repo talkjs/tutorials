@@ -14,9 +14,7 @@ To follow along, you’ll need:
 - An existing TalkJS project using the [JavaScript Chat SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/). See our [Getting Started guide](https://talkjs.com/docs/Getting_Started/) for an example of how to set this up.
 - An installation of [Node.js](https://nodejs.org/) along with the [npm](https://www.npmjs.com/) package manager. We’ll use this to create our backend server.
 
-We’ll build up the feature step by step in the following sections. If you would rather see the complete example code,
-
-!! see the [Github repo]() for this tutorial.
+We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [Github repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-create-a-message-center) for this tutorial.
 
 ## Create a conversation with the REST API
 
@@ -159,9 +157,7 @@ You now have a working demonstration of how to build a message center with TalkJ
 - Set up email and SMS notifications
 - Removed the message field from the inbox
 
-For the full example code for this tutorial, see
-
-!! [our Github repo]().
+For the full example code for this tutorial, see [our Github repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-create-a-message-center).
 
 If you want to learn more about TalkJS, here are some good places to start:
 
