@@ -4,7 +4,10 @@ To keep your customers informed about important updates, it's useful to include 
 
 TalkJS makes it easy to [add a message center to your application](https://talkjs.com/use-cases/message-center/), with built-in support for sending email or SMS notifications at the same time:
 
-!! 1-demo.jpg
+<figure class="kg-image-card">
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/08/1-demo.jpg" alt="An example message center"/>
+  <figcaption>An example message center</figcaption>
+</figure>
 
 In this tutorial, we'll walk you through how to send messages with the TalkJS [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/) and customize your inbox for read-only messages.
 
@@ -22,7 +25,10 @@ The first step is to create a [conversation](https://talkjs.com/docs/Reference/C
 
 Another option would be to build a message center based on the [Chatbox UI mode](https://talkjs.com/docs/Features/Chat_UI_Modes/The_Chatbox/), which displays a single conversation:
 
-!! 2-chatbox-demo.jpg
+<figure class="kg-image-card">
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/08/2-chatbox-demo.jpg" alt="An example message center built with the Chatbox UI mode"/>
+  <figcaption>An example message center built with the Chatbox UI mode</figcaption>
+</figure>
 
 In this case you would follow the same steps as for an inbox, but add all messages to a single conversation.
 
@@ -93,7 +99,10 @@ await fetch(
 
 You should see the message in your inbox:
 
-!! 3-send-message.jpg
+<figure class="kg-image-card">
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/08/3-send-message.jpg" alt="An example message linking to the TalkJS Getting Started guid"/>
+  <figcaption>An example message</figcaption>
+</figure>
 
 You can include links in messages that you send from the REST API with TalkJS's [link markup](https://talkjs.com/docs/Features/Customizations/Formatting/#links). This is useful when you want to send a message to view information elsewhere. In this example, we've included a link to the TalkJS [Getting Started guide](https://talkjs.com/docs/Getting_Started/).
 
@@ -137,7 +146,10 @@ await fetch(
 
 You should now see the warning "You can read, but not send messages":
 
-!! 4-read-only.jpg
+<figure class="kg-image-card">
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/08/4-read-only.jpg" alt="Inbox with the read-only warning in the message field"/>
+  <figcaption>Inbox with the read-only warning in the message field</figcaption>
+</figure>
 
 ## Remove the message field from the inbox
 
@@ -147,7 +159,10 @@ As our messages are read-only, we can reflect this in the UI by removing the mes
 inbox.messageField.setVisible(false);
 ```
 
-!! 5-remove-message-field.jpg
+<figure class="kg-image-card">
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/08/5-remove-message-field.jpg" alt="Inbox with the message field removed"/>
+  <figcaption>Inbox with the message field removed</figcaption>
+</figure>
 
 ## Summary
 
