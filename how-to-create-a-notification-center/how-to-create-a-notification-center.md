@@ -106,7 +106,7 @@ You should see the message in your inbox:
   <figcaption>An example message</figcaption>
 </figure>
 
-You can include links in messages that you send from the REST API with TalkJS's [link markup](https://talkjs.com/docs/Features/Customizations/Formatting/#links). This is useful when you want to send a message to view information elsewhere. In this example, we've included a link to the TalkJS [Getting Started guide](https://talkjs.com/docs/Getting_Started/).
+You can include links in messages that you send from the REST API with TalkJS's [link markup](https://talkjs.com/docs/Features/Customizations/Formatting/#links). This is useful when you want to send a message to view information elsewhere.
 
 Often, you'll want to send the same message to multiple users at once. In this case, your backend code will need to create a conversation for each user and then send the same message text to each conversation.
 
