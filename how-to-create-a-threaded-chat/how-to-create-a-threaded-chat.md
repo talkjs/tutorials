@@ -6,7 +6,7 @@ TalkJS's core use case is pre-built chat messaging that's easy to integrate into
 
 !! gif
 
-This will be one of our longer tutorials! Adding reply threads will take quite a lot of steps – we'll need to be able to create and reply in threads, navigate between them, and see if a message already has replies. In the process we'll take you on a tour of most of TalkJS's extensive customization options, including theme customization in the [Theme Editor](https://talkjs.com/docs/Features/Themes/The_Theme_Editor/), [action buttons](https://talkjs.com/docs/Features/Customizations/Action_Buttons_Links/), [custom data](https://talkjs.com/docs/Reference/Concepts/Conversations/#custom), [webhooks](https://talkjs.com/docs/Reference/Webhooks/) and the [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/).
+This will be one of our longer tutorials! Adding reply threads will take quite a lot of steps – we'll need to be able to create and reply in threads, navigate between them, and see if a message already has replies. In the process we'll take you on a tour of most of TalkJS's extensive customization options, including [custom themes](https://talkjs.com/docs/Features/Themes/The_Theme_Editor/), [action buttons](https://talkjs.com/docs/Features/Customizations/Action_Buttons_Links/), [custom data](https://talkjs.com/docs/Reference/Concepts/Conversations/#custom), [webhooks](https://talkjs.com/docs/Reference/Webhooks/) and the [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/).
 
 To follow along with this tutorial, you'll need:
 
@@ -44,11 +44,21 @@ First, you'll need to edit your theme to include the button:
 2.  Select to **Edit** the theme you use for your "default" role.
 3.  In the list of **Built-in Components**, select **UserMessage**.
 4.  Add the following line below the `<MessageBody />` component:
-    ```
+    ```jsx
     <ActionButton action="replyInThread">Reply</ActionButton>
     ```
     This adds a button marked **Reply** which sends a `replyInThread` action when you click it.
-5.  If you are in Live mode, select **Copy to live**.
+5.  Style your button by updating the `margin` property in the `.by-me button[data-action],
+.by-other button[data-action]` selector:
+    `css
+    .by-me button[data-action],
+    .by-other button[data-action] {
+      /* ... other properties ... */
+      margin: 5px;
+      /* ... other properties ... */
+    }
+    `
+6.  If you are in Live mode, select **Copy to live**.
 
 You should now see a **Reply** button at the bottom of each chat message:
 
@@ -69,11 +79,9 @@ You should now see the event data logged to your browser console when you click 
 
 ### Post the data to your server
 
-We'll need some of this event data to call TalkJS's [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/) and create a new thread.
+To create our reply thread, we'll call TalkJS's [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/). You'll need to call the API from a backend web server rather than in your existing frontend code to avoid exposing your secret API key, which has full admin access to your TalkJS account. In this section we'll create the backend server and send it data from the `replyInThread` event handler.
 
-You'll need to call the API from a backend web server rather than in your existing frontend code to avoid exposing your secret API key, which has full admin access to your TalkJS account.
-
-So in this section we'll create the backend server and send it some message data. We’ll be using [Express](https://expressjs.com/) in this tutorial, but feel free to use your favorite web server library instead. You'll also need to set up CORS support on your server. In this case we'll use the [`cors`](https://expressjs.com/en/resources/middleware/cors.html) package:
+We’ll use [Express](https://expressjs.com/) in this tutorial, but feel free to use your favorite web server library instead. You'll also need to set up CORS support on your server. In this case we'll use the [`cors`](https://expressjs.com/en/resources/middleware/cors.html) package:
 
 ```js
 import express from "express";
@@ -86,15 +94,15 @@ app.use(express.json());
 app.listen(3000, () => console.log("Server is up"));
 ```
 
-In your server code, create a `/newThread` endpoint to receive the message ID, conversation ID, message text and participant IDs from the browser:
+In your server code, create a `/newThread` endpoint to receive the message ID, conversation ID, message text and participant IDs from the browser. For now we'll just log them to the server console:
 
 ```js
 app.post("/newThread", async (req, res) => {
   // Get details of the message we'll reply to
-  const parentMessageId = req.body["messageId"];
-  const parentConvId = req.body["conversationId"];
-  const parentMessageText = req.body["messageText"];
-  const parentParticipants = req.body["participants"];
+  const parentMessageId = req.body.messageId;
+  const parentConvId = req.body.conversationId;
+  const parentMessageText = req.body.messageText;
+  const parentParticipants = req.body.participants;
 
   console.log("Parent message id: " + parentMessageId);
   console.log("Parent conversation id: " + parentConvId);
@@ -108,48 +116,46 @@ app.post("/newThread", async (req, res) => {
 Then update your `onCustomMessageAction` call to post the message ID to the server endpoint:
 
 ```js
-chatbox.onCustomMessageAction("replyInThread", (event) => {
-  async function postMessageData(
-    messageId,
-    conversationId,
-    messageText,
-    participants
-  ) {
-    // Send message data to your backend server
-    const response = await fetch("http://localhost:3000/newThread", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        messageId,
-        conversationId,
-        messageText,
-        participants,
-      }),
-    });
-  }
+      chatbox.onCustomMessageAction("replyInThread", (event) => {
+        async function postMessageData(
+          messageId,
+          conversationId,
+          messageText,
+          participants
+        ) {
+          // Send message data to your backend server
+          const response = await fetch("http://localhost:3000/newThread", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              messageId,
+              conversationId,
+              messageText,
+              participants,
+            }),
+          });
+        }
 
-  postMessageData(
-    event.message.id,
-    event.message.conversation.id,
-    event.message.body,
-    Object.keys(event.message.conversation.participants)
-  );
+        postMessageData(
+          event.message.id,
+          event.message.conversation.id,
+          event.message.body,
+          Object.keys(event.message.conversation.participants)
+        );
 ```
 
 You should see the message data logged to your server console when you click the **Reply** action button.
 
 ### Create a new thread
 
-text
+Now that we've passed the message data to the server, we can use it to call the TalkJS REST API. Update your `app.post` call from the previous section with the following:
 
 ```js
 function getMessages(messageId) {
-  const conversationId = "replyto_" + messageId;
-
   return fetch(
-    `${basePath}/v1/${appId}/conversations/${conversationId}/messages`,
+    `${basePath}/v1/${appId}/conversations/replyto_${messageId}/messages`,
     {
       method: "GET",
       headers: {
@@ -160,25 +166,31 @@ function getMessages(messageId) {
   );
 }
 
-async function createThread(parentMessageId, participants) {
-  const conversationId = "replyto_" + parentMessageId;
-  return fetch(`${basePath}/v1/${appId}/conversations/${conversationId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${secretKey}`,
-    },
-    body: JSON.stringify({
-      participants: participants,
-      subject: "Replies",
-    }),
-  });
+// Create a thread as a new conversation
+async function createThread(parentMessageId, parentConvId, participants) {
+  return fetch(
+    `${basePath}/v1/${appId}/conversations/replyto_${parentMessageId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${secretKey}`,
+      },
+      body: JSON.stringify({
+        participants: participants,
+        subject: "Replies",
+        custom: {
+          parentConvId: parentConvId,
+          parentMessageId: parentMessageId,
+        },
+      }),
+    }
+  );
 }
 
 async function duplicateParentMessageText(parentMessageId, messageText) {
-  const conversationId = "replyto_" + parentMessageId;
   return fetch(
-    `${basePath}/v1/${appId}/conversations/${conversationId}/messages`,
+    `${basePath}/v1/${appId}/conversations/replyto_${parentMessageId}/messages`,
     {
       method: "POST",
       headers: {
@@ -197,17 +209,17 @@ async function duplicateParentMessageText(parentMessageId, messageText) {
 
 app.post("/newThread", async (req, res) => {
   // Get details of the message we'll reply to
-  const parentMessageId = req.body["messageId"];
-  const parentConvId = req.body["conversationId"];
-  const parentMessageText = req.body["messageText"];
-  const parentParticipants = req.body["participants"];
+  const parentMessageId = req.body.messageId;
+  const parentConvId = req.body.conversationId;
+  const parentMessageText = req.body.messageText;
+  const parentParticipants = req.body.participants;
 
-  let response = await getMessages(parentMessageId);
-  let messages = await response.json();
+  const response = await getMessages(parentMessageId);
+  const messages = await response.json();
 
   // Create a message with the text of the parent message if one doesn't already exist
-  if (messages.data === undefined || messages.data.length == 0) {
-    await createThread(parentMessageId, parentParticipants);
+  if (!messages.data?.length) {
+    await createThread(parentMessageId, parentConvId, parentParticipants);
     await duplicateParentMessageText(parentMessageId, parentMessageText);
   }
 
@@ -215,21 +227,24 @@ app.post("/newThread", async (req, res) => {
 });
 ```
 
-!! describe, possibly split up
-!! replace after code review
+In this code, we're creating a new thread by making a new conversation for it. We'll give the new conversation an ID of `replyto_<MESSAGE_ID>`, where `<MESSAGE_ID>` is the ID of the message we're replying to.
 
-Also select the new conversation. Frontend code:
+First, we need to check if a conversation with this ID already exists and has messages. To do this, the `getMessages` function calls the REST API to [list all messages in a conversation](https://talkjs.com/docs/Reference/REST_API/Messages/#listing-messages-from-a-conversation).
+
+If the conversation doesn't exist or have messages, we call the `createThread` function, which calls the REST API to [create or update it](https://talkjs.com/docs/Reference/REST_API/Conversations/#setting-conversation-data). We also duplicate the text of the original message in the new thread, so that users can see the message they're replying to. We do this with another call to the REST API to [send a new message](https://talkjs.com/docs/Reference/REST_API/Messages/#sending-on-behalf-of-a-user).
+
+We'll also switch to viewing the new conversation. To do this, call the [`select` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Chatbox/#Chatbox__select) on the chatbox in your frontend code:
 
 ```js
 let thread = talkSession.getOrCreateConversation("replyto_" + event.message.id);
 chatbox.select(thread);
 ```
 
-!! screenshot of what we have so far
+!! screenshot of the new thread.
 
 ## Add a "Back" action button
 
-Next, we'll add a **Back** action button to navigate back to the message you replied to. Some steps are similar to the steps for setting up the **Reply** button in the last section, so we'll move more quickly through these this time.
+Currently, there's no way of getting back to the message that the user replied to. In this section, we'll fix this by adding a **Back** action button. Some steps are similar to the steps for setting up the **Reply** button in the last section, so we'll move more quickly through these this time.
 
 ### Edit your theme
 
@@ -239,8 +254,18 @@ As before, you'll need to edit your theme to include the new button:
 2.  Select to **Edit** the theme you use for your "default" role.
 3.  In the list of **Built-in Components**, select **ChatHeader**.
 4.  Find the code for displaying the user's name in the header (something like `<span>{{user.name}}</span>`) and replace it with the following:
-    `<span><ActionButton action="back">&lt; Back</ActionButton>{{user.name}}</ActionButton></span>`
-5.  If you are in Live mode, select **Copy to live**.
+    ```jsx
+    <span><ActionButton action="back">&lt; Back</ActionButton>{{user.name}}</ActionButton></span>
+    ```
+5.  Style your button by updating the `margin` property in the `.header button[data-action]` selector:
+    ```css
+    .header button[data-action] {
+      /* ... other properties ... */
+      margin: 5px;
+      /* ... other properties ... */
+    }
+    ```
+6.  If you are in Live mode, select **Copy to live**.
 
 You should now see a **Back** button in your chat header:
 
@@ -249,7 +274,7 @@ You should now see a **Back** button in your chat header:
 
 ### Add custom fields to the conversation
 
-Currently the **Back** button doesn't do anything when you click it. We want to use it to go back to the previous ("parent") conversation To do this, you'll need the ID of the parent conversation. We'll add this ID to the current conversation as [custom data](https://talkjs.com/docs/Reference/Concepts/Conversations/#custom) when we create the thread. We'll add the ID of the parent message at the same time – we don't need this yet, but it will be useful later.
+At the moment, the **Back** button doesn't do anything when you click it. We want to use it to go back to the conversation that the user replied to (which we'll call the "parent conversation"). To do this, you'll need the ID of the parent conversation. We'll add this ID to the current conversation as [custom data](https://talkjs.com/docs/Reference/Concepts/Conversations/#custom) when we create the thread. We'll also add the ID of the parent message at the same time – we don't need this yet, but it will be useful later.
 
 Update your `createThread` method to include these custom fields:
 
@@ -295,11 +320,11 @@ You should now switch back to the parent conversation when you select the **Back
 
 ## Add a reply count
 
-We can now create threads and navigate through them, but currently there's no way to tell whether comments have replies without clicking through. To complete our threaded chat demo, we'll add a reply count feature, so that the action button is labelled, say, **Replies (3)** if there are three replies. If there are no replies yet we'll leave it as **Reply**.
+We can now create threads and navigate through them. The final feature we need is a way to tell whether comments have replies without clicking through. To complete our threaded chat demo, we'll add a reply count feature, so that the action button is labelled, say, **Replies (3)** if there are three replies. If there are no replies yet we'll leave it as **Reply**.
 
 ### Enable a webhook for new message events
 
-We'll want to update the reply count when new messages are sent. To do this, we’ll first enable TalkJS [webhooks](https://talkjs.com/docs/Reference/Webhooks/), which allow the TalkJS server to notify your server when a message is sent. Webhooks let you use an event-driven architecture, where you get told about events when they happen rather than having to constantly check for new messages.
+We'll want to update the reply count when users add new messages to threads. To do this, we’ll first enable TalkJS [webhooks](https://talkjs.com/docs/Reference/Webhooks/), which allow the TalkJS server to notify your server when it sends a new message. Webhooks let you use an event-driven architecture, where you get told about events when they happen rather than having to constantly check for new messages.
 
 Webhooks are server-side only, so you'll need to add a new `/updateReplyCount` endpoint to your existing server code to monitor incoming events from the TalkJS server:
 
@@ -312,7 +337,7 @@ app.post("/updateReplyCount", (req, res) => {
 
 Currently this endpoint just logs the event data when it receives a new message sent event.
 
-For TalkJS to communicate with your server, you must expose it to the internet. This can be very difficult when developing locally, with endless firewalls and port forwarding to set up. Instead, we’ll use [ngrok](https://ngrok.com/) to create a secure tunnel to your local server. See our tutorial on [How to integrate ngrok with TalkJS](https://talkjs.com/resources/how-to-integrate-ngrok-with-talkjs-to-receive-webhooks-locally/#setting-up-ngrok) for instructions on how to install ngrok.
+For TalkJS to communicate with your server, you must expose it to the internet. To make this easy, we’ll use [ngrok](https://ngrok.com/) to create a secure tunnel to your local server. See our tutorial on [How to integrate ngrok with TalkJS](https://talkjs.com/resources/how-to-integrate-ngrok-with-talkjs-to-receive-webhooks-locally/#setting-up-ngrok) for instructions on how to install ngrok.
 
 Once you have installed ngrok, run the following command:
 
@@ -339,7 +364,9 @@ TalkJS will now send a web request to your server when a message is sent. To tes
 
 Next, we'll check whether incoming messages are replies in a thread, and if so we'll update the reply count for the parent message.
 
-We'll keep track of the number of replies by adding [custom data](https://talkjs.com/docs/Reference/Concepts/Messages/#custom) to messages, in a similar way to how we added custom data to conversations in the previous section. Update your `/updateReplyCount` endpoint with the following code:
+We'll keep track of the number of replies by adding [custom data](https://talkjs.com/docs/Reference/Concepts/Messages/#custom) to messages. This will be similar to how we added custom data to conversations in the previous section.
+
+Update your `/updateReplyCount` endpoint with the following code:
 
 ```js
 async function updateReplyCount(messageId, conversationId, count) {
@@ -386,11 +413,11 @@ app.post("/updateReplyCount", async (req, res) => {
 });
 ```
 
-This code looks for incoming user message events where the conversation ID begins with `"replyto_"` (this is how we're labelling reply threads) and then gets the current number of messages in that thread with a call to the `getMessages` function we introduced in "Create a new thread".
+This code looks for incoming user message events where the conversation ID begins with `"replyto_"` (this is how we're labelling reply threads). It then gets the current number of messages in that thread with a call to the `getMessages` function we introduced in the "Create a new thread" section.
 
 !!internal link
 
-It then calls the new `updateReplyCount` method to update a custom `replyCount` property with the current number of replies.
+Finally, it calls the new `updateReplyCount` method to update a custom `replyCount` property with the current number of replies, ignoring the duplicated parent message at the top of the thread.
 
 ### Update logic in theme
 
@@ -407,7 +434,7 @@ TalkJS allows you to [use conditionals](https://talkjs.com/docs/Features/Themes/
 
 ## Conclusion
 
-You now have a working demonstration of how to create a threaded chat!
+It's been a long tutorial, but you now have a working demonstration of how to create a threaded chat!
 
 To recap, in this tutorial we have:
 
