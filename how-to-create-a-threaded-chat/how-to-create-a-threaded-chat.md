@@ -14,7 +14,11 @@ To follow along with this tutorial, you'll need:
 - An existing TalkJS project using the [JavaScript Chat SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/). See our [Getting Started guide](https://talkjs.com/docs/Getting_Started/) for an example of how to set this up.
 - An installation of [Node.js](https://nodejs.org/) along with the [npm](https://www.npmjs.com/) package manager. We’ll use this to create our backend server.
 
-We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-delete-a-conversation) for this tutorial.
+We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see
+
+!! the [GitHub repo]()
+
+for this tutorial.
 
 ## Set up your project
 
