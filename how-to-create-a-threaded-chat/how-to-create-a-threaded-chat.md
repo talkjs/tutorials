@@ -4,7 +4,7 @@ If you've use comment systems like YouTube video comments, you're probably used 
 
 TalkJS's core use case is pre-built chat messaging that's easy to integrate into your website. We support replying to messages within a conversation, in a similar style to replies in a messaging app like WhatsApp, but we do not yet support reply threads natively. However, TalkJS is flexible enough to let you build reply threads as a feature yourself.
 
-!! gif
+!! 1-demo.gif
 
 This will be one of our longer tutorials! Adding reply threads will take quite a lot of steps – we'll need to be able to create and reply in threads, navigate between them, and see if a message already has replies. In the process we'll take you on a tour of most of TalkJS's extensive customization options, including [custom themes](https://talkjs.com/docs/Features/Themes/The_Theme_Editor/), [action buttons](https://talkjs.com/docs/Features/Customizations/Action_Buttons_Links/), [custom data](https://talkjs.com/docs/Reference/Concepts/Conversations/#custom), [webhooks](https://talkjs.com/docs/Reference/Webhooks/) and the [REST API](https://talkjs.com/docs/Reference/REST_API/Getting_Started/Introduction/).
 
@@ -66,8 +66,7 @@ First, you'll need to edit your theme to include the button:
 
 You should now see a **Reply** button at the bottom of each chat message:
 
-!! screenshot
-!! explain about fixing styling
+!! 2-reply-button.jpg
 
 ### Add an event handler
 
@@ -244,7 +243,7 @@ let thread = talkSession.getOrCreateConversation("replyto_" + event.message.id);
 chatbox.select(thread);
 ```
 
-!! screenshot of the new thread.
+!! 3-reply-thread.jpg
 
 ## Add a "Back" action button
 
@@ -273,8 +272,7 @@ As before, you'll need to edit your theme to include the new button:
 
 You should now see a **Back** button in your chat header:
 
-!! screenshot
-!! explain about fixing styling
+!! 4-back-button.jpg
 
 ### Add custom fields to the conversation
 
@@ -302,8 +300,6 @@ async function createThread(parentMessageId, parentConvId, participants) {
   });
 }
 ```
-
-!! test this?
 
 ### Select the inbox
 
