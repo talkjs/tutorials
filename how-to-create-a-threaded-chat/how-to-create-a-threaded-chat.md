@@ -430,7 +430,7 @@ The final step is to display the reply count in the chat UI. In the TalkJS dashb
 
 TalkJS allows you to [use conditionals](https://talkjs.com/docs/Features/Themes/Editing_Component_Templates/#rendering-conditionally) and [access custom properties](https://talkjs.com/docs/Features/Themes/Passing_Data_to_Themes/#storing-custom-data-in-users-conversations-and-messages) in your templates. Combining these ideas, this code updates the button text to say, for example, **Replies (3)** if the `replyCount` custom property has a value of 3. If there are no replies yet it leaves the text as **Reply**.
 
-!! screenshot (one message with replies, one without)
+!! 5-reply-count.jpg
 
 ## Conclusion
 
