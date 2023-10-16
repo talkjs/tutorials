@@ -245,6 +245,8 @@ chatbox.select(thread);
 
 !! 3-reply-thread.jpg
 
+You now have a working **Reply** button in your chat!
+
 ## Add a "Back" action button
 
 Currently, there's no way of getting back to the message that the user replied to. In this section, we'll fix this by adding a **Back** action button. Some steps are similar to the steps for setting up the **Reply** button in the last section, so we'll move more quickly through these this time.
