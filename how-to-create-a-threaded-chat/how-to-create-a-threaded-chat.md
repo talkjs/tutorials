@@ -258,7 +258,7 @@ As before, you'll need to edit your theme to include the new button:
 3.  In the list of **Built-in Components**, select **ChatHeader**.
 4.  Find the code for displaying the user's name in the header (something like `<span>{{user.name}}</span>`) and replace it with the following:
     ```jsx
-    <span><ActionButton action="back">&lt; Back</ActionButton>{{user.name}}</ActionButton></span>
+    <span><ActionButton action="back">&lt; Back</ActionButton>{{user.name}}</span>
     ```
 5.  Style your button by updating the `margin` property in the `.header button[data-action]` selector:
     ```css
