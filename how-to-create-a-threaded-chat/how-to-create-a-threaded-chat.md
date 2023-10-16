@@ -153,7 +153,7 @@ You should see the message data logged to your server console when you click the
 
 ### Create a new thread
 
-Now that we've passed the message data to the server, we can use it to call the TalkJS REST API. Update your `app.post` call from the previous section with the following:
+Now that we've passed the message data to the server, we can use it to call the TalkJS REST API. Replace your `app.post` call from the previous section with the following:
 
 ```js
 function getMessages(messageId) {
