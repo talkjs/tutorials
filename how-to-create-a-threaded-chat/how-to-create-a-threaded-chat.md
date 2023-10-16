@@ -45,7 +45,7 @@ In this section, you'll add a **Reply** action button to each message in your ch
 First, you'll need to edit your theme to include the button:
 
 1.  Go to the **Themes** tab of the TalkJS dashboard.
-2.  Select to **Edit** the theme you use for your "default" role.
+2.  Select to **Edit** the active theme for your "default" role. (You can find the active theme in the settings for the "default" role in the **Roles** tab of the dashboard.)
 3.  In the list of **Built-in Components**, select **UserMessage**.
 4.  Add the following line below the `<MessageBody />` component:
     ```jsx
