@@ -110,7 +110,7 @@ app.post("/newThread", async (req, res) => {
   console.log("Parent message id: " + parentMessageId);
   console.log("Parent conversation id: " + parentConvId);
   console.log("Parent message text: " + parentMessageText);
-  console.log("Parent message text: " + parentParticipants);
+  console.log("Parent message participants: " + parentParticipants);
 
   res.status(200).end();
 });
