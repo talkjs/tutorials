@@ -280,7 +280,7 @@ You should now see a **Back** button in your chat header:
 
 At the moment, the **Back** button doesn't do anything when you click it. We want to use it to go back to the conversation that the user replied to (which we'll call the "parent conversation"). To do this, you'll need the ID of the parent conversation. We'll add this ID to the current conversation as [custom data](https://talkjs.com/docs/Reference/Concepts/Conversations/#custom) when we create the thread. We'll also add the ID of the parent message at the same time – we don't need this yet, but it will be useful later.
 
-Update your `createThread` method to include these custom fields:
+Update the `createThread` method in your backend code to include these custom fields:
 
 ```js
 async function createThread(parentMessageId, parentConvId, participants) {
