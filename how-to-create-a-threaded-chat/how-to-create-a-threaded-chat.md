@@ -301,7 +301,7 @@ async function createThread(parentMessageId, parentConvId, participants) {
 }
 ```
 
-### Select the inbox
+### Select the chatbox
 
 Now we'll listen for the `"back"` event with the [`onCustomConversationAction` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Chatbox/#Chatbox__onCustomConversationAction). When we receive the message, we'll use the [`select` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Chatbox/#Chatbox__select) on the chatbox to view the parent conversation:
 
