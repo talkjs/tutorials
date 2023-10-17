@@ -333,7 +333,7 @@ You should now switch back to the parent conversation when you select the **Back
 
 ## Add a reply count
 
-We can now create threads and navigate through them. The final feature we need is a way to tell whether comments have replies without clicking through. To complete our threaded chat demo, we'll add a reply count feature, so that the action button is labelled, say, **Replies (3)** if there are three replies. If there are no replies yet we'll leave it as **Reply**.
+We can now create threads and navigate through them. The final feature we need is a way to tell whether messages have replies without clicking through. To complete our threaded chat demo, we'll add a reply count feature, so that the action button is labelled, say, **Replies (3)** if there are three replies. If there are no replies yet we'll leave it as **Reply**.
 
 ### Enable a webhook for new message events
 
