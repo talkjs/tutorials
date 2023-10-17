@@ -423,14 +423,16 @@ Finally, it calls the new `updateReplyCount` method to update a custom `replyCou
 
 ### Update logic in theme
 
-The final step is to display the reply count in the chat UI. In the TalkJS dashboard, update the `MessageBody` settings of your default theme:
+The final step is to display the reply count in the chat UI. TalkJS allows you to [use conditionals](https://talkjs.com/docs/Features/Themes/Editing_Component_Templates/#rendering-conditionally) and [access custom properties](https://talkjs.com/docs/Features/Themes/Passing_Data_to_Themes/#storing-custom-data-in-users-conversations-and-messages) in your templates. Combining these ideas, we'll update the button text to say, for example, **Replies (3)** if the `replyCount` custom property has a value of 3. If there are no replies yet we'll leave the text as **Reply**.
+
+In the TalkJS dashboard, update the `MessageBody` settings of your default theme:
 
 ```js
 <ActionButton t:if="{{ custom.replyCount > 0 }}" action="replyInThread">Replies ({{ custom.replyCount }})</ActionButton>
 <ActionButton t:else action="replyInThread">Reply</ActionButton>
 ```
 
-TalkJS allows you to [use conditionals](https://talkjs.com/docs/Features/Themes/Editing_Component_Templates/#rendering-conditionally) and [access custom properties](https://talkjs.com/docs/Features/Themes/Passing_Data_to_Themes/#storing-custom-data-in-users-conversations-and-messages) in your templates. Combining these ideas, this code updates the button text to say, for example, **Replies (3)** if the `replyCount` custom property has a value of 3. If there are no replies yet it leaves the text as **Reply**.
+Restart your server, and try adding comments again. You should now see a reply count on the parent comment's action button:
 
 !! 5-reply-count.jpg
 
