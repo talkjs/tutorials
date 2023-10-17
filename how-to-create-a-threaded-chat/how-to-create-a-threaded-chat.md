@@ -243,7 +243,7 @@ app.post("/newThread", async (req, res) => {
 
 In this code, we're creating a new thread by making a new conversation for it. We'll give the new conversation an ID of `replyto_<MESSAGE_ID>`, where `<MESSAGE_ID>` is the ID of the message we're replying to.
 
-First, we need to check if a conversation with this ID already exists and has messages. To do this, the `getMessages` function calls the REST API to [list all messages in a conversation](https://talkjs.com/docs/Reference/REST_API/Messages/#listing-messages-from-a-conversation).
+We only need to create a thread if it doesn't exist already, so we start by checking if a conversation with this ID already exists and has messages. To do this, the `getMessages` function calls the REST API to [list all messages in a conversation](https://talkjs.com/docs/Reference/REST_API/Messages/#listing-messages-from-a-conversation).
 
 If the conversation doesn't exist or have messages, we call the `createThread` function, which calls the REST API to [create or update it](https://talkjs.com/docs/Reference/REST_API/Conversations/#setting-conversation-data). We also duplicate the text of the original message in the new thread, so that users can see the message they're replying to. We do this with another call to the REST API to [send a new message](https://talkjs.com/docs/Reference/REST_API/Messages/#sending-on-behalf-of-a-user).
 
