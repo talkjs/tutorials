@@ -153,9 +153,14 @@ You should see the message data logged to your server console when you click the
 
 ### Create a new thread
 
-Now that we've passed the message data to the server, we can use it to call the TalkJS REST API. Replace your `app.post` call from the previous section with the following:
+Now that we've passed the message data to the server, we can use it to call the TalkJS REST API. Replace your `app.post` call from the previous section with the following, filling in the TalkJS App ID and secret key with your own values from the **Settings** section of the TalkJS dashboard:
 
 ```js
+const appId = "<APP_ID>";
+const secretKey = "<SECRET_KEY>";
+
+const basePath = "https://api.talkjs.com";
+
 function getMessages(messageId) {
   return fetch(
     `${basePath}/v1/${appId}/conversations/replyto_${messageId}/messages`,
