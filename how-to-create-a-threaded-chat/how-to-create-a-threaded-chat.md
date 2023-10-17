@@ -1,4 +1,4 @@
-# How to use TalkJS to create a comment system with reply threads
+# How to build a reply thread feature with TalkJS
 
 If you've use comment systems like YouTube video comments, you're probably used to viewing or replying in comment threads. Reply threads help organize conversations by grouping related messages together, making it easier to follow specific topics.
 
