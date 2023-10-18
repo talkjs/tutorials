@@ -4,7 +4,10 @@ If you've use comment systems like YouTube video comments, you're probably used 
 
 TalkJS's core use case is pre-built chat messaging that's easy to integrate into your website. We support replying to messages within a conversation, in a similar style to replies in a messaging app like WhatsApp, but we do not yet support reply threads natively. However, TalkJS is flexible enough to let you build reply threads as a feature yourself.
 
-!! 1-demo.gif
+<figure class="kg-image-card">
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/1-demo.gif" alt="Demonstration of the reply thread feature"/>
+  <figcaption>Demonstration of the reply thread feature</figcaption>
+</figure>
 
 This will be one of our longer tutorials! We'll take you through the following steps:
 
@@ -20,11 +23,7 @@ To follow along with this tutorial, you'll need:
 - An existing TalkJS project using the [JavaScript Chat SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/). See our [Getting Started guide](https://talkjs.com/docs/Getting_Started/) for an example of how to set this up.
 - An installation of [Node.js](https://nodejs.org/) along with the [npm](https://www.npmjs.com/) package manager. We’ll use this to create our backend server.
 
-We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see
-
-!! the [GitHub repo]()
-
-for this tutorial.
+We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-make-a-threaded-chat) for this tutorial.
 
 ## Set up your project
 
@@ -72,7 +71,10 @@ First, you'll need to edit your theme to include the button:
 
 You should now see a **Reply** button at the bottom of each chat message:
 
-!! 2-reply-button.jpg
+<figure class="kg-image-card">
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/2-reply-button.jpg" alt="The Reply action button"/>
+  <figcaption>The Reply action button</figcaption>
+</figure>
 
 ### Add an event handler
 
@@ -254,7 +256,10 @@ let thread = talkSession.getOrCreateConversation("replyto_" + event.message.id);
 chatbox.select(thread);
 ```
 
-!! 3-reply-thread.jpg
+<figure class="kg-image-card">
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/3-reply-thread.jpg" alt="The new reply thread, with a copy of the original message"/>
+  <figcaption>The new reply thread, with a copy of the original message</figcaption>
+</figure>
 
 You now have a working **Reply** button in your chat!
 
@@ -285,7 +290,10 @@ As before, you'll need to edit your theme to include the new button:
 
 You should now see a **Back** button in your chat header:
 
-!! 4-back-button.jpg
+<figure class="kg-image-card">
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/4-back-button.jpg" alt="The Back action button"/>
+  <figcaption>The Back action button</figcaption>
+</figure>
 
 ### Add custom fields to the conversation
 
@@ -445,7 +453,10 @@ In the TalkJS dashboard, update the `MessageBody` settings of your default theme
 
 Restart your server, and try adding comments again. You should now see a reply count on the parent comment's action button:
 
-!! 5-reply-count.jpg
+<figure class="kg-image-card">
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/5-reply-count.jpg" alt="Action buttons with a reply count"/>
+  <figcaption>Action buttons with a reply count</figcaption>
+</figure>
 
 ## Conclusion
 
@@ -458,9 +469,7 @@ To recap, in this tutorial we have:
 - used custom data to add navigation back to the previous thread
 - used webhooks and custom data to add a reply count
 
-For the full example code for this tutorial, see
-
-!! [our GitHub repo]().
+For the full example code for this tutorial, see [our GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-make-a-threaded-chat).
 
 If you want to learn more about TalkJS, here are some good places to start:
 
