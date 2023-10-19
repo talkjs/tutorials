@@ -434,11 +434,7 @@ app.post("/updateReplyCount", async (req, res) => {
 });
 ```
 
-This code looks for incoming user message events where the conversation ID begins with `"replyto_"` (this is how we're labelling reply threads). It then gets the current number of messages in that thread with a call to the `getMessages` function we introduced in the "Create a new thread" section.
-
-!!internal link
-
-Finally, it calls the new `updateReplyCount` method to update a custom `replyCount` property with the current number of replies, ignoring the duplicated parent message at the top of the thread.
+This code looks for incoming user message events where the conversation ID begins with `"replyto_"` (this is how we're labelling reply threads). It then gets the current number of messages in that thread with a call to the `getMessages` function we introduced in [Create a new thread](https://talkjs.com/resources/how-to-build-a-reply-thread-feature-with-talkjs/#create-a-new-thread). Finally, it calls the new `updateReplyCount` method to update a custom `replyCount` property with the current number of replies, ignoring the duplicated parent message at the top of the thread.
 
 ### Update logic in theme
 
