@@ -63,7 +63,7 @@ First, you'll need to edit your theme to include the button:
     .by-me button[data-action],
     .by-other button[data-action] {
       /* ... other properties ... */
-      margin: 5px;
+      margin: 1rem;
       /* ... other properties ... */
     }
     `
@@ -274,18 +274,48 @@ As before, you'll need to edit your theme to include the new button:
 1.  Go to the **Themes** tab of the TalkJS dashboard.
 2.  Select to **Edit** the theme you use for your "default" role.
 3.  In the list of **Built-in Components**, select **ChatHeader**.
-4.  Find the code for displaying the user's name in the header (something like `<span>{{user.name}}</span>`) and replace it with the following:
+4.  Find the code for displaying the conversation image in the header (something like `<ConversationImage conversation="{{conversation }}" />`) and add the following above it:
     ```jsx
-    <span><ActionButton action="back">&lt; Back</ActionButton>{{user.name}}</span>
+    <ActionButton action="back">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      >
+        <path d="m15 18-6-6 6-6" fill="none" />
+      </svg>
+      Back
+    </ActionButton>
     ```
-5.  Style your button by updating the `margin` property in the `.header button[data-action]` selector:
+5.  Style your button by replacing the CSS for the `.header button[data-action]` selector and adding styling for the `.header button[data-action] svg` selector:
+
     ```css
     .header button[data-action] {
-      /* ... other properties ... */
-      margin: 5px;
-      /* ... other properties ... */
+      border-radius: 0.375rem;
+      font-size: inherit;
+      margin: 0 1rem 0 0;
+      padding: 0.25rem 0.325rem;
+      cursor: pointer;
+      transition: color 200ms ease-in-out, background-color 200ms ease-in-out,
+        border 200ms ease-in-out;
+      color: #111;
+      background-color: transparent;
+      border: 1px solid #525252;
+      display: flex;
+      align-items: center;
+    }
+
+    .header button[data-action] svg {
+      margin-left: -4px;
     }
     ```
+
 6.  If you are in Live mode, select **Copy to live**.
 
 You should now see a **Back** button in your chat header:
@@ -440,7 +470,7 @@ This code looks for incoming user message events where the conversation ID begin
 
 The final step is to display the reply count in the chat UI. TalkJS allows you to [use conditionals](https://talkjs.com/docs/Features/Themes/Editing_Component_Templates/#rendering-conditionally) and [access custom properties](https://talkjs.com/docs/Features/Themes/Passing_Data_to_Themes/#storing-custom-data-in-users-conversations-and-messages) in your templates. Combining these ideas, we'll update the button text to say, for example, **Replies (3)** if the `replyCount` custom property has a value of 3. If there are no replies yet we'll leave the text as **Reply**.
 
-In the TalkJS dashboard, update the `MessageBody` settings of your default theme:
+In the TalkJS dashboard, update the **Reply** button in the `UserMessage`s settings of your default theme:
 
 ```js
 <ActionButton t:if="{{ custom.replyCount > 0 }}" action="replyInThread">Replies ({{ custom.replyCount }})</ActionButton>
