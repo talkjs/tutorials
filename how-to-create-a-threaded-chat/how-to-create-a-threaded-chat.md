@@ -45,7 +45,7 @@ We'll also remove the standard **Reply** message action, as we'll be creating th
 
 In this section, you'll add a **Reply** action button to each message in your chat and use it to open a new [conversation](https://talkjs.com/docs/Reference/Concepts/Conversations/). This conversation will act as the reply thread for that message.
 
-### Edit your theme
+### Add the "Reply" button to your theme
 
 First, you'll need to edit your theme to include the button:
 
@@ -267,7 +267,7 @@ You now have a working **Reply** button in your chat!
 
 Currently, there's no way of getting back to the message that the user replied to. In this section, we'll fix this by adding a **Back** action button. Some steps are similar to the steps for setting up the **Reply** button in the last section, so we'll move more quickly through these this time.
 
-### Edit your theme
+### Add the "Back" button to your theme
 
 As before, you'll need to edit your theme to include the new button:
 
