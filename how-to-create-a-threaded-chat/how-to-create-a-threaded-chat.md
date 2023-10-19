@@ -5,7 +5,7 @@ If you've used comment systems like YouTube video comments, you're probably used
 TalkJS's core use case is pre-built chat messaging that's easy to integrate into your website. We support replying to messages within a conversation, in a similar style to replies in a messaging app like WhatsApp, but we do not yet support reply threads natively. However, TalkJS is flexible enough to let you build reply threads as a feature yourself.
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/1-demo.gif" alt="Demonstration of the reply thread feature"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/1-demo-1.gif" alt="Demonstration of the reply thread feature"/>
   <figcaption>Demonstration of the reply thread feature</figcaption>
 </figure>
 
@@ -72,7 +72,7 @@ First, you'll need to edit your theme to include the button:
 You should now see a **Reply** button at the bottom of each chat message:
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/2-reply-button.jpg" alt="The Reply action button"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/2-reply-button-1.jpg" alt="The Reply action button"/>
   <figcaption>The Reply action button</figcaption>
 </figure>
 
@@ -257,7 +257,7 @@ chatbox.select(thread);
 ```
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/3-reply-thread.jpg" alt="The new reply thread, with a copy of the original message"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/3-reply-thread-1.jpg" alt="The new reply thread, with a copy of the original message"/>
   <figcaption>The new reply thread, with a copy of the original message</figcaption>
 </figure>
 
@@ -321,7 +321,7 @@ As before, you'll need to edit your theme to include the new button:
 You should now see a **Back** button in your chat header:
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/4-back-button.jpg" alt="The Back action button"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/4-back-button-1.jpg" alt="The Back action button"/>
   <figcaption>The Back action button</figcaption>
 </figure>
 
@@ -480,7 +480,7 @@ In the TalkJS dashboard, update the **Reply** button in the `UserMessage`s setti
 Restart your server, and try adding comments again. You should now see a reply count on the parent comment's action button:
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/5-reply-count.jpg" alt="Action buttons with a reply count"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/5-reply-count-1.jpg" alt="Action buttons with a reply count"/>
   <figcaption>Action buttons with a reply count</figcaption>
 </figure>
 
