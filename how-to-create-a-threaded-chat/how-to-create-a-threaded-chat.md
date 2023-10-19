@@ -5,7 +5,7 @@ If you've used comment systems like YouTube video comments, you're probably used
 TalkJS's core use case is pre-built chat messaging that's easy to integrate into your website. We support replying to messages within a conversation, in a similar style to replies in a messaging app like WhatsApp, but we do not yet support reply threads natively. However, TalkJS is flexible enough to let you build reply threads as a feature yourself.
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/1-demo.gif" alt="Demonstration of the reply thread feature"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/1-demo-1.gif" alt="Demonstration of the reply thread feature"/>
   <figcaption>Demonstration of the reply thread feature</figcaption>
 </figure>
 
@@ -63,7 +63,7 @@ First, you'll need to edit your theme to include the button:
     .by-me button[data-action],
     .by-other button[data-action] {
       /* ... other properties ... */
-      margin: 5px;
+      margin: 1rem;
       /* ... other properties ... */
     }
     `
@@ -72,7 +72,7 @@ First, you'll need to edit your theme to include the button:
 You should now see a **Reply** button at the bottom of each chat message:
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/2-reply-button.jpg" alt="The Reply action button"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/2-reply-button-1.jpg" alt="The Reply action button"/>
   <figcaption>The Reply action button</figcaption>
 </figure>
 
@@ -257,7 +257,7 @@ chatbox.select(thread);
 ```
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/3-reply-thread.jpg" alt="The new reply thread, with a copy of the original message"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/3-reply-thread-1.jpg" alt="The new reply thread, with a copy of the original message"/>
   <figcaption>The new reply thread, with a copy of the original message</figcaption>
 </figure>
 
@@ -274,24 +274,54 @@ As before, you'll need to edit your theme to include the new button:
 1.  Go to the **Themes** tab of the TalkJS dashboard.
 2.  Select to **Edit** the theme you use for your "default" role.
 3.  In the list of **Built-in Components**, select **ChatHeader**.
-4.  Find the code for displaying the user's name in the header (something like `<span>{{user.name}}</span>`) and replace it with the following:
+4.  Find the code for displaying the conversation image in the header (something like `<ConversationImage conversation="{{conversation }}" />`) and add the following above it:
     ```jsx
-    <span><ActionButton action="back">&lt; Back</ActionButton>{{user.name}}</span>
+    <ActionButton action="back">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      >
+        <path d="m15 18-6-6 6-6" fill="none" />
+      </svg>
+      Back
+    </ActionButton>
     ```
-5.  Style your button by updating the `margin` property in the `.header button[data-action]` selector:
+5.  Style your button by replacing the CSS for the `.header button[data-action]` selector and adding styling for the `.header button[data-action] svg` selector:
+
     ```css
     .header button[data-action] {
-      /* ... other properties ... */
-      margin: 5px;
-      /* ... other properties ... */
+      border-radius: 0.375rem;
+      font-size: inherit;
+      margin: 0 1rem 0 0;
+      padding: 0.25rem 0.325rem;
+      cursor: pointer;
+      transition: color 200ms ease-in-out, background-color 200ms ease-in-out,
+        border 200ms ease-in-out;
+      color: #111;
+      background-color: transparent;
+      border: 1px solid #525252;
+      display: flex;
+      align-items: center;
+    }
+
+    .header button[data-action] svg {
+      margin-left: -4px;
     }
     ```
+
 6.  If you are in Live mode, select **Copy to live**.
 
 You should now see a **Back** button in your chat header:
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/4-back-button.jpg" alt="The Back action button"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/4-back-button-1.jpg" alt="The Back action button"/>
   <figcaption>The Back action button</figcaption>
 </figure>
 
@@ -434,17 +464,13 @@ app.post("/updateReplyCount", async (req, res) => {
 });
 ```
 
-This code looks for incoming user message events where the conversation ID begins with `"replyto_"` (this is how we're labelling reply threads). It then gets the current number of messages in that thread with a call to the `getMessages` function we introduced in the "Create a new thread" section.
-
-!!internal link
-
-Finally, it calls the new `updateReplyCount` method to update a custom `replyCount` property with the current number of replies, ignoring the duplicated parent message at the top of the thread.
+This code looks for incoming user message events where the conversation ID begins with `"replyto_"` (this is how we're labelling reply threads). It then gets the current number of messages in that thread with a call to the `getMessages` function we introduced in [Create a new thread](https://talkjs.com/resources/how-to-build-a-reply-thread-feature-with-talkjs/#create-a-new-thread). Finally, it calls the new `updateReplyCount` method to update a custom `replyCount` property with the current number of replies, ignoring the duplicated parent message at the top of the thread.
 
 ### Update logic in theme
 
 The final step is to display the reply count in the chat UI. TalkJS allows you to [use conditionals](https://talkjs.com/docs/Features/Themes/Editing_Component_Templates/#rendering-conditionally) and [access custom properties](https://talkjs.com/docs/Features/Themes/Passing_Data_to_Themes/#storing-custom-data-in-users-conversations-and-messages) in your templates. Combining these ideas, we'll update the button text to say, for example, **Replies (3)** if the `replyCount` custom property has a value of 3. If there are no replies yet we'll leave the text as **Reply**.
 
-In the TalkJS dashboard, update the `MessageBody` settings of your default theme:
+In the TalkJS dashboard, update the **Reply** button in the `UserMessage`s settings of your default theme:
 
 ```js
 <ActionButton t:if="{{ custom.replyCount > 0 }}" action="replyInThread">Replies ({{ custom.replyCount }})</ActionButton>
@@ -454,7 +480,7 @@ In the TalkJS dashboard, update the `MessageBody` settings of your default theme
 Restart your server, and try adding comments again. You should now see a reply count on the parent comment's action button:
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/5-reply-count.jpg" alt="Action buttons with a reply count"/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/10/5-reply-count-1.jpg" alt="Action buttons with a reply count"/>
   <figcaption>Action buttons with a reply count</figcaption>
 </figure>
 
