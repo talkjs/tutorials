@@ -14,31 +14,7 @@ Our example will use [React](https://react.dev/) along with the [`talkjs-react` 
 
 For the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/react/remote-work-demo) for this tutorial.
 
-## Summary of React components
-
-As well as the TalkJS chatbox, we'll need some other React components to make up our team chat UI, including lists of channels and DMs and a custom chat header. The exact details of styling and placement will depend on your app and the libraries that you're already using. In this section we'll list the components that we're using in the example repo.
-
-You'll see the following components in the `src/components` directory:
-
-- `CategoryCollapse`: displays a collapsible list of conversations with a given `title`. We'll use this component twice: once with a title of "Channels" and once with a title of "DMs"
-- `ConversationListItem`: displays a single conversation within each collapsible list
-- `ChatHeader`: displays a custom chat header
-- `ConversationImage`: displays a conversation image in the chat header and next to each conversation list item.
-
-In the example repo we're using [Tailwind CSS](https://tailwindcss.com/) to style our components, so you'll see layout code inside the `className` of each component. The layout leaves an empty space for the TalkJS chatbox (we'll add this in the next section):
-
-!! image: 2-layout.jpg
-
-<figure class="kg-image-card">
-  <img class="kg-image" src="<URL>" alt="Layout of the team chat UI. There's an empty space that we'll fill with the TalkJS chatbox in later sections. The chat header is above it and the collapsible lists are to the left."/>
-  <figcaption>Layout of the team chat UI</figcaption>
-</figure>
-
-## Set up the TalkJS chatbox
-
-In this section we'll set up a basic chatbox with the `<Session>` and `<Chatbox>` components, and sync some user and conversation data.
-
-### Install the talkjs-react library
+## Add talkjs-react to your project
 
 If you aren't already using the `talkjs-react` library, install it with `npm` or `yarn`:
 
@@ -52,49 +28,73 @@ or
 yarn add talkjs @talkjs/react
 ```
 
-To use it in the component that you'll be adding a chatbox to, import TalkJS using the following statement:
+To use it in your components, import TalkJS using the following statement:
 
 ```jsx
 import Talk from "talkjs";
 ```
 
-### Add the session component and sync user data
+## Add the session component and sync user data
 
-Next, import the TalkJS [`Session` component](https://github.com/talkjs/talkjs-react#1-create-a-session) and add it to your app in the place where you want the chatbox to appear in your UI:
+Next, import the TalkJS [`Session` component](https://github.com/talkjs/talkjs-react#1-create-a-session) and add it to your app. In our example, we'll import the `Session` component at the top level of our app, and put the rest of the team chat code inside it as a child component, so that the whole team chat app has access to the session:
 
 ```jsx
-import { Session } from "@talkjs/react";
 import { useCallback } from "react";
+import { Session } from "@talkjs/react";
+import talkJsConfig from "./talkJsConfig";
 
-// ...
+function App() {
+  const syncUser = useCallback(
+    () =>
+      new Talk.User({
+        id: talkJsConfig.userId,
+        name: "Eulalia van Helgen",
+        photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
+        role: "default",
+      }),
+    []
+  );
 
-const syncUser = useCallback(
-  () =>
-    new Talk.User({
-      id: talkJsConfig.userId,
-      name: "Eulalia Van Helgen",
-      photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
-      role: "default",
-    }),
-  []
-);
+  return (
+    <Session appId={talkJsConfig.appId} syncUser={syncUser}>
+      <TeamChat />
+    </Session>
+  );
+}
 
-// ...
-
-<Session appId={talkJsConfig.appId} syncUser={syncUser}>
-  {/* The chatbox will go here */}
-</Session>;
+export default App;
 ```
 
-This sets up the basic information we need for a TalkJS [session](https://talkjs.com/docs/Reference/Concepts/Sessions/): an app ID, and a user to log in as.
+The `Session` component takes the basic information we need for a TalkJS [session](https://talkjs.com/docs/Reference/Concepts/Sessions/): an app ID, and a user to log in as.
 
 You can find your `appId` in the **Settings** tab of the TalkJS dashboard. In the example above, we're storing it in a separate `talkJsConfig` file.
 
 To sync data for the user we want to log in as, we'll use the [`syncUser` prop](https://github.com/talkjs/talkjs-react#1-synchronize-user-data). This prop uses the [`useCallback`](https://react.dev/reference/react/useCallback) React Hook and expects a callback function that creates a `Talk.User` object. In this example, the `syncUser` callback creates a user with a user ID that we define in `talkJsConfig`.
 
-### Add the chatbox component and sync conversation data
+## Add UI components for the team chat
 
-Similarly, we'll import the [`Chatbox` component](https://github.com/talkjs/talkjs-react#2-create-a-chatbox) and add it inside the `Session` component:
+As well as the TalkJS chatbox, we'll need some other React components to make up our team chat UI, including lists of channels and DMs and a custom chat header. The exact details of styling and placement will depend on your app and the libraries that you're already using. In this section we'll list the components that we're using in the example repo.
+
+You'll see the following components in the `src/components` directory:
+
+- `TeamChat`: the main component that displays our team chat.
+- `CategoryCollapse`: displays a collapsible list of conversations with a given `title`. We'll use this component twice: once to display a list of channels and once to display a list of DMs.
+- `ConversationListItem`: displays a single conversation within each collapsible list.
+- `ChatHeader`: displays a custom chat header.
+- `ConversationImage`: displays a conversation image in the chat header and next to each conversation list item.
+
+In the example repo we're using [Tailwind CSS](https://tailwindcss.com/) to style our components, so you'll see layout code inside the `className` of each component. The layout leaves a space for the TalkJS chatbox (we'll add this in the next section):
+
+!! image: 2-layout.jpg
+
+<figure class="kg-image-card">
+  <img class="kg-image" src="<URL>" alt="Layout of the team chat UI. There's an empty space that we'll fill with the TalkJS chatbox in later sections. The chat header is above it and the collapsible lists are to the left."/>
+  <figcaption>Layout of the team chat UI</figcaption>
+</figure>
+
+## Add the chatbox component and sync conversation data
+
+To add the TalkJS chatbox, import the [`Chatbox` component](https://github.com/talkjs/talkjs-react#2-create-a-chatbox) and add it in the place you want it in your layout:
 
 ```jsx
 import { Chatbox } from "@talkjs/react";
@@ -102,62 +102,60 @@ import { Chatbox } from "@talkjs/react";
 // ... //
 
 const syncConversation = useCallback((session) => {
-  const other = new Talk.User({
-    id: "remoteWorkOther",
-    name: "TalkJS",
-    photoUrl: "https://talkjs.com/new-web/avatar-talkjs.jpg",
-    welcomeMessage:
-      "Hi there 👋 \nThis is our chat demo and you can test it out in any way you like. Play with some of the chat features, kick the tyres a little, and experience what you could easily build with TalkJS. Also consider checking out our Docs: https://talkjs.com/docs/",
-    role: "default",
-  });
-
-  const defaultConv = session.getOrCreateConversation("remoteWorkWelcome");
+  const defaultConv = session.getOrCreateConversation("remoteWorkMeetup");
   defaultConv.setParticipant(session.me);
-  defaultConv.setParticipant(other);
   return defaultConv;
 }, []);
 
 // ... //
 
-<Session appId={talkJsConfig.appId} syncUser={syncUser}>
-  <Chatbox
-    syncConversation={syncConversation}
-    className="h-full w-full overflow-hidden rounded-b-xl lg:rounded-none lg:rounded-br-xl"
-    showChatHeader={false}
-    theme="team_chat"
-  />
-</Session>;
+<Chatbox
+  syncConversation={syncConversation}
+  className="h-full w-full overflow-hidden rounded-b-xl lg:rounded-none lg:rounded-br-xl"
+  showChatHeader={false}
+  theme="team_chat"
+/>;
 ```
 
-Here we've set `showChatHeader` to `false`, because we've already replaced it with a custom `ChatHeader` component. We'll use the `team_chat` [theme](https://talkjs.com/docs/Features/Themes/). We use `className` to style the component with Tailwind.
-
-We'll sync conversation data with the [`syncConversation` prop](https://github.com/talkjs/talkjs-react#2-create-and-join-a-conversation), which takes a callback that creates a [`ConversationBuilder`](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder) object. In this example, the `syncConversation` callback creates a conversation with a conversation id of `remoteWorkWelcome`, and adds a couple of users. This will be the default "welcome" channel that you see when you first load the app:
+The `Chatbox` component has a [`syncConversation` prop](https://github.com/talkjs/talkjs-react#2-create-and-join-a-conversation), which takes a callback that creates a [`ConversationBuilder`](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder) object. In this example, the `syncConversation` callback creates a conversation with a conversation id of `remoteWorkWelcome`, and adds you to the conversation. This will be the default "welcome" channel that you see when you first load the app:
 
 !! add screenshot
 
+The other props style the chatbox. We set `showChatHeader` to `false`, because we've already replaced it with a custom `ChatHeader` component, and select the `team_chat` [theme](https://talkjs.com/docs/Features/Themes/). We use `className` to style the component further with Tailwind.
+
 ## Change the conversation
 
-Currently, our chatbox displays a single conversation. Next, we want to switch to a different conversation when we click on another `ConversationListItem` (channel or direct message). The `ConversationListItem` component is outside our `Session` component, so we'll use the [`useRef`](https://react.dev/reference/react/useRef) React Hook to [make references to the session and chatbox](https://github.com/talkjs/talkjs-react#using-refs), and pass these in to the `sessionRef` and `chatboxRef` props in our components:
+Currently, our chatbox displays a single conversation. Next, we want to switch to a different TalkJS conversation when we click on a channel or direct message thread. In our UI implementation, this is handled inside the `ConversationListItem` component, where we have a button that calls a `changeConversation` function when you click on the item:
+
+```jsx
+<button
+  onClick={() => changeConversation(conversation)}
+  // ...
+>
+  // ...
+</button>
+```
+
+To change the conversation, we'll need to be able to access the TalkJS `Session` object inside the `changeConversation` function. To do this, we'll use with the [`useSession` custom React Hook](https://github.com/talkjs/talkjs-react#using-hooks). We'll also need to access the `Chatbox` object, which we'll [create a reference to](https://github.com/talkjs/talkjs-react#using-refs) with the [`useRef` React Hook](https://react.dev/reference/react/useRef):
 
 ```jsx
 import { useRef } from "react";
+import { useSession } from "@talkjs/react";
 
-const sessionRef = useRef(null);
 const chatboxRef = useRef(null);
 
-// Added sessionRef and chatboxRef
-<Session appId={talkJsConfig.appId} syncUser={syncUser} sessionRef={sessionRef}>
-  <Chatbox
-    syncConversation={syncConversation}
-    chatboxRef={chatboxRef}
-    className="h-full w-full overflow-hidden rounded-b-xl lg:rounded-none lg:rounded-br-xl"
-    showChatHeader={false}
-    theme="team_chat"
-  />
-</Session>;
+// ... //
+
+<Chatbox
+  syncConversation={syncConversation}
+  chatboxRef={chatboxRef} // add chatbox ref
+  className="h-full w-full overflow-hidden rounded-b-xl lg:rounded-none lg:rounded-br-xl"
+  showChatHeader={false}
+  theme="team_chat"
+/>;
 ```
 
-We then use these references inside a `changeConversation` function that we pass to the `ConversationListItem`:
+We then use these references inside the `changeConversation` function, where we set up the relevant TalkJS conversation and add the user as a participant, in the same way that we did for the default conversation:
 
 ```jsx
 import { useState } from "react";
@@ -169,50 +167,19 @@ const [currentConversation, setCurrentConversation] =
 // ... //
 
 const changeConversation = (conversation) => {
-  if (sessionRef.current?.isAlive) {
-    const talkJsConversation = sessionRef.current.getOrCreateConversation(
-      conversation.id
-    );
-
-    const me = new Talk.User({
-      id: talkJsConfig.userId,
-      name: "Eulalia Van Helgen",
-      photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
-      role: "default",
-    });
-
-    const other = new Talk.User({
-      id: "remoteWorkOther",
-      name: "TalkJS",
-      photoUrl: "https://talkjs.com/new-web/avatar-talkjs.jpg",
-      welcomeMessage:
-        "Hi there 👋 \nThis is our chat demo and you can test it out in any way you like. Play with some of the chat features, kick the tyres a little, and experience what you could easily build with TalkJS. Also consider checking out our Docs: https://talkjs.com/docs/",
-      role: "default",
-    });
+  if (session?.isAlive) {
+    const talkJsConversation = session.getOrCreateConversation(conversation.id);
+    const me = new Talk.User(talkJsConfig.userId);
 
     talkJsConversation.setParticipant(me);
-    talkJsConversation.setParticipant(other);
     talkJsConversation.setAttributes(conversation);
-    setMobileChannelSelected(true);
     setCurrentConversation(conversation);
+
     if (chatboxRef.current?.isAlive) {
       chatboxRef.current.select(talkJsConversation);
     }
   }
 };
-```
-
-Inside the `changeConversation` function we set up the relevant TalkJS conversation and add participants, in the same way that we did for the default conversation.
-
-We'll then call the `changeConversation` function inside the `ConversationListItem` component:
-
-```jsx
-<button
-  onClick={() => changeConversation(conversation)}
-  // ...
->
-  // ...
-</button>
 ```
 
 Clicking on a different channel or DM thread now takes you to the relevant conversation.
@@ -242,7 +209,7 @@ We'll then pass the `unreadMessages` variable into the `ConversationListItem` co
 
 ```jsx
 const unread = unreadMessages.find(
-  (item) => item.lastMessage.conversation.id === conversation.id
+  (item) => item.conversation.id === conversation.id
 );
 
 return (
