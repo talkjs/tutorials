@@ -2,7 +2,12 @@
 
 When your team is spread out across multiple locations, it's great to have a central place to collaborate, with discussion channels and private messaging all in one place. In this tutorial, we'll walk you through how to customize TalkJS to create a team chat app, with a similar layout to Slack or Microsoft Teams:
 
-!! gif
+!! 1-demo.gif
+
+<figure class="kg-image-card">
+  <img class="kg-image" src="<URL>" alt="GIF demonstrating the team chat UI, which has lists of channels and DMs on the left and a conversation view on the right. The user starts checks the unread 'meetups' channel, then clicks on an unread DM and sends a reply."/>
+  <figcaption>Demonstration of the team chat</figcaption>
+</figure>
 
 You can see it in action in our [interactive demo](https://talkjs.com/demo/team-chat/).
 
@@ -119,7 +124,12 @@ const syncConversation = useCallback((session) => {
 
 The `Chatbox` component has a [`syncConversation` prop](https://github.com/talkjs/talkjs-react#2-create-and-join-a-conversation), which takes a callback that creates a [`ConversationBuilder`](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder) object. In this example, the `syncConversation` callback creates a conversation with a conversation id of `remoteWorkMeetup`, and adds you to the conversation. This will be the default "meetup" channel that you see when you first load the app:
 
-!! add screenshot
+!! 3-default-channel.jpg
+
+<figure class="kg-image-card">
+  <img class="kg-image" src="<URL>" alt="View of the default 'meetups' channel."/>
+  <figcaption>View of the default 'meetups' channel.</figcaption>
+</figure>
 
 The other props style the chatbox. We set `showChatHeader` to `false`, because we've already replaced it with a custom `ChatHeader` component, and select the `team_chat` [theme](https://talkjs.com/docs/Features/Themes/). We use `className` to style the component further with Tailwind.
 
@@ -231,7 +241,14 @@ return (
 );
 ```
 
-!! gif
+Now, when a conversation receives a new message, the name will display in bold:
+
+!! 4-new-message.gif
+
+<figure class="kg-image-card">
+  <img class="kg-image" src="<URL>" alt="GIF that demonstrates how the channel name displays in bold when a new message arrives."/>
+  <figcaption>The channel name displays in bold when a new message arrives</figcaption>
+</figure>
 
 ## Conclusion
 
