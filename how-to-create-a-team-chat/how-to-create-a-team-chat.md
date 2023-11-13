@@ -117,7 +117,7 @@ const syncConversation = useCallback((session) => {
 />;
 ```
 
-The `Chatbox` component has a [`syncConversation` prop](https://github.com/talkjs/talkjs-react#2-create-and-join-a-conversation), which takes a callback that creates a [`ConversationBuilder`](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder) object. In this example, the `syncConversation` callback creates a conversation with a conversation id of `remoteWorkWelcome`, and adds you to the conversation. This will be the default "welcome" channel that you see when you first load the app:
+The `Chatbox` component has a [`syncConversation` prop](https://github.com/talkjs/talkjs-react#2-create-and-join-a-conversation), which takes a callback that creates a [`ConversationBuilder`](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder) object. In this example, the `syncConversation` callback creates a conversation with a conversation id of `remoteWorkMeetup`, and adds you to the conversation. This will be the default "meetup" channel that you see when you first load the app:
 
 !! add screenshot
 
