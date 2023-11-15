@@ -5,7 +5,7 @@ When your team is spread out across multiple locations, it's great to have a cen
 !! 1-demo.gif
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="<URL>" alt="GIF demonstrating the team chat UI, which has lists of channels and DMs on the left and a conversation view on the right. The user starts checks the unread 'meetups' channel, then clicks on an unread DM and sends a reply."/>
+  <img class="kg-image" src="<URL>" alt="GIF demonstrating the team chat UI, which has lists of channels and DMs on the left and a conversation view on the right. The user checks the unread 'meetups' channel, then clicks on an unread DM and sends a reply."/>
   <figcaption>Demonstration of the team chat</figcaption>
 </figure>
 
