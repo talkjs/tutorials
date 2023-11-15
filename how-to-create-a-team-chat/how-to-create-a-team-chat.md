@@ -146,7 +146,7 @@ Currently, our chatbox displays a single conversation. Next, we want to switch t
 </button>
 ```
 
-To change the conversation, we'll need to be able to access the TalkJS `Session` object inside the `changeConversation` function. To do this, we'll use with the [`useSession` custom React Hook](https://github.com/talkjs/talkjs-react#using-hooks). We'll also need to access the `Chatbox` object, which we'll [create a reference to](https://github.com/talkjs/talkjs-react#using-refs) with the [`useRef` React Hook](https://react.dev/reference/react/useRef):
+To change the conversation, we'll need to be able to access the TalkJS `Session` object inside the `changeConversation` function. To do this, we'll use the [`useSession` custom React Hook](https://github.com/talkjs/talkjs-react#using-hooks). We'll also need to access the `Chatbox` object, which we'll [create a reference to](https://github.com/talkjs/talkjs-react#using-refs) with the [`useRef` React Hook](https://react.dev/reference/react/useRef):
 
 ```jsx
 import { useRef } from "react";
