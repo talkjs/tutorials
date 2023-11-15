@@ -135,7 +135,7 @@ The other props style the chatbox. We set `showChatHeader` to `false`, because w
 
 ## Change the conversation
 
-Currently, our chatbox displays a single conversation. Next, we want to switch to a different TalkJS conversation when we click on a channel or direct message thread. In our UI implementation, this is handled inside the `ConversationListItem` component, where we have a button that calls a `changeConversation` function when you click on the item:
+Currently, our chatbox displays a single conversation. Next, we want to be able to switch to a different TalkJS conversation when we click on a channel or direct message thread. In our UI implementation, this is handled inside the `ConversationListItem` component, where we have a button that calls a `changeConversation` function when you click on the item:
 
 ```jsx
 <button
