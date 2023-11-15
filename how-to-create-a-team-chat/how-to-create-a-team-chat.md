@@ -88,7 +88,7 @@ You'll see the following components in the `src/components` directory:
 - `ChatHeader`: displays a custom chat header.
 - `ConversationImage`: displays a conversation image in the chat header and next to each conversation list item.
 
-In the example repo we're using [Tailwind CSS](https://tailwindcss.com/) to style our components, so you'll see layout code inside the `className` of each component. The layout leaves a space for the TalkJS chatbox (we'll add this in the next section):
+In the example repo we're using [Tailwind CSS](https://tailwindcss.com/) to style our components, so you'll see layout code inside the `className` of each component. Feel free to use a different approach to styling with CSS if you prefer. Our example layout leaves a space for the TalkJS chatbox (we'll add this in the next section):
 
 !! image: 2-layout.jpg
 
