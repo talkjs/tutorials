@@ -11,7 +11,9 @@ When your team is spread out across multiple locations, it's great to have a cen
 
 You can see it in action in our [interactive demo](https://talkjs.com/demo/team-chat/).
 
-Our example will use [React](https://react.dev/) along with the [`talkjs-react` library](https://github.com/talkjs/talkjs-react). To follow along, you’ll need:
+Our example will use [React](https://react.dev/) along with the [`talkjs-react` library](https://github.com/talkjs/talkjs-react). We'll use React components to add a custom header to the TalkJS chatbox, and lists of channels and DMs to the side. Clicking on a channel or DM name will open up a TalkJS conversation.
+
+To follow along, you’ll need:
 
 - A [TalkJS account](https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
 - An existing React app
@@ -78,7 +80,7 @@ To sync data for the user we want to log in as, we'll use the [`syncUser` prop](
 
 ## Add UI components for the team chat
 
-As well as the TalkJS chatbox, we'll need some other React components to make up our team chat UI, including lists of channels and DMs and a custom chat header. The exact details of styling and placement will depend on your app and the libraries that you're already using. In this section we'll list the components that we're using in the example repo.
+We'll need some React components to make up our team chat UI, including lists of channels and DMs and a custom chat header. The exact details of styling and placement will depend on your app and the libraries that you're already using. In this section we'll list the components that we're using in the example repo.
 
 You'll see the following components in the `src/components` directory:
 
@@ -88,7 +90,7 @@ You'll see the following components in the `src/components` directory:
 - `ChatHeader`: displays a custom chat header.
 - `ConversationImage`: displays a conversation image in the chat header and next to each conversation list item.
 
-In the example repo we're using [Tailwind CSS](https://tailwindcss.com/) to style our components, so you'll see layout code inside the `className` of each component. Feel free to use a different approach to styling with CSS if you prefer. Our example layout leaves a space for the TalkJS chatbox (we'll add this in the next section):
+In the example repo we're using [Tailwind CSS](https://tailwindcss.com/) to style our components, so you'll see layout code inside the `className` of each component. Feel free to use a different approach to styling with CSS if you prefer. Our example layout leaves a space for a TalkJS chatbox (we'll add this in the next section):
 
 !! image: 2-layout.jpg
 
