@@ -72,7 +72,7 @@ export default App;
 
 The `Session` component takes the basic information we need for a TalkJS [session](https://talkjs.com/docs/Reference/Concepts/Sessions/): an app ID, and a user to log in as.
 
-You can find your `appId` in the **Settings** tab of the TalkJS dashboard. In the example above, we're storing it in a separate `talkJsConfig` file.
+You can find your `appId` in the **Settings** tab of the [TalkJS dashboard](https://talkjs.com/dashboard/login). In the example above, we're storing it in a separate `talkJsConfig` file.
 
 To sync data for the user we want to log in as, we'll use the [`syncUser` prop](https://github.com/talkjs/talkjs-react#1-synchronize-user-data). This prop uses the [`useCallback`](https://react.dev/reference/react/useCallback) React Hook and expects a callback function that creates a `Talk.User` object. In this example, the `syncUser` callback creates a user with a user ID that we define in `talkJsConfig`.
 
