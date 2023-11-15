@@ -2,10 +2,8 @@
 
 When your team is spread out across multiple locations, it's great to have a central place to collaborate, with discussion channels and private messaging all in one place. In this tutorial, we'll walk you through how to customize TalkJS to create a team chat app, with a similar layout to Slack or Microsoft Teams:
 
-!! 1-demo.gif
-
 <figure class="kg-image-card">
-  <img class="kg-image" src="<URL>" alt="GIF demonstrating the team chat UI, which has lists of channels and DMs on the left and a conversation view on the right. The user checks the unread 'meetups' channel, then clicks on an unread DM and sends a reply."/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/11/1-demo.gif" alt="GIF demonstrating the team chat UI, which has lists of channels and DMs on the left and a conversation view on the right. The user checks the unread 'meetups' channel, then clicks on an unread DM and sends a reply."/>
   <figcaption>Demonstration of the team chat</figcaption>
 </figure>
 
@@ -92,10 +90,8 @@ You'll see the following components in the `src/components` directory:
 
 In the example repo we're using [Tailwind CSS](https://tailwindcss.com/) to style our components, so you'll see layout code inside the `className` of each component. Feel free to use a different approach to styling with CSS if you prefer. Our example layout leaves a space for a TalkJS chatbox (we'll add this in the next section):
 
-!! image: 2-layout.jpg
-
 <figure class="kg-image-card">
-  <img class="kg-image" src="<URL>" alt="Layout of the team chat UI. There's an empty space that we'll fill with the TalkJS chatbox in later sections. The chat header is above it and the collapsible lists are to the left."/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/11/2-layout.jpg" alt="Layout of the team chat UI. There's an empty space that we'll fill with the TalkJS chatbox in later sections. The chat header is above it and the collapsible lists are to the left."/>
   <figcaption>Layout of the team chat UI</figcaption>
 </figure>
 
@@ -126,10 +122,8 @@ const syncConversation = useCallback((session) => {
 
 The `Chatbox` component has a [`syncConversation` prop](https://github.com/talkjs/talkjs-react#2-create-and-join-a-conversation), which takes a callback that creates a [`ConversationBuilder`](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder) object. In this example, the `syncConversation` callback creates a conversation with a conversation id of `remoteWorkMeetup`, and adds you to the conversation. This will be the default "meetup" channel that you see when you first load the app:
 
-!! 3-default-channel.jpg
-
 <figure class="kg-image-card">
-  <img class="kg-image" src="<URL>" alt="View of the default 'meetups' channel."/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/11/3-default-channel.jpg" alt="View of the default 'meetups' channel."/>
   <figcaption>View of the default 'meetups' channel.</figcaption>
 </figure>
 
@@ -245,10 +239,8 @@ return (
 
 Now, when a conversation receives a new message, the name will display in bold:
 
-!! 4-new-message.gif
-
 <figure class="kg-image-card">
-  <img class="kg-image" src="<URL>" alt="GIF that demonstrates how the channel name displays in bold when a new message arrives."/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2023/11/4-new-message.gif" alt="GIF that demonstrates how the channel name displays in bold when a new message arrives."/>
   <figcaption>The channel name displays in bold when a new message arrives</figcaption>
 </figure>
 
