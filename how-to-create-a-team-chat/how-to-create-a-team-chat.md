@@ -131,7 +131,7 @@ The `Chatbox` component has a [`syncConversation` prop](https://github.com/talkj
   <figcaption>View of the default 'meetups' channel.</figcaption>
 </figure>
 
-The other props style the chatbox. We set `showChatHeader` to `false`, because we've already replaced it with a custom `ChatHeader` component, and select the `team_chat` [theme](https://talkjs.com/docs/Features/Themes/). We use `className` to style the component further with Tailwind.
+The other props style the chatbox. We set `showChatHeader` to `false`, because we've already replaced it with a custom `ChatHeader` component, and select the `team_chat` [preset theme](https://talkjs.com/docs/Features/Themes/). We use `className` to style the component further with Tailwind.
 
 ## Change the conversation
 
