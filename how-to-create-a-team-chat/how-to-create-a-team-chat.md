@@ -43,7 +43,9 @@ import Talk from "talkjs";
 
 ## Add the session component and sync user data
 
-Next, import the TalkJS [`Session` component](https://github.com/talkjs/talkjs-react#1-create-a-session) and add it to your app. In our example, we'll import the `Session` component at the top level of our app, and put the rest of the team chat code inside it as a child component, so that the whole team chat app has access to the session:
+Next, we'll set up our TalkJS [session](https://talkjs.com/docs/Reference/Concepts/Sessions/). The session takes an app ID and a user to log in as.
+
+To do this, import the TalkJS [`Session` component](https://github.com/talkjs/talkjs-react#1-create-a-session) and add it to your app. In our example, we'll import the `Session` component at the top level of our app, and put the rest of the team chat code inside it as a child component, so that the whole team chat app has access to the session:
 
 ```jsx
 import { useCallback } from "react";
@@ -71,8 +73,6 @@ function App() {
 
 export default App;
 ```
-
-The `Session` component takes the basic information we need for a TalkJS [session](https://talkjs.com/docs/Reference/Concepts/Sessions/): an app ID, and a user to log in as.
 
 You can find your `appId` in the **Settings** tab of the [TalkJS dashboard](https://talkjs.com/dashboard/login). In the example above, we're storing it in a separate `talkJsConfig` file.
 
