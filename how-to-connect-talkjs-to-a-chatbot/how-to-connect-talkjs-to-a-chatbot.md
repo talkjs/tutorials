@@ -59,7 +59,7 @@ We've included a `welcomeMessage` for the bot to start the conversation off.
 
 ## Get notified about new messages
 
-Later in this guide, we'll want the bot to reply to any messages that the user sends in the conversation. To do this, we'll first enable TalkJS webhooks, which allow the TalkJS server to notify your server when a message is sent.
+We'll eventually want the bot to reply to any messages that the user sends in the conversation. To do this, we'll first enable TalkJS webhooks, which allow the TalkJS server to notify your server when a message is sent.
 
 Webhooks let you use an event-driven architecture, where you get told about events when they happen rather than having to constantly check for new messages. There are lots of events you can listen for, but we’re only interested in new messages being sent.
 
