@@ -91,7 +91,7 @@ This command starts a secure tunnel to your local port 3000. The output should i
 Forwarding                    https://<YOUR_SITE>.ngrok-free.app -> http://localhost:3000
 ```
 
-You’re now ready to enable webhooks. You can do this in the **Settings** section of the TalkJS dashboard, under **Webhooks**. Paste the URL above into the **Webhook URL** field, including the `/getMessages` path: https://<YOUR_SITE>.ngrok-free.app/talkjs.
+You’re now ready to enable webhooks. You can do this in the **Settings** section of the TalkJS dashboard, under **Webhooks**. Paste the ngrok URL into the **Webhook URL** field, including the `/getMessages` path: https://<YOUR_SITE>.ngrok-free.app/talkjs.
 
 Select the **message.sent** option:
 
