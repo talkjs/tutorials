@@ -1,4 +1,4 @@
-# How to make a customizable chatbot frontend with TalkJS and the OpenAI AI
+# How to make a customizable chatbot frontend with TalkJS and the OpenAI API
 
 AI chatbots like OpenAI's ChatGPT are increasingly popular, providing automated, context-aware responses to all kinds of user queries. TalkJS lets you create a customizable chat application that integrates chatbot responses seamlessly into your user chat.
 
