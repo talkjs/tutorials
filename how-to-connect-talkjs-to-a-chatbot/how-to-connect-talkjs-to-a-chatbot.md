@@ -63,7 +63,7 @@ We'll eventually want the bot to reply to any messages that the user sends in th
 
 Webhooks let you use an event-driven architecture, where you get told about events when they happen rather than having to constantly check for new messages. There are lots of events you can listen for, but we’re only interested in new messages being sent.
 
-Webhooks are server-side only, so you’ll need a web server. We’ll be using [Express](https://expressjs.com/) in this tutorial, but feel free to use your favorite web server library instead. The following code sets up an Express server with a POST endpoint at `/getMessages` that logs incoming events from the TalkJS server to the terminal:
+Webhooks are server-side only, so you’ll need a web server. We’ll be using [Express](https://expressjs.com/) in this tutorial, but feel free to use your favorite web server library instead. The following code sets up an Express server with a POST endpoint at `/onMessageSent` that logs incoming events from the TalkJS server to the terminal:
 
 ```js
 import express from "express";
@@ -71,7 +71,7 @@ const app = express().use(express.json()); // creates http server
 
 app.listen(3000, () => console.log("Server is up"));
 
-app.post("/getMessages", (req, res) => {
+app.post("/onMessageSent", (req, res) => {
   console.log(req.body);
   res.status(200).end();
 });
@@ -91,7 +91,7 @@ This command starts a secure tunnel to your local port 3000. The output should i
 Forwarding                    https://<YOUR_SITE>.ngrok-free.app -> http://localhost:3000
 ```
 
-You’re now ready to enable webhooks. You can do this in the **Settings** section of the TalkJS dashboard, under **Webhooks**. Paste the ngrok URL into the **Webhook URL** field, including the `/getMessages` path: https://<YOUR_SITE>.ngrok-free.app/talkjs.
+You’re now ready to enable webhooks. You can do this in the **Settings** section of the TalkJS dashboard, under **Webhooks**. Paste the ngrok URL into the **Webhook URL** field, including the `/onMessageSent` path: https://<YOUR_SITE>.ngrok-free.app/talkjs.
 
 Select the **message.sent** option:
 
@@ -144,12 +144,10 @@ The model returns a list of `choices` for completions. We'll return the first on
 Next, update your `app.post` call to call the `getCompletion` function:
 
 ```js
-const userId = "chatbotExampleUser";
+const botId = "chatbotExampleBot";
 
-app.post("/getMessages", async (req, res) => {
-  const senderId = req.body.data.message.senderId;
-
-  if (senderId == userId) {
+app.post("/onMessageSent", async (req, res) => {
+  if (senderId != botId) {
     const reply = await getCompletion();
     console.log(reply);
   }
@@ -157,26 +155,38 @@ app.post("/getMessages", async (req, res) => {
 });
 ```
 
-We only call the OpenAPI for messages from the user, to stop the bot getting stuck in a loop of responding to itself.
+We do not call the OpenAI API for messages from the bot, to stop it getting stuck in a loop of responding to itself.
 
-Restart your server, and send another message. You should see a response logged to your terminal. At the moment, the response is very generic (something like `"How can I assist you today?"`), because it only has the instructions in the system message to work with. We want to instead give it the full conversation so far, so that it can reply with something relevant. To do this, replace your `app.post` call with the following code, which adds each new message to the `messageHistory` list:
+Restart your server, and send another message. You should see a response logged to your terminal. At the moment, the response is very generic (something like `"How can I assist you today?"`), because it only has the instructions in the system message to work with. We want to instead give it the full conversation so far, so that it can reply with something relevant. To do this, replace your `app.post` call with the following code, which creates a message history for each conversation:
 
 ```js
-const userId = "chatbotExampleUser";
-const botId = "chatbotExampleUser";
+const allMessageHistory = {};
 
-app.post("/getMessages", async (req, res) => {
-  const userMessage = req.body.data.message.text;
-  const senderId = req.body.data.message.senderId;
+app.post("/onMessageSent", async (req, res) => {
+  const convId = req.body.data.conversation.id;
+  const messageText = req.body.data.message.text;
+  const senderId = req.body.data.sender.id;
 
-  if (senderId == userId) {
-    messageHistory.push({ role: "user", content: userMessage });
-
-    const reply = await getCompletion();
-    console.log(reply);
-  } else if (senderId == botId) {
-    messageHistory.push({ role: "assistant", content: userMessage });
+  if (!(convId in allMessageHistory)) {
+    allMessageHistory[convId] = [
+      {
+        role: "system",
+        content:
+          "You are a helpful assistant. Please provide short, concise answers.",
+      },
+    ];
   }
+  const messageHistory = allMessageHistory[convId];
+
+  if (senderId == botId) {
+    // Bot message
+    messageHistory.push({ role: "assistant", content: messageText });
+  } else {
+    // User message
+    messageHistory.push({ role: "user", content: messageText });
+    getCompletion(messageHistory);
+  }
+
   res.status(200).end();
 });
 ```
@@ -216,20 +226,19 @@ async function sendMessage(text) {
 
 As with the OpenAI API, you should call the TalkJS API from your backend server to avoid exposing your secret key. You can find your secret key along with your app ID in the [TalkJS dashboard](https://talkjs.com/dashboard/login) under **Settings**.
 
-Now you can call the `sendMessage` function inside your `app.post` call:
+Now you can call the `sendMessage` function after `getCompletion`:
 
 ```js
 app.post("/getMessages", async (req, res) => {
-  const userMessage = req.body.data.message.text;
-  const senderId = req.body.data.message.senderId;
+  // ...
 
-  if (senderId == userId) {
-    messageHistory.push({ role: "user", content: userMessage });
-
-    const reply = await getCompletion();
-    await sendMessage(reply); // add call to TalkJS API
-  } else if (senderId == botId) {
-    messageHistory.push({ role: "assistant", content: userMessage });
+  if (senderId == botId) {
+    // Bot message
+    messageHistory.push({ role: "assistant", content: messageText });
+  } else {
+    // User message
+    messageHistory.push({ role: "user", content: messageText });
+    getCompletion(messageHistory).then((reply) => sendMessage(convId, reply));
   }
   res.status(200).end();
 });
