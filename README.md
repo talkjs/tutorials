@@ -1,3 +1,3 @@
 # Tutorials
 
-Private repo for draft tutorials
+Repo for draft tutorials
