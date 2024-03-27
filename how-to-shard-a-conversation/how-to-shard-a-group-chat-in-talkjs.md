@@ -3,7 +3,7 @@
 Sharding is conventionally used in distributed systems to spread users across services to ensure consistent availability. Sharding involves distributing users between available services so that no one service experiences unnecessary loads at any given time. Using TalkJS, you can have group chats with up to 1250 users. But, if you require more users, you can shard a conversation and assign users to the sharded conversations.
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="" alt="Users are randomly assigned to conversations."/>
+  <img class="kg-image" src="1-random-assignment.png" alt="Users are randomly assigned to conversations."/>
   <figcaption>After entering their information, users are randomly assigned to conversations.</figcaption>
 </figure>
 
@@ -185,6 +185,11 @@ function getShard(userId) {
 ```
 
 ## Conclusion
+
+<figure class="kg-image-card">
+  <img class="kg-image" src="2-demo.gif" alt="Assign the user to a pre-determined conversation shard."/>
+  <figcaption>Assigning the user to a pre-determined conversation shard.</figcaption>
+</figure>
 
 You now have a working demonstration of how to shard a conversation! To recap, in this tutorial you have:
 
