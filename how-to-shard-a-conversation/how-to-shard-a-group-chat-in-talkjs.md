@@ -125,7 +125,22 @@ After setting the current user to the sessionStorage and displaying the chat, we
 
 ### Creating a TalkJS User
 
-Once the user enters their details and submits it, we create a TalkJS user using that information. Inside the `index.js` file, there's an asynchronous function called `createUser()` that does this. It accepts the name, email address, and URL to the profile picture. The `id` field is assigned a random UUID using the `crypto` package in JavaScript. Before creating the user, we set this id as the `currentUser` in the `sessionStorage`. After creating the user, we return the user to the calling function.
+Once the user enters their details and submits it, we create a TalkJS user using that information. The `modalSubmitted()` method retrieves the values from the form and invokes methods to create a user and display the chat.
+
+```javascript
+async function modalSubmitted(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("userName").value;
+  const email = document.getElementById("userEmailAddress").value;
+  const profilePictureURL = document.getElementById("userProfilePicture").value;
+  await Talk.ready;
+  const user = createUser(name, email, profilePictureURL);
+  await showChat(user);
+}
+```
+
+Inside the `index.js` file, there's an asynchronous function called `createUser()` that does this. It accepts the name, email address, and URL to the profile picture. The `id` field is assigned a random UUID using the `crypto` package in JavaScript. Before creating the user, we set this id as the `currentUser` in the `sessionStorage`. After creating the user, we return the user to the calling function.
 
 ```javascript
 function createUser(name, email, profilePictureURL) {
