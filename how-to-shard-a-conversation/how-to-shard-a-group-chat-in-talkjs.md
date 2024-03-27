@@ -18,7 +18,7 @@ We’ll build up the feature step by step in the following sections. If you woul
 
 ## Executing the script to add users and conversations
 
-The sample script contains four functions. The `createUsers()` method creates six users. The other three methods, `setupConversation1()`, `setupConversation2()`, and `setupConversation3()`, creates three conversations with two users each. Ensure that you enter your app ID in the `appId` field and your secret key in the `secretKey` field. You can find them both on your TalkJS dashboard. Note that each conversation has the same subject so that every user assigned feels like they're being added to the same conversation. 
+The sample script contains four functions. The `setupUsers()` method creates six users. The other three methods, `setupConversation1()`, `setupConversation2()`, and `setupConversation3()`, creates three conversations with two users each. Ensure that you enter your app ID in the `appId` field and your secret key in the `secretKey` field. You can find them both on your TalkJS dashboard. The `request()` helper method executes all the API calls. Note that each conversation has the same subject and an associated shard number. The shard number is shown only for the purpose of this demo.
 
 ## Setting the theme for your chat
 
@@ -29,156 +29,158 @@ Go to your TalkJS dashboard, and navigate to the *Chat UI* tab. Then, select the
 After following the getting started guide, you should have a working chat. We must make some changes to it to allow users to enter their information to enter a group chat. Edit the `index.html` file to add a modal that appears when the page loads. We are using Bootstrap here, but you can use any library or framework you prefer. Below the `talkjs-container` div, add the following code:
 
 ```html
-<div class="modal fade" id="userEntryFormModal" tabindex="-1" data-bs-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="userEntryFormModalLabel">Enter your info</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="myForm">
-                <div class="modal-body">
-
-                    <div class="mb-3">
-                        <label for="userName" class="form-label">Name</label>
-                        <input type="text" class="userName form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="userEmailAddress" class="form-label">Email address</label>
-                        <input type="email" class="userEmailAddress form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="userProfilePicture" class="form-label">Profile Picture URL</label>
-                        <input type="text" class="userProfilePicture form-control">
-                    </div>
-            </form>
-            <button class="btn btn-primary" type="submit">Enter chat</button>
+<div
+  class="modal fade"
+  id="userEntryFormModal"
+  tabindex="-1"
+  data-bs-backdrop="static"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userEntryFormModalLabel">
+          Enter your info
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form onsubmit="modalSubmitted(event)">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="userName" class="form-label">Name</label>
+            <input id="userName" type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label for="userEmailAddress" class="form-label"
+              >Email address</label
+            >
+            <input
+              id="userEmailAddress"
+              type="email"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="userProfilePicture" class="form-label"
+              >Profile Picture URL</label
+            >
+            <input
+              id="userProfilePicture"
+              type="text"
+              class="form-control"
+            />
+          </div>
+          <button class="btn btn-primary" type="submit">Enter chat</button>
         </div>
-        </form>
+      </form>
     </div>
+  </div>
 </div>
 ```
 
-This modal contains three fields to accept the user's name, email address, and a URL to a profile picture. Once the user submits this information, they enter the group chat. Go [here](https://getbootstrap.com/docs/5.0/getting-started/introduction/), to learn how to use Bootstrap in your project.
+This modal contains three fields to accept the user's name, email address, and a URL to a profile picture. Once the user submits this information, the `modalSubmitted()` method retrieves the values from the form, creates a TalkJS user, and permits them to enter the group chat. Go [here](https://getbootstrap.com/docs/5.0/getting-started/introduction/), to learn how to use Bootstrap in your project.
 
 ## Adding a new user to a chat
 
 When the page loads first, the user must enter their name, email address, and a URL to their profile picture to enter the chat. On clicking *Enter Chat*, they are randomly added to one of the created group chats. Let's see how this works behind the scenes. If you are using the `index.js` file from the getting started guide, you must clear its contents to replace it with the following code explained below.
 
 ```javascript
-let talkSession;
-const userEntryFormModal = new bootstrap.Modal(document.getElementById('userEntryFormModal'), {})
-const talkJSContainer = document.getElementById("talkjs-container");
+const appId = "<YOUR_APP_ID>";
 
-if(sessionStorage.getItem("showModal") == "false")
-  setMainConversation();
-else{
+const userEntryFormModal = new bootstrap.Modal(
+  document.getElementById("userEntryFormModal"),
+  {}
+);
+const talkJSContainer = document.getElementById("talkjs-container");
+```
+
+Inside the `index.js` file, we have several functions. The first line stores your TalkJS app ID. Then, we create another `const` called `userEntryFormModal` to store the Bootstrap modal. Lastly, we create another `const` called `talkJSContainer` to retrieve the `div` to mount our chatbox to.
+
+```javascript
+const savedUserId = sessionStorage.getItem("currentUser");
+if (savedUserId) {
+  Talk.ready.then(() => {
+    const user = new Talk.User(savedUserId);
+    showChat(user);
+  });
+} else {
   userEntryFormModal.show();
   talkJSContainer.style.display = "none";
 }
 ```
 
-Inside the `index.js` file, we have several functions. The first line creates a new variable called `talkSession`. This is to store the TalkJS session after creating it. Then, we create another `const` called `userEntryFormModal` to store the Bootstrap modal. Lastly, we create another `const` called `talkJSContainer` to retrieve the `div` to mount our chatbox to.
-
-```javascript
-document.getElementById("myForm").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const name = document.querySelector('.userName').value;
-  const email = document.querySelector('.userEmailAddress').value;
-  const profilePictureURL = document.querySelector('.userProfilePicture').value;
-  const user = await createUser(name, email, profilePictureURL);
-  const conversation = await getRandomConversation();  
-  await assignUserToConversation(user, conversation);
-  sessionStorage.setItem("currentUser", user.id);
-  sessionStorage.setItem("currentConversation", conversation.id);
-  sessionStorage.setItem("showModal", "false");
-  userEntryFormModal.hide();  
-});
-```
-
-The next few lines checks if the `sessionStorage` contains a key called `showModal`. If this is set to false, it means that the user has already entered a group chat. Otherwise, we must hide the talkJSContainer and display the modal for the user to enter their information.
+The next few lines checks if the `sessionStorage` contains a key called `currentUser`. If it is available, it means that the user has already entered a group chat. Otherwise, we must hide the talkJSContainer and display the modal for the user to enter their information.
 
 Once the user enters their information and clicks submit, we retrieve the values from the form and do the following:
 
-* Create a TalkJS user
-* Retrieve a random conversation
-* Assign the user to the random conversation
-* Set the current user and conversation to `sessionStorage`
+* Create a TalkJS user and set them to the `sessionStorage`
+* Retrieve a conversation shard
+* Assign the user to the conversation shard
 
-After setting the current user and conversation to the sessionStorage, we also set a key called `showModal` to the session and set it to false. Finally, we hide the modal.
+After setting the current user to the sessionStorage and displaying the chat, we hide the modal.
 
 ### Creating a TalkJS User
 
-Once the user enters their details and submits it, we create a TalkJS user using that information. Inside the `index.js` file, there's an asynchronous function called `createUser()` that does this. It accepts the name, email address, and URL to the profile picture and uses that to create a new user in TalkJS. The `id` field is assigned a random UUID using the `crypto` package in JavaScript. After creating the user, we create a new Talk session using the `appID` and the created user. Finally, we return the user to the calling function.
+Once the user enters their details and submits it, we create a TalkJS user using that information. Inside the `index.js` file, there's an asynchronous function called `createUser()` that does this. It accepts the name, email address, and URL to the profile picture. The `id` field is assigned a random UUID using the `crypto` package in JavaScript. Before creating the user, we set this id as the `currentUser` in the `sessionStorage`. After creating the user, we return the user to the calling function.
 
 ```javascript
-async function createUser(name, email, profilePictureURL){
-  await Talk.ready;
-  const user = new Talk.User({
-    id: crypto.randomUUID(),
+function createUser(name, email, profilePictureURL) {
+  const userId = crypto.randomUUID();
+  sessionStorage.setItem("currentUser", userId);
+  return new Talk.User({
+    id: userId,
     name: name,
     email: email,
     photoUrl: profilePictureURL,
-    role: "default"
+    role: "default",
   });
-  talkSession = window.talkSession = new Talk.Session({
-    appId: "<YOUR_APP_ID>",
-    me: user,
-  });
-  return user;
 }
 ```
 
-### Getting a random conversation
+### Retrieve a conversation shard
 
-Inside the `index.js` file, there's an asynchronous function called `getRandomConversation()`. This function retrieves the three conversations we have in TalkJS and adds them into an array. Then, it uses the `Math.floor()` and `Math.random()` methods to return a random conversation from the array.
-
-```javascript
-async function getRandomConversation(){
-  let conversationArray = [];
-  let conversation1, conversation2, conversation3;
-  conversation1 = await talkSession.getOrCreateConversation("sharded-conversation-1");
-  conversation2 = await talkSession.getOrCreateConversation("sharded-conversation-2");
-  conversation3 = await talkSession.getOrCreateConversation("sharded-conversation-3");
-  conversationArray.push(conversation1, conversation2, conversation3);
-  const randomIndex = Math.floor(Math.random() * conversationArray.length);
-  return conversationArray[randomIndex];
-}
-```
-
-### Assign user to the conversation
-
-After creating a user and retrieving a random conversation, we must assign the user to that conversation. This is done inside the `assignUserToConversation()` method inside `index.js`. 
+After creating the TalkJS user, we invoke the `showChat()` method. This method creates a new Talk session using your `appId` and the created user. Then, it invokes the `getShard()` method to retrieve a conversation shard. We then set the user to the conversation. Using the session created earlier, we create a chatbox and select the retrieved conversation. Finally, we set the `display` property of the `talkJSContainer` to `block`, mount the chatbox inside it, and hide the modal.
 
 ```javascript
-async function assignUserToConversation(user, conversation){
-  await Talk.ready;
+async function showChat(user) {
+  console.log("show chat");
+  const session = new Talk.Session({ appId, me: user });
+
+  const shard = getShard(user.id);
+  const conversation = session.getOrCreateConversation(
+    `sharded-conversation-${shard}`
+  );
   conversation.setParticipant(user);
-  const chatbox = talkSession.createChatbox();
+
+  const chatbox = session.createChatbox();
   chatbox.select(conversation);
+  await chatbox.mount(talkJSContainer);
+
   talkJSContainer.style.display = "block";
-  chatbox.mount(talkJSContainer);
+  userEntryFormModal.hide();
 }
 ```
 
-We first wait for TalkJS to load and then set the user to the conversation. Using the session created earlier, we create a chatbox and select the retrieved conversation. Finally, we set the `display` property of the `talkJSContainer` to `block` and mount the chatbox inside it.
+### Assigning the user to a conversation shard
 
-## Setting the main conversation
-
-Whatever you've done so far works well the first time you execute it. But as soon as you refresh the page, the modal appears for the user to enter their information and enter a group chat again. This shouldn't be the case. Remember adding the current user's and conversation's `id` to the session storage, along with a key called `showModal`? These are used to retrieve the created conversation and user from the user's session and display them rather than showing the modal on page refresh.
+The `getShard()` method retrieves a pre-determined shard ID. Since this examples contains 3 shards, we have set the `shardCount` to 3. Using the last block of the user's ID, we first convert it from hexadecimal to decimal, and then do a modulo operation by the `shardCount` and add `1` to retrieve a value in `[1,2,3]`. This ensures that the same user is always assigned to the same shard.
 
 ```javascript
-async function setMainConversation(){
-  await Talk.ready;
-  const user = new Talk.User(sessionStorage.getItem("currentUser"));
-  talkSession = window.talkSession = new Talk.Session({
-    appId: "<YOUR_APP_ID>",
-    me: user,
-  });
-  const chatbox = talkSession.createChatbox();
-  const currentConversation = await talkSession.getOrCreateConversation(sessionStorage.getItem("currentConversation"));
-  chatbox.select(currentConversation);
-  chatbox.mount(talkJSContainer);
+function getShard(userId) {
+  const shardCount = 3;
+
+  // UUID is like 88710ed2-4121-4c60-90c5-506be6bcd664, take just the last section, 506be6bcd664
+  const lastIdSection = userId.substring(userId.lastIndexOf("-") + 1);
+
+  // Convert that from hexadecimal to decimal number, 88424362858084
+  const lastIdNumeric = parseInt(lastIdSection, 16);
+
+  // Assign to one of N shards using modulo, in this case 88424362858084 % 3 = 1
+  return (lastIdNumeric % shardCount) + 1;
 }
 ```
 
@@ -188,7 +190,7 @@ You now have a working demonstration of how to shard a conversation! To recap, i
 
 - Added a modal for the user to enter their details
 - Create a TalkJS user based on the information entered
-- Randomly assign the user to one of the existing conversations
+- Assign the user to one of the conversation shards
 
 For the full example code for this tutorial, see our [GitHub repo]().
 
