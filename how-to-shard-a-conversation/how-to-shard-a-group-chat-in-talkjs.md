@@ -2,14 +2,14 @@
 
 Sharding is conventionally used in distributed systems to spread users across services to ensure consistent availability. Sharding involves distributing users between available services so that no one service experiences unnecessary loads at any given time. Using TalkJS, you can have group chats with up to 1250 users, [depending on your plan](https://talkjs.com/docs/Features/Group_Chats/#user-limits-in-group-chats). But, if you require more users, you can shard a conversation and assign users to the sharded conversations.
 
-Sharding conversations is useful in scenarios with a large number of participants where it is not important that users respond back to specific other participants. Examples of this are live streaming, social chats, etc. In our demo, we assign a specific user to a specific shard always so that they're able to retrieve their messages across devices. 
+Conversation sharding is useful in scenarios like livestreams and social chats where there are a large number of users adding short messages in the chat and it is not so important that every user can see all messages.
 
 <figure class="kg-image-card">
   <img class="kg-image" src="1-random-assignment.png" alt="Users are randomly assigned to conversations."/>
   <figcaption>After entering their information, users are randomly assigned to conversations.</figcaption>
 </figure>
 
-The following sections highlight the main topics that we'll cover today:
+In our demo, we assign each user to a specific shard based on their id, so that they're able to retrieve their messages across devices.  The following sections highlight the main topics that we'll cover in this tutorial:
 
 - Adding a modal for the user to enter their details to enter a group chat 
 - Creating a TalkJS user based on the details entered
