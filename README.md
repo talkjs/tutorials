@@ -19,4 +19,4 @@ This is our repo for draft tutorials. We'll review them here and then upload to 
 ## Notes for reviewers uploading to Ghost
 
 - Paste in the article in a Markdown block.
-- Upload the images through Ghost's UI and paste the link in the `<URL>` placeholder. Fill in the caption and alt text.
+- Upload the images through Ghost's UI and paste the link in the `<URL>` placeholder.
