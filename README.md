@@ -4,9 +4,9 @@ This is our repo for draft tutorials. We'll review them here and then upload to 
 
 ## Notes for writers
 
-- Clone the repo and make a new branch for your tutorial
-- Add your tutorial to a new folder
-- Write tutorials in Markdown – refer to Ghost's [reference guide](https://ghost.org/help/using-markdown/) for details
+- Clone the repo and make a new branch for your tutorial.
+- Add your tutorial to a new folder.
+- Write tutorials in Markdown – refer to Ghost's [reference guide](https://ghost.org/help/using-markdown/) for details.
 - Add images and GIFs to the same folder. They'll need to be wrapped in some custom HTML to display correctly in our editor, so paste this snippet in where you want the image to appear and fill out the captions and alt text. We'll add the image URL when we upload the tutorial.
   ```html
   <figure class="kg-image-card">
@@ -14,7 +14,7 @@ This is our repo for draft tutorials. We'll review them here and then upload to 
     <figcaption>TEXT</figcaption>
   </figure>
   ```
-- Create a PR when it's ready to review
+- Create a PR when it's ready to review.
 
 ## Notes for reviewers uploading to Ghost
 
