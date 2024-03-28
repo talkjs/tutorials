@@ -224,7 +224,7 @@ You now have a working demonstration of how to shard a conversation! To recap, i
 - Create a TalkJS user based on the information entered
 - Assign the user to one of the conversation shards
 
-For the full example code for this tutorial, see our [GitHub repo]().
+For the full example code for this tutorial, see our [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-shard-a-conversation).
 
 If you want to learn more about TalkJS, here are some good places to start:
 
