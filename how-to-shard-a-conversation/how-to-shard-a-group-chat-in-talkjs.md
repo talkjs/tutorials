@@ -22,7 +22,7 @@ To follow along, you’ll need:
 
 This project uses a script to add three example conversations with 2 users each. This is not required in a production scenario where you already have users and conversations set up.
 
-We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo]() for this tutorial.
+We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-shard-a-conversation) for this tutorial.
 
 ## Executing the script to add users and conversations
 
