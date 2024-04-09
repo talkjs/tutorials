@@ -1,6 +1,6 @@
 # How to use custom data to style your TalkJS chat
 
-You might often have situations where you want to style your chat differently for different users. Creating a theme for different subset of users is not feasible. TalkJS gives you the option to pass custom data to the theme that you can use to style your chat.
+You might often have situations where you want to style your chat differently for different users. Creating a theme for different subsets of users is not feasible. TalkJS gives you the option to pass custom data to the theme that you can use to style your chat.
 
 <figure class="kg-image-card">
   <img class="kg-image" src="1-custom-styled-chats.png" alt="Styling chats differently using custom data in the same theme."/>
@@ -16,9 +16,14 @@ In this tutorial, we're going to showcase three chats each with a different `acc
 To follow along, you’ll need:
 
 A [TalkJS account]|(https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
+
 An existing TalkJS project using the [JavaScript Chat SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/). See our [Getting Started]|(https://talkjs.com/docs/Getting_Started/) guide for an example of how to set this up.
 
 We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo]() for this tutorial. <!-- Add Github link -->
+
+## Creating and setting the theme for your chat
+
+Go to your TalkJS dashboard, and navigate to the **Themes** tab. Click **Create new theme** and enter **customDataToTheme** as the theme name. Click **Create**. Now, navigate to the **Chat UI** tab, select the default role. Select the **customDataToTheme** theme and click **Publish to live** to apply this theme to your default role.
 
 ## Editing the HTML layout to add three chatboxes side-by-side
 
@@ -54,13 +59,16 @@ Notice how we've moved the inline styles out into a stylesheet. For this, you mu
 }
 ```
 
-### Setting the theme for your chat
+To reference the `styles.css` file in your `index.html` file, paste the following line in the `<head>` section.
 
-Go to your TalkJS dashboard, and navigate to the **Chat UI** tab. Then, select the default role and select the **customDataToTheme** theme. Click **Publish** to live to apply this theme to your default role.
+```html
+<link rel="stylesheet" href="styles.css">
+```
 
 ## Passing custom data to the chatboxes
 
 Inside the `index.js` file, we're creating 4 users in total. It is to demonstrate one user talking to three other users.
+
 ```javascript
 const me = new Talk.User({
 id: "0001",
@@ -183,7 +191,7 @@ You now know how to use custom data to style your TalkJS chat. To recap, in this
 - Accessed the custom data in your TalkJS theme
 - Style different components using the custom data
 
-For the full example code for this tutorial, see our [GitHub repo]().
+For the full example code for this tutorial, see our [GitHub repo](). <!-- Add Github link -->
 
 If you want to learn more about TalkJS, here are some good places to start:
 
