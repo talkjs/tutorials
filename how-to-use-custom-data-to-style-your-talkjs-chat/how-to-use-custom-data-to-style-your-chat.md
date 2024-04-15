@@ -1,8 +1,10 @@
 # How to use custom data to style your TalkJS chat
 
-You might often have situations where you want to style your chat differently for different users. Creating a theme for different subsets of users is not feasible. TalkJS gives you the option to [pass custom data to your theme](https://talkjs.com/docs/Features/Themes/Passing_Data_to_Themes). You can then access this data as a [CSS custom property](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) in the Theme Editor and use it to style your chat.
+You might often have situations where you want to style your chat differently for different users. For example, imagine you run a marketplace where you want different accent colors for different sellers. Creating a theme for each seller would result in an unmanageable number of themes.
 
-Imagine running a marketplace and you want different accent colors for chatboxes for different users. Creating a theme for each accent color you want would result in a large number of themes. This is difficult to manage and not the right way to go.
+TalkJS gives you the option to [pass custom data to your theme](https://talkjs.com/docs/Features/Themes/Passing_Data_to_Themes). You can then access this data as a [CSS custom property](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) in the Theme Editor and use it to style your chat.
+
+
 
 <figure class="kg-image-card">
   <img class="kg-image" src="1-custom-styled-chats.png" alt="Styling chats differently using custom data in the same theme."/>
