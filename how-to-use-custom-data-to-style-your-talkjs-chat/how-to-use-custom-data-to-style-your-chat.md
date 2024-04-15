@@ -201,7 +201,7 @@ You now know how to use custom data to style your TalkJS chat. To recap, in this
 - Accessed the custom data in your TalkJS theme
 - Styled different components using the custom data
 
-For the full example code for this tutorial, see our [GitHub repo](). <!-- Add Github link -->
+For the full example code for this tutorial, see our [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-use-custom-data-to-style-your-talkjs-chat).
 
 If you want to learn more about TalkJS, here are some good places to start:
 
