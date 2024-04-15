@@ -19,7 +19,7 @@ To follow along, you’ll need:
 - A [TalkJS account]|(https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
 - An existing TalkJS project using the [JavaScript Chat SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/). See our [Getting Started]|(https://talkjs.com/docs/Getting_Started/) guide for an example of how to set this up.
 
-We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo]() for this tutorial. <!-- Add Github link -->
+We’ll build up the feature step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-use-custom-data-to-style-your-talkjs-chat) for this tutorial.
 
 ## Creating and setting the theme for your chat
 
