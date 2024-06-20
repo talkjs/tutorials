@@ -118,6 +118,8 @@ Now let's create a new user and add them as the current user in our session. Usu
 We'll use the JavaScript SDK to create the user. To do this, we'll first replace the `userId` prop in the `Session` component with the [`syncUser`](/Reference/React_SDK/Components/Session/#syncUser) prop. The `syncUser` prop takes a callback that creates a [`Talk.User`](/Reference/JavaScript_Chat_SDK/User/) object:
 
 ```js
+"use client";
+
 import Talk from "talkjs";
 import { useCallback } from "react";
 
