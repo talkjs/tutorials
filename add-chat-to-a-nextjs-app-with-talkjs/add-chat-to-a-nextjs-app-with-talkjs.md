@@ -8,7 +8,7 @@ We'll follow a very similar approach to our to our [React getting started guide]
 
 To follow this guide, you will need a [TalkJS account](https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
 
-You'll probably also have an existing Next.js app that you want to add TalkJS to. If not, you can [create a Next.js starter app](https://nextjs.org/docs/getting-started/installation).
+You'll need a Next.js app to add TalkJS to. If you don't have an existing app, you can [create a Next.js starter app](https://nextjs.org/docs/getting-started/installation).
 
 For the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/react/next.js) for this tutorial.
 
