@@ -4,7 +4,7 @@ Next.js is a popular React-based framework that provides features for your web a
 
 This tutorial will show you how to use TalkJS's [React SDK](https://talkjs.com/docs/Getting_Started/Frameworks/React/) to add chat to your Next.js application.
 
-We'll follow a very similar approach to our to our [React getting started guide](https://talkjs.com/docs/Getting_Started/Frameworks/React/1_On_1_Chat), but there will be some differences because of Next.js's ability to render components on the server. The React SDK uses the TalkJS [JavaScript SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/) to create and update users and conversations. The JavaScript SDK can only run in the browser, so we will use Next.js's [Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components) to render our chat component on the client only.
+We'll follow a very similar approach to our [React getting started guide](https://talkjs.com/docs/Getting_Started/Frameworks/React/1_On_1_Chat), but there will be some differences because of Next.js's ability to render components on the server. The React SDK uses the TalkJS [JavaScript SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/) to create and update users and conversations. The JavaScript SDK can only run in the browser, so we will use Next.js's [Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components) to render our chat component on the client only.
 
 To follow this guide, you will need a [TalkJS account](https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
 
