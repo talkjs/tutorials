@@ -48,6 +48,22 @@ Within your Django project, create a new `talkjs` app with the [`startapp`](http
 
 We'll add all our chat-related code in this app.
 
+Add the `talkjs` app to the `INSTALLED_APPS` list in `settings.py`:
+
+```py
+INSTALLED_APPS = [
+    'talkjs.apps.TalkjsConfig',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+```
+
+Django will need this later to create database migrations for the app.
+
 ## Add your user data
 
 Next, we'll create some user data. For the purposes of this tutorial, we'll store it in a SQLite database. SQLite is included with Python, so this means we can get started without installing anything else. If you want to use a different database in your project, you can [configure it](https://docs.djangoproject.com/en/5.0/ref/settings/#databases) in `settings.py`.
