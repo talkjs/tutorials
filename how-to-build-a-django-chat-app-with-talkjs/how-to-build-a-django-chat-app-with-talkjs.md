@@ -142,6 +142,15 @@ urlpatterns = [
 ]
 ```
 
+You'll also need to configure the top-level `urls.py` so that it includes the URLs in `talkjs/urls.py`:
+
+```python
+urlpatterns = [
+    # other paths ...
+    path("chat/", include("talkjs.urls")),
+]
+```
+
 Next we'll create the `chat.html` template for the view in `talkjs/templates/talkjs`. As a first test, we'll just print the names of the two users:
 
 ```html
