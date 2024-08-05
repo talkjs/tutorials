@@ -142,7 +142,7 @@ urlpatterns = [
 ]
 ```
 
-Next we'll create an HTML template for the view in `talkjs/templates/talkjs`. As a first test, we'll just print the names of the two users:
+Next we'll create the `chat.html` template for the view in `talkjs/templates/talkjs`. As a first test, we'll just print the names of the two users:
 
 ```html
 <!DOCTYPE html>
