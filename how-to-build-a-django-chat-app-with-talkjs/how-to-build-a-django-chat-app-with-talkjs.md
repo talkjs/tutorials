@@ -68,7 +68,7 @@ Django will need this later to create database migrations for the app.
 
 Next, we'll create some user data. For the purposes of this tutorial, we'll store it in a SQLite database. SQLite is included with Python, so this means we can get started without installing anything else. If you want to use a different database in your project, you can [configure it](https://docs.djangoproject.com/en/5.0/ref/settings/#databases) in `settings.py`.
 
-Create a new `TalkJSUser` [model](https://docs.djangoproject.com/en/5.0/topics/db/models/) in`talkjs/models.py` for your user data:
+Create a new `TalkJSUser` [model](https://docs.djangoproject.com/en/5.0/topics/db/models/) in `talkjs/models.py` for your user data:
 
 ```python
 from django.db import models
