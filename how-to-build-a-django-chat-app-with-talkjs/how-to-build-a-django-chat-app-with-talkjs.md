@@ -251,7 +251,7 @@ This code sets up a conversation between the current user and the other user, wi
 
 You'll need to replace `<APP_ID>` with your app ID, which you can find on the **Settings** tab of your [TalkJS dashboard](https://talkjs.com/dashboard).
 
-For convenience, in the example project we've also created a second [`selectchat` template](https://github.com/talkjs/talkjs-examples/talkjs/templates/talkjs/selectchat.html) that lets you select which chat you want to join. For example, if you go to `/chat/alice` you'll see links to chats with Nina and Sebastian. We won't go through this template and its corresponding view in detail as they work in a similar way to the `chat` ones, but you can view them in the repo.
+For convenience, in the example project we've also created a second [`selectchat` template](https://github.com/talkjs/talkjs-examples/tree/master/django/django_talkjs/talkjs/templates/talkjs/selectchat.html) that lets you select which chat you want to join. For example, if you go to `/chat/alice` you'll see links to chats with Nina and Sebastian. We won't go through this template and its corresponding view in detail as they work in a similar way to the `chat` ones, but you can view them in the repo.
 
 In the `chat` template, we'll add a button to get back to the `selectchat` screen:
 
