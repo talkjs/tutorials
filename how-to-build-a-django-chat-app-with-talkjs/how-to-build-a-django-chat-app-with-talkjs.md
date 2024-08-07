@@ -102,7 +102,7 @@ This will create a SQL migration file in `/talkjs/migrations`. You can then run 
 python manage.py migrate
 ```
 
-You can create new TalkJS users through Django's [admin interface](https://docs.djangoproject.com/en/5.0/ref/contrib/admin/) or by calling the [database API](https://docs.djangoproject.com/en/5.0/topics/db/queries/). To make it easier to test the app out, the example code for this tutorial includes a [`seed_users.py` script](https://github.com/talkjs/talkjs-examples/tree/master/django/django_talkjs/talkjs/management/commands) in `talkjs/management/commands` that calls the database API to delete any existing TalkJS users in the database and create some new example users. You can run this with the following command:
+You can create new TalkJS users through Django's [admin interface](https://docs.djangoproject.com/en/5.0/ref/contrib/admin/) or by calling the [database API](https://docs.djangoproject.com/en/5.0/topics/db/queries/). To make it easier to test the app out, the example code for this tutorial includes a [`seed_users.py` script](https://github.com/talkjs/talkjs-examples/tree/master/django/django_talkjs/talkjs/management/commands/seed_users.py) in `talkjs/management/commands` that calls the database API to delete any existing TalkJS users in the database and create some new example users. You can run this with the following command:
 
 ```sh
 python manage.py seed_users
