@@ -256,7 +256,7 @@ The rendermode directive sets the page’s mode of interactivity, in our case th
 
 If this seems a little complex, don’t worry you’ll understand it once you see the code. Here is the code:
 
-```html
+```c#
 @rendermode InteractiveServer
 @inject IJSRuntime jsRuntime;
 ```
