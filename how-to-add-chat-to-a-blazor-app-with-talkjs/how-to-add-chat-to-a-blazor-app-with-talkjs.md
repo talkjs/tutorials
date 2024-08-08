@@ -7,5 +7,18 @@ In this tutorial we’ll demonstrate how to add a Chat API to a Blazor Web Appli
 This tutorial assumes that you have knowledge of Blazor, .NET and also that you’re familiar with the basics of Javascript, HTML and CSS. 
 
 To follow along, you’ll need:
--	A TalkJS account. TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
+-	A [TalkJS account](https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
 -	A Blazor Web App in which you would like to add a chat to.
+
+This Blazor application is created using the Blazor Web App template in Visual Studio, specifically Interactive server with Per page/component interactivity. The steps of creating one can be found in this Microsoft Blazor tutorial link. 
+
+If you already have an existing application created using the Blazor Web App template, you can still follow along and tweak the render modes depending on where your component displaying the chat will be.
+
+We’ll build up the chat step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo -NOT UPDATED](https://github.com/MagnusMutai/tutorials/edit/main/how-to-add-chat-to-a-blazor-app-with-talkjs) for this tutorial. 
+This is a tutorial just to get you started. For a fine-grained explanation, please follow the comments in the code.
+
+# Initialize TalkJS 
+In this section we are going to activate TalkJS. To do this, in app.razor, add the following script tag containing the JavaScript code that activates TalkJS in your Blazor application.
+
+
+
