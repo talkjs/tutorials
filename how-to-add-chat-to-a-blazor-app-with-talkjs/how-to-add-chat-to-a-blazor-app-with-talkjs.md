@@ -331,3 +331,20 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
     }
 }
 ```
+
+Run the program, and you should have a similar output in your browser:
+
+<figure class="kg-image-card">
+  <img class="kg-image" src="2-one-on-one-chat.png" alt="Conversation between two users in Blazor"/>
+  <figcaption>Blazor application is now integrated with TalkJS</figcaption>
+</figure>
+
+# Next steps
+
+In this guide, you've added powerful user-to-user chat to your Blazor app. You now have a starting point to try out all the features TalkJS offers. For example, you could create a new UI theme in the Theme Editor, customize your chat with action buttons or HTML panels, or enable email notifications.
+
+If you want to learn more about TalkJS, here are some good places to start:
+
+- The TalkJS Docs help you get started with TalkJS.
+- TalkJS tutorials provide how-to guides for many common TalkJS use cases.
+- The talkjs-examples Github repo has larger complete examples that demonstrate how to integrate with other libraries and frameworks. For the full example code for this tutorial, see our Blazor example.
