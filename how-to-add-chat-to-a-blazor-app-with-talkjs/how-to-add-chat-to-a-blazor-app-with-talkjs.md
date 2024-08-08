@@ -56,7 +56,7 @@ Inside `TalkWrapper`, we are going to define a function called `createConversati
     <Routes />
     <script src="_framework/blazor.web.js"></script>
 
-    @* The actual code that creates a conversation *@
+    @* Create a conversation *@
     <script>
         window.TalkWrapper = {
 
