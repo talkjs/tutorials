@@ -112,3 +112,26 @@ Inside `TalkWrapper`, we are going to define a function called `createConversati
 
 </body>
 ```
+# Create a user model
+
+That’s enough JavaScript for now. 
+
+For the sake of simplicity, we are going write the rest of the C# code and HTML to display the component under the default Home.razor page.
+
+Now, add a data model of a typical participant in a TalkJS conversation. To do so, create a class named User as shown below and add the given properties.
+
+```html
+@code {
+
+    //Model for a typical chat participant
+    public class User
+    {
+        public long Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string PhotoUrl { get; set; } = string.Empty;
+        public string WelcomeMessage { get; set; } = string.Empty;
+    }
+}
+```
+
