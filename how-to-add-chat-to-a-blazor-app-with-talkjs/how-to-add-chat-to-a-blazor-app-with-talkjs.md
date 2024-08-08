@@ -20,5 +20,29 @@ This is a tutorial just to get you started. For a fine-grained explanation, plea
 # Initialize TalkJS 
 In this section we are going to activate TalkJS. To do this, in app.razor, add the following script tag containing the JavaScript code that activates TalkJS in your Blazor application.
 
+```html
+<body>
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+
+    @* Initialize TalkJS *@
+    @* Minified snippet to load TalkJS without delaying your page *@
+    @* This code needs to be below the Talk.Wrapper Code above for it work appropriately *@
+    <script>
+        (function (t, a, l, k, j, s) {
+            s = a.createElement('script'); s.async = 1; s.src = 'https://cdn.talkjs.com/talk.js'; a.head.appendChild(s)
+                ; k = t.Promise; t.Talk = {
+                    v: 3, ready: {
+                        then: function (f) {
+                            if (k) return new k(function (r, e) { l.push([f, r, e]) }); l
+                                .push([f])
+                        }, catch: function () { return k && new k() }, c: l
+                    }
+                };
+        })(window, document, []);
+    </script>
+
+</body>
+```
 
 
