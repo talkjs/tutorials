@@ -122,7 +122,6 @@ Now, add a data model of a typical participant in a TalkJS conversation. To do s
 
 ```c#
 @code {
-
     //Model for a typical chat participant
     public class User
     {
@@ -133,5 +132,52 @@ Now, add a data model of a typical participant in a TalkJS conversation. To do s
         public string WelcomeMessage { get; set; } = string.Empty;
     }
 }
+```
+
+# Create User instances
+
+Still under Home.razor, we are going to create instances of the User class defined above. After that, we are going to assign them to properties of the User type.
+
+First, override the OnInitializedAsync Blazor component lifecycle method and define the relevant code to create user instances inside the method. The example code is shown below.
+
+```c#
+    protected User Me { get; set; }
+    protected User Other { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Populate Users
+        // In real world application this would come from the database
+        //First participant/You
+        Me = new User()
+            {
+                Id = 123456,
+                Name = "Alice",
+                Email = "alice@example.com",
+                PhotoUrl = "https://talkjs.com/images/avatar-1.jpg",
+                WelcomeMessage = "Hey there! How are you? :-)",
+            };
+        //Second participant/Whoever you're chatting with
+        Other = new User()
+            {
+                Id = 754321,
+                Name = "Michael",
+                Email =  "michael@example.com",
+                PhotoUrl = "https://talkjs.com/images/avatar-4.jpg",
+                WelcomeMessage = "Hola!",
+            };
+
+        StateHasChanged();
+    }
+
+    //Model for a typical chat participant
+    public class User
+    {
+        public long Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string PhotoUrl { get; set; } = string.Empty;
+        public string WelcomeMessage { get; set; } = string.Empty;
+    }
 ```
 
