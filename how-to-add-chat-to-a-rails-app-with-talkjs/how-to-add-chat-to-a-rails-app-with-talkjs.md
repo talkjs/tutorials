@@ -86,7 +86,7 @@ User.create(name: "Leroy", email: "leroy.stanley@example.com", id: "leroy.stanle
 User.create(name: "Ray", email: "ray.mitchelle@example.com", id: "ray.mitchelle", photoUrl: "https://talkjs.com/new-web/avatar-4.jpg", role: "default")
 ```
 
-These are commands to create three users with the fields specified. We've used fields that are analogous to a TalkJS user so that it is straightforward to create them and start conversations. To add this to our database, run:
+These are commands to create three users with the fields specified. We've used fields that match those of a [TalkJS user](https://talkjs.com/docs/Reference/Concepts/Users/) so that it is straightforward to create them and start conversations. To add this to our database, run:
 
 ```bash
 rails db:seed
@@ -119,17 +119,17 @@ class ChatController < ApplicationController
 end
 ```
 
-This creates two actions inside the `chat_controller`. The first one called index assigns all the users from the database to a variable `@users`. The same is also assigned to the `gon.users` variable. Don' worry about `gon` just yet, we'll get to that in a later section.
+This creates two actions inside the `chat_controller`. The first one, called `index`, assigns all the users from the database to a variable `@users`. This is then also assigned to the `gon.users` variable. Don' worry about `gon` just yet, we'll get to that in a later section.
 
-The second action does the same thing, but also assigns another variable called `gon.mainUser` with the value of the user John Garcia. 
+The second action does the same thing, but also assigns another variable called `gon.mainUser` with the value of the user John Garcia. In the next section, we're going to add two views for the two actions we just created.
 
 ## Add a view
 
-We're going to two HTML files. The first one corresponds to the initial screen where the user can make a chat selection. The second one displays the actual chat itself.
+We're going to create two HTML files. The first one corresponds to the initial screen where the user can make a chat selection. The second one displays the actual chat itself.
 
 ### Index view
 
-Go inside the empty `chat` folder inside `rails-talkjs/app/views`. Create a new file called `index.html.erb`. Add the following code inside it:
+Inside the empty `chat` folder in `rails-talkjs/app/views`, create a new file called `index.html.erb`. Add the following code inside it:
 
 ```html
 <div class = "button-container">
@@ -149,6 +149,7 @@ Next, create another file called `conversation.html.erb` and add the following c
 <%= javascript_import_module_tag "conversation" %>
 <div class = "main-container">
 <%= content_tag :button, type: 'button', class: 'chat-button', onclick: "window.location='#{chat_path}'" do %>
+  <!-- SVG left arrow icon -->
   <svg
     xmlns="http://www.w3.org/2000/svg&quot;
     width="16"
@@ -172,9 +173,9 @@ Next, create another file called `conversation.html.erb` and add the following c
 
 The first line is to use the `conversation.js` file with this view. We'll be creating this in the section where we include TalkJS. Next, we have a `div` that houses a button and another `div` to add the TalkJS chat. On clicking the button, we go back to the `index` view.
 
-## Install a gem
+## Install `gon`
 
-Gems are your dependencies in Ruby. To install a new gem, we have to add a new entry inside the `Gemfile` and run the command `bundle install`. We require a gem called [`gon`](https://github.com/gazay/gon) that lets us use Rails variables inside JavaScript.
+Next, we'll pass our data to the views. We'll use the [`gon`](https://github.com/gazay/gon) gem, which makes it easier to use Rails variables inside JavaScript.
 
 Open your `Gemfile` and add a new entry:
 
@@ -274,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-Remember the variables `gon.users` and `gon.mainUser` we had in the `chat_controller`. With the help of the `gon` dependency, we're able to use them inside our JavaScript file. This code sets up a conversation between the main user (John Garcia) and the other user. The user data is provided by the `chat` view. For more explanation of the TalkJS code, see our [getting started guide](https://talkjs.com/docs/Getting_Started/JavaScript_SDK/1_On_1_Chat/).
+Remember the variables `gon.users` and `gon.mainUser` we had in the `chat_controller`? With the help of the `gon` dependency, we're able to use them inside our JavaScript file. This code sets up a conversation between the main user (John Garcia) and the other user. The user data is provided by the `chat` view. For more explanation of the TalkJS code, see our [getting started guide](https://talkjs.com/docs/Getting_Started/JavaScript_SDK/1_On_1_Chat/).
 
 You'll need to replace `<APP_ID>` with your app ID, which you can find on the **Settings** tab of your [TalkJS dashboard](https://talkjs.com/dashboard).
 
@@ -317,24 +318,27 @@ h1, h3 {
 #talkjs-container i {
   color: #888;
 }
-.button-container{
-  width: 415px;
-  margin: 30px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border: 1px solid #888;
-  padding: 1rem;
-  border-radius: 10px;
-}
-.main-container{
-  width: 415px;
-  margin: 30px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-#talkjs-container{
+	
+	.button-container {
+	  width: 415px;
+	  margin: 30px auto;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: flex-start;
+	  border: 1px solid #888;
+	  padding: 1rem;
+	  border-radius: 10px;
+	}
+	
+	.main-container {
+	  width: 415px;
+	  margin: 30px auto;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: flex-start;
+	}
+	
+	#talkjs-container {
   width: 100%;
   height: 500px;
   border-radius: 8px;
@@ -377,7 +381,7 @@ You can view the styles we're using for our example in [the GitHub repo](https:/
 You now have a working demonstration of how to integrate TalkJS with Rails! To recap, in this tutorial we have:
 
 - Created a Rails model corresponding to a TalkJS user and stored some data in a SQLite database
-- Created a controller having two actions
+- Created a controller with two actions
 - Set up routes
 - Added a chatbox to the template with TalkJS's JavaScript SDK
 - Styled the template
