@@ -262,7 +262,7 @@ If this seems a little complex, don’t worry you’ll understand it once you se
 ```
 After that, add the HTML div tag that is going to render the TalkJS chat component. Make sure it has the same id used to mount the TalkJS chat component under the `createConversation` function. The code is as shown below. 
 
-```html
+```html/c#
 @page "/"
 
 
