@@ -18,7 +18,7 @@ We’ll build up the chat step by step in the following sections. If you would r
 This is a tutorial just to get you started. For a fine-grained explanation, please follow the comments in the code.
 
 # Initialize TalkJS 
-In this section we are going to activate TalkJS. To do this, in app.razor, add the following script tag containing the JavaScript code that activates TalkJS in your Blazor application.
+In this section we are going to activate TalkJS. To do this, in the `body` tag of `app.razor`, add the following script tag containing the JavaScript code that activates TalkJS in your Blazor application.
 
 ```html
 <body>
