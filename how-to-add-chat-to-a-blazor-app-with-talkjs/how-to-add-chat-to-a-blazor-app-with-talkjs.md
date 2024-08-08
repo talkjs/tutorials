@@ -339,10 +339,10 @@ Run the program, and you should have a similar output in your browser:
 
 # Next steps
 
-In this guide, you've added powerful user-to-user chat to your Blazor app. You now have a starting point to try out all the features TalkJS offers. For example, you could create a new UI theme in the Theme Editor, customize your chat with action buttons or HTML panels, or enable email notifications.
+In this guide, you've added powerful user-to-user chat to your Blazor app. You now have a starting point to try out all the features TalkJS offers. For example, you could create a new UI theme in the [Theme Editor](https://talkjs.com/features/themes), customize your chat with [action buttons](https://talkjs.com/docs/Features/Customizations/Action_Buttons_Links/) or HTML panels, or enable [email notifications](https://talkjs.com/docs/Features/Notifications/Email_Notifications/).
 
 If you want to learn more about TalkJS, here are some good places to start:
 
-- The TalkJS Docs help you get started with TalkJS.
-- TalkJS tutorials provide how-to guides for many common TalkJS use cases.
-- The talkjs-examples Github repo has larger complete examples that demonstrate how to integrate with other libraries and frameworks. For the full example code for this tutorial, see our Blazor example.
+- The [TalkJS Docs](https://talkjs.com/docs/) help you get started with TalkJS.
+- [TalkJS tutorials](https://talkjs.com/resources/tag/tutorials/) provide how-to guides for many common TalkJS use cases.
+- The [talkjs-examples Github repo](https://github.com/talkjs/talkjs-examples) has larger complete examples that demonstrate how to integrate with other libraries and frameworks. For the full example code for this tutorial, see our [Blazor example NOT UPDATED](https://github.com/talkjs/talkjs-examples).
