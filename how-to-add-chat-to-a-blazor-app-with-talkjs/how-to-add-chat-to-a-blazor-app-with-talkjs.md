@@ -191,14 +191,13 @@ Now we are going to call the `createConversation` JavaScript function that is de
 
 ```C#
 @code {
-    // private const string AppId = "tm0N20qA";   //Get your App Id from your TalkJS Dashboard after creating an account
     protected User Me { get; set; }
     protected User Other { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         // Populate Users
-        // In real world application this would come from the database
+        // In a real world application, this would come from the database
         //First participant/You
         Me = new User()
             {
@@ -276,14 +275,13 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
 
 
 @code {
-    // private const string AppId = "tm0N20qA";   //Get your App Id from your TalkJS Dashboard after creating an account
     protected User Me { get; set; }
     protected User Other { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         // Populate Users
-        // In real world application this would come from the database
+        // In a real world application, this would come from the database
         //First participant/You
         Me = new User()
             {
@@ -307,7 +305,7 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
     }
 
 
-    private const string AppId = "tm0N20qA";   //Get your App Id from your TalkJS Dashboard after creating an account
+    private const string AppId = "<APP_ID>";   //Get your App Id from your TalkJS Dashboard after creating an account
 
     //Call javascript that initializes TalkJS api
     protected override async Task OnAfterRenderAsync(bool firstRender)
