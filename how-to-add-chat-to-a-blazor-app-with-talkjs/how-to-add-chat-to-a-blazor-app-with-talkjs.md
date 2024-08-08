@@ -10,7 +10,7 @@ To follow along, you’ll need:
 -	A [TalkJS account](https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
 -	A Blazor Web App in which you would like to add a chat to.
 
-This Blazor application is created using the Blazor Web App template in Visual Studio, specifically Interactive server with Per page/component interactivity. The steps of creating one can be found in this Microsoft Blazor tutorial link. 
+This Blazor application is created using the Blazor Web App template in Visual Studio, specifically Interactive server with Per page/component interactivity. The steps of creating one can be found in this Microsoft [Blazor tutorial link](https://dotnet.microsoft.com/en-us/learn/aspnet/blazor-tutorial/create). 
 
 If you already have an existing application created using the Blazor Web App template, you can still follow along and tweak the render modes depending on where your component displaying the chat will be.
 
