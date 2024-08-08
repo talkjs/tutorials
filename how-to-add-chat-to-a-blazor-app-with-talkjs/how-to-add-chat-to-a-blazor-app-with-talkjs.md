@@ -45,4 +45,70 @@ In this section we are going to activate TalkJS. To do this, in app.razor, add t
 </body>
 ```
 
+# Create a conversation
 
+Next, in `app.razor` we will add another script tag that creates the actual conversation. This script will consist of a JavaScript wrapper called `TalkWrapper` (A JavaScript Wrapper is a function that calls one or more other functions.)  
+
+Inside `TalkWrapper`, we are going to define a function called `createConversation`.This function contains the logic to create a conversation. It receives four parameters which will be provided by our C# code that will call it. Here is the code:
+
+```html
+<body>
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+
+    @* The actual code that creates a conversation *@
+    <script>
+        window.TalkWrapper = {
+
+            createConversation: function (appId, myUser, otherUser, conversationId) {
+
+                // Create a Talk.User object for me
+                const me = new Talk.User(myUser);
+                //Create a Talk.User object for other participant
+                const other = new Talk.User(otherUser);
+
+                // Create a Talk.Session object
+                const talkSession = new Talk.Session({
+                    appId: appId,
+                    me: me,
+                });
+
+                // Create a conversation with a unique conversation ID
+                const conversation = talkSession.getOrCreateConversation(conversationId);
+
+                // Add myself as a participant
+                conversation.setParticipant(me);
+
+                // Add another participant
+                conversation.setParticipant(other);
+
+                const chatbox = talkSession.createChatbox();
+                chatbox.select(conversation);
+                // Mount a conversation into a given div
+                //We're getting the div by id, make sure the div has the id specified i.e talkjs-container
+                chatbox.mount(document.getElementById('talkjs-container'));
+            }
+        }
+
+    </script>
+
+    @* Initialize TalkJS *@
+    @* Minified snippet to load TalkJS without delaying your page *@
+    @* This code needs to be below the Talk.Wrapper Code above for it work appropriately *@
+    <script>
+        (function (t, a, l, k, j, s) {
+            s = a.createElement('script'); s.async = 1; s.src = 'https://cdn.talkjs.com/talk.js'; a.head.appendChild(s)
+                ; k = t.Promise; t.Talk = {
+                    v: 3, ready: {
+                        then: function (f) {
+                            if (k) return new k(function (r, e) { l.push([f, r, e]) }); l
+                                .push([f])
+                        }, catch: function () { return k && new k() }, c: l
+                    }
+                };
+        })(window, document, []);
+    </script>
+
+
+</body>
+```
