@@ -147,7 +147,7 @@ First, override the `OnInitializedAsync` Blazor component lifecycle method and d
     protected override async Task OnInitializedAsync()
     {
         // Populate Users
-        // In real world application this would come from the database
+        // In a real world application, this would come from the database
         //First participant/You
         Me = new User()
             {
