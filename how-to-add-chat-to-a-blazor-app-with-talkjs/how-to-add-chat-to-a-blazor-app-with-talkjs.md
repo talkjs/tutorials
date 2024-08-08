@@ -116,9 +116,9 @@ Inside `TalkWrapper`, we are going to define a function called `createConversati
 
 That’s enough JavaScript for now. 
 
-For the sake of simplicity, we are going write the rest of the C# code and HTML to display the component under the default Home.razor page.
+For the sake of simplicity, we are going write the rest of the C# code and HTML to display the component under the default `Home.razor` page.
 
-Now, add a data model of a typical participant in a TalkJS conversation. To do so, create a class named User as shown below and add the given properties.
+Now, add a data model of a typical participant in a TalkJS conversation. To do so, create a class named `User` as shown below and add the given properties.
 
 ```c#
 @code {
@@ -136,9 +136,9 @@ Now, add a data model of a typical participant in a TalkJS conversation. To do s
 
 # Create User instances
 
-Still under Home.razor, we are going to create instances of the User class defined above. After that, we are going to assign them to properties of the User type.
+Still under `Home.razor`, we are going to create instances of the User class defined above. After that, we are going to assign them to properties of the User type.
 
-First, override the OnInitializedAsync Blazor component lifecycle method and define the relevant code to create user instances inside the method. The example code is shown below.
+First, override the `OnInitializedAsync` Blazor component lifecycle method and define the relevant code to create user instances inside the method. The example code is shown below.
 
 ```c#
     protected User Me { get; set; }
@@ -180,4 +180,12 @@ First, override the OnInitializedAsync Blazor component lifecycle method and def
         public string WelcomeMessage { get; set; } = string.Empty;
     }
 ```
+
+# Call the JavaScript createConversation function
+Now we are going to call the createConversation JavaScript function that is defined inside the TalkWrapper function under app.razor. We are passing four arguments; 
+- AppId – This is found on your TalkJS Dashboard after creating an account. 
+- Me – A User instance of yourself.
+- Other – User instance of the other person in the conversation. 
+- Conversation Id. 
+
 
