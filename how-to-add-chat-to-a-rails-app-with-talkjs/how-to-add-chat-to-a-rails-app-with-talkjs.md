@@ -318,27 +318,27 @@ h1, h3 {
 #talkjs-container i {
   color: #888;
 }
-	
-	.button-container {
-	  width: 415px;
-	  margin: 30px auto;
-	  display: flex;
-	  flex-direction: column;
-	  align-items: flex-start;
-	  border: 1px solid #888;
-	  padding: 1rem;
-	  border-radius: 10px;
-	}
-	
-	.main-container {
-	  width: 415px;
-	  margin: 30px auto;
-	  display: flex;
-	  flex-direction: column;
-	  align-items: flex-start;
-	}
-	
-	#talkjs-container {
+
+.button-container {
+  width: 415px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #888;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.main-container {
+  width: 415px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#talkjs-container {
   width: 100%;
   height: 500px;
   border-radius: 8px;
