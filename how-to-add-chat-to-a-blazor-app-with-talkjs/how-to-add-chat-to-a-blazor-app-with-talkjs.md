@@ -182,10 +182,67 @@ First, override the `OnInitializedAsync` Blazor component lifecycle method and d
 ```
 
 # Call the JavaScript createConversation function
+
 Now we are going to call the createConversation JavaScript function that is defined inside the TalkWrapper function under app.razor. We are passing four arguments; 
 - AppId – This is found on your TalkJS Dashboard after creating an account. 
 - Me – A User instance of yourself.
 - Other – User instance of the other person in the conversation. 
 - Conversation Id. 
 
+```C#
+@code {
+    // private const string AppId = "tm0N20qA";   //Get your App Id from your TalkJS Dashboard after creating an account
+    protected User Me { get; set; }
+    protected User Other { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        // Populate Users
+        // In real world application this would come from the database
+        //First participant/You
+        Me = new User()
+            {
+                Id = 123456,
+                Name = "Alice",
+                Email = "alice@example.com",
+                PhotoUrl = "https://talkjs.com/images/avatar-1.jpg",
+                WelcomeMessage = "Hey there! How are you? :-)",
+            };
+        //Second participant/Whoever you're chatting with
+        Other = new User()
+            {
+                Id = 754321,
+                Name = "Michael",
+                Email =  "michael@example.com",
+                PhotoUrl = "https://talkjs.com/images/avatar-4.jpg",
+                WelcomeMessage = "Hola!",
+            };
+
+        StateHasChanged();
+    }
+
+
+    private const string AppId = "<APP_ID>";   //Get your App Id from your TalkJS Dashboard after creating an account
+
+    //Call javascript that initializes TalkJS api
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //Only call javascript if both users and the app id is available
+        if (Me != null && Other != null && !string.IsNullOrEmpty(AppId))
+        {
+            await jsRuntime.InvokeVoidAsync("TalkWrapper.createConversation", AppId, Me, Other, "SAMPLE_CONVERSATION");
+        }
+
+    }
+
+    //Model for a typical chat participant
+    public class User
+    {
+        public long Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string PhotoUrl { get; set; } = string.Empty;
+        public string WelcomeMessage { get; set; } = string.Empty;
+    }
+}
+```
