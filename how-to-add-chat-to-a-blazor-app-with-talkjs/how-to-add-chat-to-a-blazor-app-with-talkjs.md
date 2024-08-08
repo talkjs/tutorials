@@ -120,7 +120,7 @@ For the sake of simplicity, we are going write the rest of the C# code and HTML 
 
 Now, add a data model of a typical participant in a TalkJS conversation. To do so, create a class named User as shown below and add the given properties.
 
-```html
+```c#
 @code {
 
     //Model for a typical chat participant
