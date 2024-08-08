@@ -249,9 +249,9 @@ Now we are going to call the `createConversation` JavaScript function that is de
 # Display the TalkJS chat
 Finally, we are going to display the TalkJS chat component.
 
-At the top of Home.razor we’re going to add two directives. One is the @rendermode directive and the other is the @inject JSRuntime directive. 
+At the top of `Home.razor` we’re going to add two directives. One is the `@rendermode` directive and the other is the `@inject` JSRuntime directive. 
 
-The rendermode directive sets the page’s mode of interactivity, in our case this is InteractiveServer. On the other hand, JSRuntime is going to be used by C# code that calls the createConversation function defined in app.razor TalkWrapper function. 
+The `rendermode` directive sets the page’s mode of interactivity, in our case this is `InteractiveServer`. On the other hand, `JSRuntime` is going to be used by C# code that calls the `createConversation` function defined in `app.razor` `TalkWrapper` function. 
 
 If this seems a little complex, don’t worry you’ll understand it once you see the code. Here is the code:
 
@@ -333,7 +333,7 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
 Run the program, and you should have a similar output in your browser:
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="2-one-on-one-chat.png" alt="Conversation between two users in Blazor"/>
+  <img class="kg-image" src="3-talkjs-blazor.png" alt="Conversation between two users in Blazor"/>
   <figcaption>Blazor application is now integrated with TalkJS</figcaption>
 </figure>
 
