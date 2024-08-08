@@ -181,9 +181,9 @@ First, override the `OnInitializedAsync` Blazor component lifecycle method and d
     }
 ```
 
-# Call the JavaScript createConversation function
+# Call the JavaScript `createConversation` function
 
-Now we are going to call the createConversation JavaScript function that is defined inside the TalkWrapper function under app.razor. We are passing four arguments; 
+Now we are going to call the `createConversation` JavaScript function that is defined inside the `TalkWrapper` function under `app.razor`. We are passing four arguments; 
 - AppId – This is found on your TalkJS Dashboard after creating an account. 
 - Me – A User instance of yourself.
 - Other – User instance of the other person in the conversation. 
@@ -246,3 +246,19 @@ Now we are going to call the createConversation JavaScript function that is defi
     }
 }
 ```
+
+# Display the TalkJS chat
+Finally, we are going to display the TalkJS chat component.
+
+At the top of Home.razor we’re going to add two directives. One is the @rendermode directive and the other is the @inject JSRuntime directive. 
+
+The rendermode directive sets the page’s mode of interactivity, in our case this is InteractiveServer. On the other hand, JSRuntime is going to be used by C# code that calls the createConversation function defined in app.razor TalkWrapper function. 
+
+If this seems a little complex, don’t worry you’ll understand it once you see the code. Here is the code:
+
+```html
+@rendermode InteractiveServer
+@inject IJSRuntime jsRuntime;
+```
+
+
