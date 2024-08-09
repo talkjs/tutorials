@@ -147,7 +147,7 @@ Now, add a data model of a typical [user](https://talkjs.com/docs/Reference/Conc
 # Create User instances
 
 Still under `Home.razor`, we are going to create instances of the User class defined above. After that, we are going to assign them to properties of the User type. These instances are hard-coded and we are assigning relevant user values to the
-`Id`, `Name`, `Email`, `PhotoUrl` and `Welcome message` properties of users. Normally in a real application, these values would be assigned using data coming from a database.
+`Id`, `Name`, `Email`, `PhotoUrl` and `Welcome message` properties of users. In a real application, these values would be assigned using data coming from a database.
 
 First, override the `OnInitializedAsync` Blazor component lifecycle method and define the relevant code to create user instances inside the method. The example code is shown below.
 
