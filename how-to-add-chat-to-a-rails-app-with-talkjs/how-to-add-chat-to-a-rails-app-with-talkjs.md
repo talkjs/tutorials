@@ -68,7 +68,9 @@ class CreateUsers < ActiveRecord::Migration[7.1]
 end
 ```
 
-This ensures that the default id field is not created and the one we created is used as the primary key. Now, run the migration script to create the table:
+This ensures that the default id field is not created and the one we created is used as the primary key. Note that `7.1` here is the version of `ActiveRecord` used to create the migrations – if you're adding TalkJS to your own project you might see a different version.
+
+Now, run the migration script to create the table:
 
 ```bash
 rails db:migrate
@@ -119,13 +121,13 @@ class ChatController < ApplicationController
 end
 ```
 
-This creates two actions inside the `chat_controller`. The first one, called `index`, assigns all the users from the database to a variable `@users`. This is then also assigned to the `gon.users` variable. Don' worry about `gon` just yet, we'll get to that in a later section.
+This creates two actions inside the `chat_controller`. The first one, called `index`, assigns all the users from the database to a variable `@users`. This is then also assigned to the `gon.users` variable. Don't worry about `gon` just yet, we'll get to that in a later section.
 
 The second action does the same thing, but also assigns another variable called `gon.mainUser` with the value of the user John Garcia. In the next section, we're going to add two views for the two actions we just created.
 
 ## Add a view
 
-We're going to create two HTML files. The first one corresponds to the initial screen where the user can make a chat selection. The second one displays the actual chat itself.
+A view in a Rails application handles the presentation of the application's data. We use an extension called `.erb` that stands for Embedded Ruby. It is a mix of HTML and Ruby. This is similar to `.jsx` that is a mix of JavaScript and HTML. We're going to create two `erb` files. The first one corresponds to the initial screen where the user can make a chat selection. The second one displays the actual chat itself.
 
 ### Index view
 
