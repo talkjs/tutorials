@@ -17,6 +17,7 @@ This tutorial assumes that you have knowledge of Blazor, .NET and also that youâ
 
 To follow along, youâ€™ll need:
 -	A [TalkJS account](https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
+- .NET 8 [SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0).
 -	A Blazor Web App in which you would like to add a chat to.
 
 This Blazor application is created using the Blazor Web App template in Visual Studio, specifically Interactive server with Per page/component interactivity. The steps of creating one can be found in this [Microsoft Blazor tutorial link](https://dotnet.microsoft.com/en-us/learn/aspnet/blazor-tutorial/create). 
