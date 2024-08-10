@@ -82,7 +82,7 @@ Inside `TalkWrapper`, we are going to define a function called `initializeAndCre
     </script>
 
     <script>
-        // Wait for TalkJS to be ready and then call createConversation
+        // Wait for TalkJS to be ready and then call createConversation function
         window.TalkWrapper = {
             initializeAndCreateConversation: function (appId, myUser, otherUser, conversationId) {
                 Talk.ready.then(function () {
@@ -222,7 +222,7 @@ Now we are going to call the `initializeAndCreateConversation` JavaScript functi
                 PhotoUrl = "https://talkjs.com/images/avatar-1.jpg",
                 WelcomeMessage = "Hey there! How are you? :-)",
             };
-        // Second participant ( the user you're chatting with):
+        // Second participant (the user you're chatting with):
         Other = new User()
             {
                 Id = 754321,
@@ -236,7 +236,7 @@ Now we are going to call the `initializeAndCreateConversation` JavaScript functi
     }
 
 
-    private const string AppId = "<APP_ID>";   //Get your App Id from your TalkJS Dashboard after creating an account
+    private const string AppId = "<APP_ID>";   // Get your App Id from your TalkJS Dashboard after creating an account
 
     // Call the JavaScript function that initializes TalkJS api
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -320,7 +320,7 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
     }
 
 
-    private const string AppId = "<APP_ID>";   //Get your App Id from your TalkJS Dashboard after creating an account
+    private const string AppId = "<APP_ID>";   // Get your App Id from your TalkJS Dashboard after creating an account
 
     // Call the JavaScript function that initializes TalkJS api
     protected override async Task OnAfterRenderAsync(bool firstRender)
