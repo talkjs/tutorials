@@ -37,7 +37,6 @@ In this section we are going to activate TalkJS. To do this, in the `body` tag o
 
     @* Initialize TalkJS *@
     @* Minified snippet to load TalkJS without delaying your page *@
-    @* This code needs to be below the Talk.Wrapper Code above for it work appropriately *@
     <script>
         (function (t, a, l, k, j, s) {
             s = a.createElement('script'); s.async = 1; s.src = 'https://cdn.talkjs.com/talk.js'; a.head.appendChild(s)
@@ -66,22 +65,47 @@ Inside `TalkWrapper`, we are going to define a function called `createConversati
     <Routes />
     <script src="_framework/blazor.web.js"></script>
 
-    @* Create a conversation *@
+    @* Initialize TalkJS *@
+    @* Minified snippet to load TalkJS without delaying your page *@
     <script>
-        window.TalkWrapper = {
+            (function (t, a, l, k, j, s) {
+                s = a.createElement('script'); s.async = 1; s.src = 'https://cdn.talkjs.com/talk.js'; a.head.appendChild(s)
+                    ; k = t.Promise; t.Talk = {
+                        v: 3, ready: {
+                            then: function (f) {
+                                if (k) return new k(function (r, e) { l.push([f, r, e]) }); l
+                                    .push([f])
+                            }, catch: function () { return k && new k() }, c: l
+                        }
+                    };
+            })(window, document, []);
+    </script>
 
-            createConversation: function (appId, myUser, otherUser, conversationId) {
+    <script>
+        // Wait for TalkJS to be ready and then call createConversation
+        window.TalkWrapper = {
+            initializeAndCreateConversation: function (appId, myUser, otherUser, conversationId) {
+                Talk.ready.then(function () {
+                    createConversation(appId, myUser, otherUser, conversationId);
+                });
+            }
+        };
+
+
+        //Create a conversation 
+        function createConversation(appId, myUser, otherUser, conversationId) {
 
                 // Create a Talk.User object for me
                 const me = new Talk.User(myUser);
-                //Create a Talk.User object for other participant
-                const other = new Talk.User(otherUser);
 
                 // Create a Talk.Session object
                 const talkSession = new Talk.Session({
                     appId: appId,
                     me: me,
                 });
+
+                // Create a Talk.User object for other participant
+                const other = new Talk.User(otherUser);
 
                 // Create a conversation with a unique conversation ID
                 const conversation = talkSession.getOrCreateConversation(conversationId);
@@ -95,30 +119,10 @@ Inside `TalkWrapper`, we are going to define a function called `createConversati
                 const chatbox = talkSession.createChatbox();
                 chatbox.select(conversation);
                 // Mount a conversation into a given div
-                //We're getting the div by id, make sure the div has the id specified i.e talkjs-container
+                // We're getting the div by id, make sure the div has the id specified i.e talkjs-container
                 chatbox.mount(document.getElementById('talkjs-container'));
             }
-        }
-
     </script>
-
-    @* Initialize TalkJS *@
-    @* Minified snippet to load TalkJS without delaying your page *@
-    @* This code needs to be below the Talk.Wrapper Code above for it work appropriately *@
-    <script>
-        (function (t, a, l, k, j, s) {
-            s = a.createElement('script'); s.async = 1; s.src = 'https://cdn.talkjs.com/talk.js'; a.head.appendChild(s)
-                ; k = t.Promise; t.Talk = {
-                    v: 3, ready: {
-                        then: function (f) {
-                            if (k) return new k(function (r, e) { l.push([f, r, e]) }); l
-                                .push([f])
-                        }, catch: function () { return k && new k() }, c: l
-                    }
-                };
-        })(window, document, []);
-    </script>
-
 
 </body>
 ```
@@ -240,7 +244,7 @@ Now we are going to call the `createConversation` JavaScript function that is de
         //Only call javascript if both users and the app id is available
         if (Me != null && Other != null && !string.IsNullOrEmpty(AppId))
         {
-            await jsRuntime.InvokeVoidAsync("TalkWrapper.createConversation", AppId, Me, Other, "SAMPLE_CONVERSATION");
+            await jsRuntime.InvokeVoidAsync("TalkWrapper.initializeAndCreateConversation", AppId, Me, Other, "SAMPLE_CONVERSATION");
         }
 
     }
@@ -324,7 +328,7 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
         //Only call javascript if both users and the app id is available
         if (Me != null && Other != null && !string.IsNullOrEmpty(AppId))
         {
-            await jsRuntime.InvokeVoidAsync("TalkWrapper.createConversation", AppId, Me, Other, "SAMPLE_CONVERSATION");
+            await jsRuntime.InvokeVoidAsync("TalkWrapper.initializeAndCreateConversation", AppId, Me, Other, "SAMPLE_CONVERSATION");
         }
 
     }
