@@ -58,7 +58,7 @@ In this section we are going to activate TalkJS. To do this, in the `body` tag o
 
 Next, in `app.razor` we will add another script tag that creates the actual conversation. This script will consist of a JavaScript wrapper called `TalkWrapper` (A JavaScript Wrapper is a function that calls one or more other functions.)  
 
-Inside `TalkWrapper`, we are going to define a function called `createConversation`.This function contains the logic to create a conversation. It receives four parameters which will be provided by our C# code that will call it. Here is the code:
+Inside `TalkWrapper`, we are going to define a function called `initializeAndCreateConversation`. This function waits for TalkJS to be initialized before calling `createConversation` function, a function that contains the logic to create a conversation. It receives four parameters which will be provided by our C# code that will call it. Here is the code:
 
 ```html
 <body>
@@ -196,9 +196,9 @@ First, override the `OnInitializedAsync` Blazor component lifecycle method and d
     }
 ```
 
-# Call the JavaScript `createConversation` function
+# Call the JavaScript `initializeAndCreateConversation` function
 
-Now we are going to call the `createConversation` JavaScript function that is defined inside the `TalkWrapper` function under `app.razor`. We are passing four arguments; 
+Now we are going to call the `initializeAndCreateConversation` JavaScript function that is defined inside the `TalkWrapper` function under `app.razor`. We are passing four arguments; 
 - AppId – This is found on your TalkJS Dashboard after creating an account. 
 - Me – A User instance of yourself.
 - Other – User instance of the other person in the conversation. 
