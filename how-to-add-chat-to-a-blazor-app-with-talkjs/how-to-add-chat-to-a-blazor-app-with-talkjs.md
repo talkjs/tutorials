@@ -92,7 +92,7 @@ Inside `TalkWrapper`, we are going to define a function called `initializeAndCre
         };
 
 
-        //Create a conversation 
+        // Create a conversation 
         function createConversation(appId, myUser, otherUser, conversationId) {
 
                 // Create a Talk.User object for me
@@ -136,7 +136,7 @@ Now, add a data model of a typical [user](https://talkjs.com/docs/Reference/Conc
 
 ```c#
 @code {
-    //Model for a typical chat participant
+    // Model for a typical chat participant
     public class User
     {
         public long Id { get; set; }
@@ -161,9 +161,9 @@ First, override the `OnInitializedAsync` Blazor component lifecycle method and d
 
     protected override async Task OnInitializedAsync()
     {
-        // Populate Users
+        // Populate users
         // In a real world application, this would come from the database
-        //First participant/You
+        // First participant (you):
         Me = new User()
             {
                 Id = 123456,
@@ -172,7 +172,7 @@ First, override the `OnInitializedAsync` Blazor component lifecycle method and d
                 PhotoUrl = "https://talkjs.com/images/avatar-1.jpg",
                 WelcomeMessage = "Hey there! How are you? :-)",
             };
-        //Second participant/Whoever you're chatting with
+        // Second participant (the user you're chatting with):
         Other = new User()
             {
                 Id = 754321,
@@ -185,7 +185,7 @@ First, override the `OnInitializedAsync` Blazor component lifecycle method and d
         StateHasChanged();
     }
 
-    //Model for a typical chat participant
+    // Model for a typical chat participant
     public class User
     {
         public long Id { get; set; }
@@ -211,9 +211,9 @@ Now we are going to call the `initializeAndCreateConversation` JavaScript functi
 
     protected override async Task OnInitializedAsync()
     {
-        // Populate Users
+        // Populate users
         // In a real world application, this would come from the database
-        //First participant/You
+        // First participant (you):
         Me = new User()
             {
                 Id = 123456,
@@ -222,7 +222,7 @@ Now we are going to call the `initializeAndCreateConversation` JavaScript functi
                 PhotoUrl = "https://talkjs.com/images/avatar-1.jpg",
                 WelcomeMessage = "Hey there! How are you? :-)",
             };
-        //Second participant/Whoever you're chatting with
+        // Second participant ( the user you're chatting with):
         Other = new User()
             {
                 Id = 754321,
@@ -238,10 +238,10 @@ Now we are going to call the `initializeAndCreateConversation` JavaScript functi
 
     private const string AppId = "<APP_ID>";   //Get your App Id from your TalkJS Dashboard after creating an account
 
-    //Call javascript that initializes TalkJS api
+    // Call the JavaScript function that initializes TalkJS api
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        //Only call javascript if both users and the app id is available
+        // Only call the JavaScript function if both users and the app id are available
         if (Me != null && Other != null && !string.IsNullOrEmpty(AppId))
         {
             await jsRuntime.InvokeVoidAsync("TalkWrapper.initializeAndCreateConversation", AppId, Me, Other, "SAMPLE_CONVERSATION");
@@ -249,7 +249,7 @@ Now we are going to call the `initializeAndCreateConversation` JavaScript functi
 
     }
 
-    //Model for a typical chat participant
+    // Model for a typical chat participant
     public class User
     {
         public long Id { get; set; }
@@ -297,7 +297,7 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
     {
         // Populate Users
         // In a real world application, this would come from the database
-        //First participant/You
+        // First participant (you):
         Me = new User()
             {
                 Id = 123456,
@@ -306,7 +306,7 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
                 PhotoUrl = "https://talkjs.com/images/avatar-1.jpg",
                 WelcomeMessage = "Hey there! How are you? :-)",
             };
-        //Second participant/Whoever you're chatting with
+        // Second participant (the user you're chatting with):
         Other = new User()
             {
                 Id = 754321,
@@ -322,10 +322,10 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
 
     private const string AppId = "<APP_ID>";   //Get your App Id from your TalkJS Dashboard after creating an account
 
-    //Call javascript that initializes TalkJS api
+    // Call the JavaScript function that initializes TalkJS api
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        //Only call javascript if both users and the app id is available
+        // Only call the JavaScript function if both users and the app id are available
         if (Me != null && Other != null && !string.IsNullOrEmpty(AppId))
         {
             await jsRuntime.InvokeVoidAsync("TalkWrapper.initializeAndCreateConversation", AppId, Me, Other, "SAMPLE_CONVERSATION");
@@ -333,7 +333,7 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
 
     }
 
-    //Model for a typical chat participant
+    // Model for a typical chat participant
     public class User
     {
         public long Id { get; set; }
