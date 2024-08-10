@@ -58,7 +58,7 @@ In this section we are going to activate TalkJS. To do this, in the `body` tag o
 
 Next, in `app.razor` we will add another script tag that creates the actual conversation. This script will consist of a JavaScript wrapper called `TalkWrapper` (A JavaScript Wrapper is a function that calls one or more other functions.)  
 
-Inside `TalkWrapper`, we are going to define a function called `initializeAndCreateConversation`. This function waits for TalkJS to be initialized before calling `createConversation`; a function that contains the logic to create a conversation. `initializeAndCreateConversation` receives four parameters which will be provided by our C# code that will call it. These parameters will in turn be passed to  `createConversation` function so that they can be used to create a conversation. Here is the code:
+Inside `TalkWrapper`, we are going to define a function called `initializeAndCreateConversation`. This function waits for TalkJS to be initialized before calling `createConversation`; a function that contains the logic to create a conversation. The `initializeAndCreateConversation` function receives four parameters which will be provided by our C# code that will call it. These parameters will in turn be passed to  `createConversation` function so that they can be used to create a conversation. Here is the code:
 
 ```html
 <body>
