@@ -150,8 +150,8 @@ Now, add a data model of a typical [user](https://talkjs.com/docs/Reference/Conc
 
 # Create User instances
 
-Still under `Home.razor`, we are going to create instances of the User class defined above. After that, we are going to assign them to properties of the User type. These instances are hard-coded and we are assigning relevant user values to the
-`Id`, `Name`, `Email`, `PhotoUrl` and `Welcome message` properties of users. In a real application, these values would be assigned using data coming from a database.
+Still under `Home.razor` inside the `@code{}` code block, we are going to create instances of the User class defined above. After that, we are going to assign them to properties of the User type. These instances are hard-coded and we are assigning relevant user values to the
+`Id`, `Name`, `Email`, `PhotoUrl` and `WelcomeMessage` properties of users. In a real application, these values would be assigned using data coming from a database.
 
 First, override the `OnInitializedAsync` Blazor component lifecycle method and define the relevant code to create user instances inside the method. The example code is shown below.
 
@@ -198,11 +198,11 @@ First, override the `OnInitializedAsync` Blazor component lifecycle method and d
 
 # Call the JavaScript `initializeAndCreateConversation` function
 
-Now we are going to call the `initializeAndCreateConversation` JavaScript function that is defined inside the `TalkWrapper` function under `app.razor`. We are passing four arguments; 
-- AppId – This is found on your TalkJS Dashboard after creating an account. 
-- Me – A User instance of yourself.
-- Other – User instance of the other person in the conversation. 
-- Conversation Id. 
+Under `app.razor`, inside the `TalkWrapper` function, we defined an `initializeAndCreateConversation` JavaScript function. Now, again in `Home.razor`, we are going to call `initializeAndCreateConversation`. We are passing four arguments: 
+- `AppId` – This is found on the **Settings** page of your TalkJS Dashboard after creating an account. 
+- `Me` – A User instance of yourself.
+- `Other` – A User instance of the other person in the conversation. 
+- `ConversationId` – A unique identifier of a conversation. 
 
 ```C#
 @code {
@@ -260,6 +260,7 @@ Now we are going to call the `initializeAndCreateConversation` JavaScript functi
     }
 }
 ```
+Make sure to replace `<APP_ID>` with your own app ID.
 
 # Display the TalkJS chat
 Finally, we are going to display the TalkJS chat component.
