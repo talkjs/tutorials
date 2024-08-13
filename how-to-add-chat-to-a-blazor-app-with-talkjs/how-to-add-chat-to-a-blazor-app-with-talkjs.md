@@ -260,6 +260,7 @@ Under `app.razor`, inside the `TalkWrapper` function, we defined an `initializeA
     }
 }
 ```
+
 Make sure to replace `<APP_ID>` with your own app ID.
 
 # Display the TalkJS chat
