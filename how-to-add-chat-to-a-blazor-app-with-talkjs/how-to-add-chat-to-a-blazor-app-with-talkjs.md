@@ -350,7 +350,7 @@ After that, add the HTML div tag that is going to render the TalkJS chat compone
 Run the program using the `dotnet watch` command, and you should have a similar output in your browser:
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="3-talkjs-blazor.png" alt="Conversation between two users in Blazor"/>
+  <img class="kg-image" src="2-talkjs-blazor.png" alt="Conversation between two users in Blazor"/>
   <figcaption>Blazor application is now integrated with TalkJS</figcaption>
 </figure>
 
