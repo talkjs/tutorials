@@ -24,7 +24,7 @@ This Blazor application is created using the Blazor Web App template in Visual S
 
 If you already have an existing application created using the Blazor Web App template, you can still follow along and tweak the render modes depending on where your component displaying the chat will be.
 
-We’ll build up the chat step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo -NOT UPDATED](https://github.com/MagnusMutai/tutorials/edit/main/how-to-add-chat-to-a-blazor-app-with-talkjs) for this tutorial. 
+We’ll build up the chat step by step in the following sections. If you would rather see the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/csharp/blazor_talkjs) for this tutorial. 
 This is a tutorial just to get you started. For a fine-grained explanation, please follow the comments in the code.
 
 # Initialize TalkJS 
@@ -362,4 +362,4 @@ If you want to learn more about TalkJS, here are some good places to start:
 
 - The [TalkJS Docs](https://talkjs.com/docs/) help you get started with TalkJS.
 - [TalkJS tutorials](https://talkjs.com/resources/tag/tutorials/) provide how-to guides for many common TalkJS use cases.
-- The [talkjs-examples Github repo](https://github.com/talkjs/talkjs-examples) has larger complete examples that demonstrate how to integrate with other libraries and frameworks. For the full example code for this tutorial, see our [Blazor example NOT UPDATED](https://github.com/talkjs/talkjs-examples).
+- The [talkjs-examples Github repo](https://github.com/talkjs/talkjs-examples) has larger complete examples that demonstrate how to integrate with other libraries and frameworks. For the full example code for this tutorial, see our [Blazor example](https://github.com/talkjs/talkjs-examples/tree/master/csharp/blazor_talkjs).
