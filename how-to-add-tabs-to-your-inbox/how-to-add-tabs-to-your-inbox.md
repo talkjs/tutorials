@@ -188,7 +188,6 @@ Talk.ready.then(function () {
     // Function to add the conversation type
    function updateConversationType(conversation) {
      const participantCount = Object.keys(conversation.participants).length;
-     console.log(conversation.participants);
 
       // Set the conversation type based on the number of participants 
      const conversationType = participantCount > 2 ? 'group' : 'dm';
@@ -198,6 +197,9 @@ Talk.ready.then(function () {
        custom: { type: conversationType }
      });
    }
+
+    // Update the conversation type
+    updateConversationType(conversation);
 
     // Create the inbox, select the conversation, mount the UI
    const inbox = talkSession.createInbox();
@@ -228,59 +230,9 @@ You can now use the custom conversation property `type` to filter the conversati
 
 Next, add filtering capacity to your tabs. 
 
-To filter conversations shown in each tab based on their `type` (in this case: `dm` or `group`), you could use the following updated code snippet:
+To filter conversations shown in each tab based on their `type` (in this case: `dm` or `group`), you could add the following to your existing code:
 
 ```JS
-Talk.ready.then(function () {
-
-   // Define current user
-   const me = new Talk.User({
-     id: "rizal",
-     name: "Rizal",
-     email: "rizal@example.com",
-     });
-  
-   // Initialize the TalkJS session
-   const talkSession = new Talk.Session({
-     appId: '<APP_ID>',
-     me: me,
-   });
-
-   // Add other user
-   const oya = new Talk.User({
-     id: 'oya',
-     name: 'Oya',
-     email: "oya@example.com",
-   });
-
-   const jinfeng = new Talk.User({
-       id: 'jinfeng',
-       name: 'Jinfeng',
-     	email: "jinfeng@example.com",
-   });
-
-    // Get or create the conversation
-   const conversation = talkSession.getOrCreateConversation('summer-hike');
-  
-   // Set the conversation participants
-   conversation.setParticipant(me);
-   conversation.setParticipant(oya);
-   conversation.setParticipant(jinfeng);
-
-    // Function to add the conversation type
-   function updateConversationType(conversation) {
-     const participantCount = Object.keys(conversation.participants).length;
-     console.log(conversation.participants);
-
-      // Set the conversation type based on the number of participants 
-     const conversationType = participantCount > 2 ? 'group' : 'dm';
-    
-     // Update the custom attribute 'type' on the conversation
-     conversation.setAttributes({
-       custom: { type: conversationType }
-     });
-   }
-
 // Define filters for each tab 
 const filters = {
    chat: {},
@@ -312,20 +264,19 @@ function setActiveTab(activeTabId) {
    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active-tab'));
    document.getElementById(activeTabId).classList.add('active-tab');
 }
+```
 
+Also, find the lines in which you create the inbox, and update it as follows, so that it uses `setFeedFilter` to apply the filtering:
+
+```JS
    // Create the inbox with a filter 
    const inbox = talkSession.createInbox();
    inbox.select(conversation);
    inbox.setFeedFilter(filters[tab]);
    inbox.mount(document.getElementById('talkjs-container'));
- });
 ```
 
-Replace `<APP_ID>` with your own app ID. 
-
-(If you’re using the REST API to create and update your conversations, you can omit the parts of this code that set user data. See for example: [Viewing an existing conversation](https://talkjs.com/docs/Getting_Started/JavaScript_SDK/1_On_1_Chat/#view-an-existing-conversation).)
-
-In this code snippet, the highlighted code defines filters for each tab, and applies the correct filter to the conversation list of the inbox whenever a user selects that tab. It sets the **Chat** tab as the default.
+This defines filters for each tab, and applies the correct filter to the conversation list of the inbox whenever a user selects that tab. It sets the **Chat** tab as the default.
 
 To try out the tab filters in action, make sure that your current user has at least one conversation of each type: a 1-on-1 chat with a contact, and a group chat. Once the user is a participant in these conversations, the **Chats** tab should show the user all their conversations, while **Contacts** tab only shows the one-on-one conversation, and the **Groups** tab shows only the group conversation.
 
