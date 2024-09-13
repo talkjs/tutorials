@@ -27,7 +27,7 @@ This guide uses the [JavaScript SDK](https://talkjs.com/docs/Reference/JavaScrip
 
 Begin by adding the tab buttons themselves. 
 
-1. In the HTML for your site or app where you’ve added TalkJS chat, find the lines in which you added the container in which to load TalkJS inbox. It’ll likely look as follows:
+1. In the HTML for your site or app where you’ve added TalkJS chat, find the lines in which you added the container in which to load the TalkJS inbox. It’ll likely look as follows:
 
 ```HTML
 <div id='talkjs-container'>
