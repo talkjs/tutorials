@@ -43,7 +43,22 @@ If you haven't already worked through the [How to use TalkJS to create a team ch
 
 To create new threads, you'll need to call TalkJS's REST API. You'll need to do this from a backend server to avoid exposing your TalkJS secret key. In this tutorial we'll use [Express](https://expressjs.com/), but feel free to use your favorite web server library instead.
 
-Add a new `backend` directory to your project. Inside `backend`, run the following command:
+Add a new `backend` directory to your project. Inside `backend`, initialize the project:
+
+```sh
+npm init
+```
+
+This will add a `package.json` file to your directory. Add the following lines:
+
+```json
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  }
+```
+
+Then install the packages that we'll need:
 
 ```sh
 npm install express cors
@@ -74,7 +89,7 @@ Replace `<APP_ID>` and `<SECRET_KEY>` with the values in the **Settings** page o
 Now, run the server with:
 
 ```sh
-node server.js
+npm start
 ```
 
 We'll add calls to the REST API in later sections.
