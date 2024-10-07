@@ -205,7 +205,7 @@ const replyInThread = (event) => {
 };
 ```
 
-This posts the message ID, conversation ID, message text and a list of participants to a `/newThread` endpoint in the backend server you created earlier. Let's create the endpoint next:
+This posts the message ID, conversation ID, message text and a list of participants to a `/newThread` endpoint in the backend server you created earlier. Let's create the endpoint next in `server.js`:
 
 ```js
 // Endpoint to create new sub-conversation (thread)
