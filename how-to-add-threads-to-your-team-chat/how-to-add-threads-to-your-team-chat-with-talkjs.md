@@ -87,7 +87,7 @@ The thread will be a standard TalkJS [conversation](/Reference/Concepts/Conversa
 
 First we'll remove the standard **Reply** message action and create a custom **Reply in thread** action instead. To do this:
 
-1.  Go to the **Roles** tab of the TalkJS dashboard.
+1.  Go to the **Chat UI** tab of the TalkJS dashboard.
 2.  Select the "default" role.
 3.  In **Actions and permissions** > **Built-in message actions**, set **Reply** to **None**.
 4.  In **Actions and permissions** > **Custom message actions**, create a new action with a name of "replyInThread" and a label of "Reply in thread", available to all messages for users with write permission.
