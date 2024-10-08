@@ -551,7 +551,7 @@ We'll need a way of updating the reply link when users add new messages to threa
 Webhooks are server-side only, so you'll need to add a new `/updateReplyCount` endpoint to your existing server code to monitor incoming events from the TalkJS server:
 
 ```js
-app.post("/updateReplyCount", (req, res) => {
+app.post("/update-reply-count", (req, res) => {
   console.log(req.body);
   res.status(200).end();
 });
@@ -577,7 +577,7 @@ Then enable the webhook with the following steps:
 
 1.  Go to the **Settings** tab of the TalkJS dashboard.
 2.  Enable the `message.sent` option in the **Webhooks** section of the TalkJS dashboard.
-3.  Add the ngrok URL to **Webhook URLs** in the TalkJS dashboard, including the `updateReplyCount` path: `https://<YOUR-URL>.ngrok.io/updateReplyCount`
+3.  Add the ngrok URL to **Webhook URLs** in the TalkJS dashboard, including the `update-reply-count` path: `https://<YOUR-URL>.ngrok.io/update-reply-count`
 
 TalkJS will now send a web request to your server when a message is sent. To test this, write another message in your chat UI. You should see the event logged to your server's console.
 
@@ -585,7 +585,7 @@ TalkJS will now send a web request to your server when a message is sent. To tes
 
 Next, we'll add a reply count as a [custom message property](https://talkjs.com/docs/Reference/Concepts/Messages/#custom) on the parent message that the thread replies to.
 
-Update your `/updateReplyCount` endpoint code with the following:
+Update your `/update-reply-count` endpoint code with the following:
 
 ```js
 // Update parent message with a reply count custom field
