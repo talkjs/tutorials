@@ -111,7 +111,7 @@ First we'll remove the standard **Reply** message action and create a custom **R
 
 ### Add an event handler for the "Reply in thread" action
 
-To listen for the new `replyInThread` event in your frontend code, pass the [`onCustomMessageAction` prop](https://talkjs.com/docs/Reference/React_SDK/Components/Chatbox/#event-props) to your `Chatbox`component:
+To listen for the new `replyInThread` event in your frontend code, pass the [`onCustomMessageAction` prop](https://talkjs.com/docs/Reference/React_SDK/Components/Chatbox/#event-props) to your `Chatbox`component in `TeamChat.jsx`:
 
 ```jsx
 const replyInThread = (event) => {
