@@ -176,7 +176,7 @@ conversation.setParticipant(other);
 
 The `getOrCreateConversation()` function ensures that a conversation with the conversation ID you specify—in this case the conversation ID of `booking_conversation`—is available on the active session. If a conversation with the given ID already exists, it gets that conversation. If a conversation with that ID doesn’t exist yet, it creates a new conversation with that ID.
 
-With [setAttributes](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder__setAttributes) you give the conversation the attribute of the subject “Booking question”. Next, you add your two users as [participants](https://talkjs.com/docs/Reference/Concepts/Participants/) to the conversation. 
+With [setAttributes](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder__setAttributes) you set the `subject` attribute of the conversation to “Booking question”. Next, you add your two users as [participants](https://talkjs.com/docs/Reference/Concepts/Participants/) to the conversation. 
 
 ## Mount the chat UI
 
