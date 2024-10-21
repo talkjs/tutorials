@@ -78,7 +78,7 @@ For a working chat, you’ll also need users and conversations between those use
 
 ## Create users
 
-To create a [user](https://talkjs.com/docs/Reference/Concepts/Users/) for your chat, you can use the [Talk.User() constructor function](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/User/#User__Constructor__1). `Talk.User` accepts a JSON object with the ID, name, email address, and photo URL of the user you’d like to create, among other parameters. 
+To create a [user](https://talkjs.com/docs/Reference/Concepts/Users/) for your chat, you can use the [`Talk.User()` constructor function](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/User/#User__Constructor__1). `Talk.User` accepts a JSON object with the ID, name, email address, and photo URL of the user you’d like to create, among other parameters. 
 
 In your own application, you would normally add your own user data from your database. For the purposes of this tutorial, you’ll use hardcoded sample user data. 
 
