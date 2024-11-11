@@ -437,14 +437,22 @@ This code populates the modal with clickable conversation options, including the
 // Tracks the message to be forwarded
 let messageToForward = null;
 
+// Tracks the current conversation
+let currentConversationId = null;
+
+// Add an event listener to update the current conversation
+inbox.onConversationSelected((event) => {
+	currentConversationId = event.conversation.id;
+});
+
 // Handles showing the forwarding modal
 inbox.onCustomMessageAction('forward', async (event) => {
-console.log("Forward action initiated:", event);
-messageToForward = event.message;
+	console.log("Forward action initiated:", event);
+	messageToForward = event.message;
 
-// Fetches the current user's conversations and show the modal
-const conversations = await fetchUserConversations(me.id);
-showConversationSelectionModal(conversations, session, messageToForward, inbox, conversationId);
+	// Fetches the current user's conversations and show the modal
+	const conversations = await fetchUserConversations(me.id);
+	showConversationSelectionModal(conversations, session, messageToForward, inbox, conversationId);
 });
 ```
 
