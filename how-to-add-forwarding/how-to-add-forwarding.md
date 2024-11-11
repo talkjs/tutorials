@@ -660,7 +660,20 @@ In this step, you'll add styling in your theme to distinguish forwarded messages
 
 This dynamically adds the value `forwarded` to the CSS class for any message that has the custom property `forwardedFrom` set.
 
-3. Then, to style the message body of a forwarded message, go to the [`MessageBody` subcomponent](https://talkjs.com/docs/Features/Themes/Components/MessageBody/) and add the following inside the `<template>` section:
+3. Still in `UserMessage`, find the section where it includes the `MessageBody`, and add `forwardedFrom="{{custom.forwardedFrom}}"` to its props, as follows:
+```html
+	<MessageBody
+		body="{{ body }}"
+		timestamp="{{ timestamp }}"
+		floatTimestamp="auto"
+		showStatus="{{ sender.isMe }}"
+		isLongEmailMessage="{{isLongEmailMessage}}"
+		darkenMenuArea="{{ darkenMenuArea }}"
+		referencedMessage="{{ referencedMessage }}"
+		forwardedFrom="{{custom.forwardedFrom}}"
+	/>
+```
+4. Then, to style the message body of a forwarded message, go to the [`MessageBody` subcomponent](https://talkjs.com/docs/Features/Themes/Components/MessageBody/) and add the following inside the `<template>` section:
 
 ```html
 <!-- TalkJS theme editor, MessageBody subcomponent -->
@@ -701,7 +714,7 @@ Still in `MessageBody`, add the following styles to the `<styles>` section:
 }
 ```
 
-Your changes are automatically saved. All forwarded message will now get distinctive styling, which should look something like the following:
+Your changes are automatically saved. All forwarded messages will now get distinctive styling, which should look something like the following:
 
 ![A message with at the top a right-pointing arrow and the word 'Forwarded' in italics.](/how-to-add-forwarding/5-styling.png)
 *An example of a forwarded message with custom styling*
