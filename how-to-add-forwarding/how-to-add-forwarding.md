@@ -49,6 +49,8 @@ To allow the user to select where they’d like to forward a message to, let’s
 
 This guide uses [Tailwind CSS](https://tailwindcss.com/) to style the conversation selection modal. If you’d rather use plain CSS or a different CSS framework, you can omit adding Tailwind and Tailwind-specific classes, and instead style the selection modal however you like. 
 
+**Note:** For ease of getting started, this guide adds Tailwind with the Play CDN, which is for development purposes only and should not be used in production. If you're planning to use Tailwind in production, follow the [installation instructions](https://tailwindcss.com/docs/installation).
+
 1. To add Tailwind to your project directly via a CDN, add the following script tag to the `<head>` of the HTML file for the page on which you have your chat, for example `index.html`: 
 
 ```html
