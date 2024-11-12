@@ -657,7 +657,7 @@ In this step, you'll add styling in your theme to distinguish forwarded messages
 <!-- TalkJS theme editor, UserMessage component -->
 
 <!-- Check for forwarded messages -->
-<div class="{{ custom.forwardedFrom | then: 'forwarded' }}"></div>
+<div t:if="{{ custom.forwardedFrom }}" class="{{ 'forwarded' }}"></div>
 ```
 
 This dynamically adds the value `forwarded` to the CSS class for any message that has the custom property `forwardedFrom` set.
