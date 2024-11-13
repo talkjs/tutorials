@@ -2,8 +2,10 @@
 
 Forwarding a message can be a quick and easy way to share information across multiple conversations. This guide shows you step-by-step how to add the option to forward a message to your TalkJS-powered chat. 
 
-![An inbox pre-built chat UI with on the left a list of conversations with one conversation selected. On the right it shows the selected conversation. The conversation contains three messages, of which the last message has at the top of the message body a right-pointing arrow and the italicized text ‘Forwarded’.](/how-to-add-forwarding/1-demo.gif)
-*A conversation with a forwarded message*
+<figure class="kg-image-card">
+  <img class="kg-image" src="1-demo.gif" alt="An inbox pre-built chat UI with on the left a list of conversations with one conversation selected. On the right it shows the selected conversation. The conversation contains three messages, of which the last message has at the top of the message body a right-pointing arrow and the italicized text ‘Forwarded’."/>
+  <figcaption>A conversation with a forwarded message</figcaption>
+</figure>
 
 <!-- TODO: Add link to example project -->
 
@@ -41,8 +43,10 @@ Start by adding a custom message action that someone can use to forward a messag
 
 If you now go to a message in your chat, and select the message action menu from the three horizontal dots on the right-hand side of the message, then the **Forward** option should show up.
 
-![A message with on the right side of the message body three horizontal dots. The drop-down menu below the horizontal dots contains several options, one of which is the option ‘Forward’, which has been selected, as is indicated by a blue background.](/how-to-add-forwarding/2-custom-message-action.png)
-*A menu with the option to forward a message*
+<figure class="kg-image-card">
+  <img class="kg-image" src="2-custom-message-action.png" alt="A message with on the right side of the message body three horizontal dots. The drop-down menu below the horizontal dots contains several options, one of which is the option ‘Forward’, which has been selected, as is indicated by a blue background."/>
+  <figcaption>A menu with the option to forward a message</figcaption>
+</figure>
 
 Currently the **Forward** button doesn’t do anything yet. Let’s change that, by adding a menu from which the user can select a conversation they want to forward their message to. 
 
@@ -199,8 +203,10 @@ This code uses the [`onCustomMessageAction` method](https://talkjs.com/docs/Refe
 
 Reload your page. When you now select the **Forward** message action, an empty conversation selectino modal should show up, a bit like the following: 
 
-![An inbox with a single conversation in view. The conversation contains one message. The user clicks on the horizontal dots of the message, and from the menu selects the option ‘Forward’. A modal window opens with the title ‘Forward to …’, below that an empty field, and at the bottom a button with the text ‘Forward’. The user closes the modal by selecting a cross in the top right.](/how-to-add-forwarding/3-empty-modal.gif)
-*An empty modal opens when you select the option to forward a message*
+<figure class="kg-image-card">
+  <img class="kg-image" src="3-empty-modal.gif" alt="An inbox with a single conversation in view. The conversation contains one message. The user clicks on the horizontal dots of the message, and from the menu selects the option ‘Forward’. A modal window opens with the title ‘Forward to …’, below that an empty field, and at the bottom a button with the text ‘Forward’. The user closes the modal by selecting a cross in the top right."/>
+  <figcaption>An empty modal opens when you select the option to forward a message</figcaption>
+</figure>
 
 In the modal, select the **Forward** button. You should get the message `Forward action initiated` in your console.
 
@@ -492,8 +498,10 @@ You’re not forwarding messages quite yet, but when you now select a conversati
 
 5. Reload your page. If you now open the modal, it will show a list of the user’s conversations, a bit like the following:
 
-![A modal window with the title ‘Forward to …’. Below the title is a list of conversations, where each conversation has an image and a title that identifies it. Below the list of conversations is a blue button with the text ‘Forward’.](/how-to-add-forwarding/4-modal-with-conversations.png)
-*A conversation selection modal with a list of the user’s conversations*
+<figure class="kg-image-card">
+  <img class="kg-image" src="4-modal-with-conversations.png" alt="A modal window with the title ‘Forward to …’. Below the title is a list of conversations, where each conversation has an image and a title that identifies it. Below the list of conversations is a blue button with the text ‘Forward’."/>
+  <figcaption>A conversation selection modal with a list of the user’s conversations</figcaption>
+</figure>
 
 (The exact list will depend on which conversations the current user is part of.) 
 
@@ -721,9 +729,11 @@ Still in `MessageBody`, add the following styles to the `<styles>` section:
 
 Your changes are automatically saved. All forwarded messages will now get distinctive styling, which should look something like the following:
 
-![A message with at the top a right-pointing arrow and the word 'Forwarded' in italics.](/how-to-add-forwarding/5-styling.png)
-*An example of a forwarded message with custom styling*
- 
+<figure class="kg-image-card">
+  <img class="kg-image" src="5-styling.png" alt="A message with at the top a right-pointing arrow and the word 'Forwarded' in italics."/>
+  <figcaption>An example of a forwarded message with custom styling</figcaption>
+</figure>
+
 That’s it! You now have a working chat in which your users can forward messages.
 
 ## Summary
