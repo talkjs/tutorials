@@ -9,6 +9,9 @@ Forwarding a message can be a quick and easy way to share information across mul
 
 If you’d rather get started immediately with a working example, check out the How to add forwarding example project on the TalkJS Github.
 
+**Note:** This example implementation of message forwarding only supports forwarding text-based messages, not messages that are location shares, [voice messages](https://talkjs.com/docs/Features/Message_Features/Voice_Messages/), or [file attachments](https://talkjs.com/docs/Features/Message_Features/File_Sharing/). To extend the current functionality to also include forwarding files, see the information on [sending files with the REST API](https://talkjs.com/docs/Reference/REST_API/Messages/#send-a-file).
+
+
 ## Contents
 - [Prerequisites](#prerequisites)
 - [Step 1: Add a custom message action for forwarding](#step-1-add-a-custom-message-action-for-forwarding)
@@ -730,7 +733,3 @@ In this guide, you’ve:
 - Added a conversation selection modal that loads the current user’s existing conversations, from which they can select which conversation to forward a message to.
 - Set up a backend that uses the REST API to forward the message to the selected conversation.
 - Styled forwarded messages so that they stand out as having been forwarded.
-
-## Limitation
-
-This example implementation of message forwarding only supports forwarding text-based messages, not messages that are location shares, [voice messages](https://talkjs.com/docs/Features/Message_Features/Voice_Messages/), or [file attachments](https://talkjs.com/docs/Features/Message_Features/File_Sharing/). To extend the current functionality to also include forwarding files, see the information on [sending files with the REST API](https://talkjs.com/docs/Reference/REST_API/Messages/#send-a-file).
