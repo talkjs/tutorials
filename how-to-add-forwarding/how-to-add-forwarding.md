@@ -200,7 +200,7 @@ showConversationSelectionModal();
  
 This code uses the [`onCustomMessageAction` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Inbox/#Inbox__onCustomMessageAction) to call the `showConversationSelectionModal` function when someone selects the **Forward** option in the custom message action menu.
 
-Reload your page. When you now select the **Forward** message action, an empty conversation selectino modal should show up, a bit like the following: 
+Reload your page. When you now select the **Forward** message action, an empty conversation selection modal should show up, a bit like the following: 
 
 <figure class="kg-image-card">
   <img class="kg-image" src="3-empty-modal.gif" alt="An inbox with a single conversation in view. The conversation contains one message. The user clicks on the horizontal dots of the message, and from the menu selects the option ‘Forward’. A modal window opens with the title ‘Forward to …’, below that an empty field, and at the bottom a button with the text ‘Forward’. The user closes the modal by selecting a cross in the top right."/>
