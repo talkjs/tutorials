@@ -22,7 +22,6 @@ If you’d rather get started immediately with a working example, check out the 
 - [Step 4: Enable message forwarding](#step-4-enable-message-forwarding)
 - [Step 5: Style forwarded messages](#step-5-style-forwarded-messages)
 - [Summary](#summary)
-- [Limitation](#limitation)
 
 ## Prerequisites
 To follow along with this guide, you’ll need:
