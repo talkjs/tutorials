@@ -441,6 +441,8 @@ document.getElementById('forwardModal').classList.remove('hidden');
 
 This code populates the modal with clickable conversation options, including the photo and subject of each conversation. When a conversation is selected, it gets highlighted. You'll likely don’t want to forward a message to the same conversation in which it’s already been posted, so this code excludes the current conversation from the selection list. Finally, it attaches an event listener to the **Forward** button, to forward the message to the selected conversation when the user clicks the forward button.
 
+**Note:** The classes used in the code snippet for the conversation list modal are Tailwind-specific. If you're styling your chat in a different way, then make sure to update the classes to match the ones you're using. 
+
 3. Next, find the code that handles showing the forwarding modal (currently still marked as ‘placeholder’), and replace it with the following:
 
 ```js
