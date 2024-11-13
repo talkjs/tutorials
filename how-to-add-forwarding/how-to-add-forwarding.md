@@ -252,8 +252,8 @@ app.use(express.json());
 app.use(cors());
 
 // Adds your app ID and TalkJS API secret key
-const TALKJS_APP_ID = '<APP_ID>' // replace with your own app id
-const TALKJS_API_KEY = '<API_KEY>' // replace with your own API secret key
+const appId = '<APP_ID>'; // replace with your own app id
+const secretKey = '<API_KEY>'; // replace with your own API secret key
 
 // Starts the Express server
 app.listen(PORT, () => {
