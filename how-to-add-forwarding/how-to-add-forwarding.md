@@ -325,13 +325,13 @@ async function getUserConversations(userId) {
 
 This code makes a GET request to TalkJS REST API to get all conversations for a given user ID. From each returned conversation, it then extracts the relevant fields—the conversation’s `id`, `subject`, and `photoUrl`—so that you can load it in the conversation selection list.
 
-**Caution:** To ensure that the user can distinguish between conversations, the conversation list expects each conversation to have a [`photoUrl` property](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder__photoUrl) and a [`subject` property](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder__subject) set. If you prefer, you could set a default `photoUrl` as a fallback for any conversation that lacks one, as follows:
+**Caution:** To ensure that the user can distinguish between conversations, the conversation list expects each conversation—including direct messages—to have a [`photoUrl` property](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder__photoUrl) and a [`subject` property](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/ConversationBuilder/#ConversationBuilder__subject) set. If you prefer, you could set a default `photoUrl` as a fallback for any conversation that lacks one, as follows:
 
 ```js
 photoUrl: conversation.photoUrl || 'https://www.example.com/image.jpg',
 ```
 
-Setting a default `subject` is not recommended though, because it may make it difficult to distinguish one conversation from the other.
+Any conversation without a `subject` property will show up in the conversation selection modal without a title, which may make it difficult to identify conversations.
 
 2. Next, to define a route to get conversations for a given user, using the `getUserConversations` you’ve just specified, also add the following code to your `server.js` file:
 
