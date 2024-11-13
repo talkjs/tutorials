@@ -13,8 +13,8 @@ If you’d rather get started immediately with a working example, check out the 
 
 **Note:** This example implementation of message forwarding only supports forwarding text-based messages, not messages that are location shares, [voice messages](https://talkjs.com/docs/Features/Message_Features/Voice_Messages/), or [file attachments](https://talkjs.com/docs/Features/Message_Features/File_Sharing/). To extend the current functionality to also include forwarding files, see the information on [sending files with the REST API](https://talkjs.com/docs/Reference/REST_API/Messages/#send-a-file).
 
-
 ## Contents
+
 - [Prerequisites](#prerequisites)
 - [Step 1: Add a custom message action for forwarding](#step-1-add-a-custom-message-action-for-forwarding)
 - [Step 2: Add a modal to select a conversation to forward to](#step-2-add-a-modal-to-select-a-conversation-to-forward-to)
@@ -24,6 +24,7 @@ If you’d rather get started immediately with a working example, check out the 
 - [Summary](#summary)
 
 ## Prerequisites
+
 To follow along with this guide, you’ll need:
 
 - A TalkJS account. TalkJS provides a ready-to-use chat client for your application. [Get started for free.](https://talkjs.com/dashboard/signup)
@@ -225,12 +226,14 @@ Let’s begin by setting up the basic server.
 
 Begin by setting up a basic server. In following this guide you'll use [Express](https://expressjs.com), which is a minimal and flexible Node.js web application framework, for this purpose.
 
-For convenience, you can also directly install [Node Fetch](https://www.npmjs.com/package/node-fetch), to be able to use the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to get resources, and [CORS](https://www.npmjs.com/package/cors) to support any cross-origin resource sharing, which you’ll rely on in later steps.  
+**Note:** This guide uses `fetch` to be able to use the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to get resources. `fetch` is available natively from NodeJS 18 onward. If you use an older version of NodeJS, you can use the [Node Fetch](https://www.npmjs.com/package/node-fetch) package. 
 
-1. Install the `express`, `node-fetch` and `cors` packages: 
+For convenience, you can also directly install [CORS](https://www.npmjs.com/package/cors) to support any cross-origin resource sharing, which you’ll rely on in later steps.  
+
+1. Install the `express` and `cors` packages: 
 
 ```
-npm install express node-fetch cors --save
+npm install express cors --save
 ```
 
 2. In your `package.json` file, ensure that you have set `"type": "module"`, to be able to use [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). (Alternatively, you can use the `.mjs` extension for your server file.)
@@ -241,7 +244,6 @@ npm install express node-fetch cors --save
 
 import express from 'express';
 import cors from 'cors';
-import fetch from 'node-fetch';
 
 const app = express();
 const PORT = 3000;
