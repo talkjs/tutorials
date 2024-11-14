@@ -672,24 +672,34 @@ In this step, you'll add styling in your theme to distinguish forwarded messages
 <!-- TalkJS theme editor, UserMessage component -->
 
 <!-- Check for forwarded messages -->
-<div t:if="{{ custom.forwardedFrom }}" class="{{ 'forwarded' }}"></div>
+<div t:if="{{ custom and custom.forwardedFrom }}" class="{{ 'forwarded' }}"></div>
 ```
 
 This dynamically adds the value `forwarded` to the CSS class for any message that has the custom property `forwardedFrom` set.
 
-3. Still in `UserMessage`, find the section where it includes the `MessageBody`, and add `forwardedFrom="{{custom.forwardedFrom}}"` to its props, as follows:
-```html
-	<MessageBody
-		body="{{ body }}"
-		timestamp="{{ timestamp }}"
-		floatTimestamp="auto"
-		showStatus="{{ sender.isMe }}"
-		isLongEmailMessage="{{isLongEmailMessage}}"
-		darkenMenuArea="{{ darkenMenuArea }}"
-		referencedMessage="{{ referencedMessage }}"
-		forwardedFrom="{{custom.forwardedFrom}}"
-	/>
-```
+3. Still in `UserMessage`, find the section where it adds the `MessageBody`, and replace it with the following, which adds `forwardedFrom="{{custom.forwardedFrom}}"` to the message body props if the message has the `forwardedFrom` custom property:
+	```html
+		<MessageBody t:if="{{ custom and custom.forwardedFrom }}"
+			body="{{ body }}"
+			timestamp="{{ timestamp }}"
+			floatTimestamp="auto"
+			showStatus="{{ sender.isMe }}"
+			isLongEmailMessage="{{isLongEmailMessage}}"
+			darkenMenuArea="{{ darkenMenuArea }}"
+			referencedMessage="{{ referencedMessage }}"
+			forwardedFrom="{{ custom.forwardedFrom }}"
+		/>
+		<MessageBody t:else
+			body="{{ body }}"
+			timestamp="{{ timestamp }}"
+			floatTimestamp="auto"
+			showStatus="{{ sender.isMe }}"
+			isLongEmailMessage="{{isLongEmailMessage}}"
+			darkenMenuArea="{{ darkenMenuArea }}"
+			referencedMessage="{{ referencedMessage }}"
+			forwardedFrom="null"
+		/>
+	```
 4. Then, to style the message body of a forwarded message, go to the [`MessageBody` subcomponent](https://talkjs.com/docs/Features/Themes/Components/MessageBody/) and add the following inside the `<template>` section:
 
 ```html
