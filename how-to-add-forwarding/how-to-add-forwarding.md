@@ -7,9 +7,7 @@ Forwarding a message can be a quick and easy way to share information across mul
   <figcaption>A conversation with a forwarded message</figcaption>
 </figure>
 
-<!-- TODO: Add link to example project -->
-
-If you’d rather get started immediately with a working example, check out the How to add forwarding example project on the TalkJS Github.
+If you’d rather get started immediately with a working example, check out the [How to add forwarding](https://github.com/talkjs/talkjs-examples/tree/master/howtos/how-to-add-forwarding) example project on the TalkJS Github.
 
 **Note:** This example implementation of message forwarding only supports forwarding text-based messages, not messages that are location shares, [voice messages](https://talkjs.com/docs/Features/Message_Features/Voice_Messages/), or [file attachments](https://talkjs.com/docs/Features/Message_Features/File_Sharing/). To extend the current functionality to also include forwarding files, see the information on [sending files with the REST API](https://talkjs.com/docs/Reference/REST_API/Messages/#send-a-file).
 
