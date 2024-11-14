@@ -583,7 +583,7 @@ app.post('/forward-message', async (req, res) => {
 
 This code prepares the request body for the message to be forwarded, and sends a POST request to the TalkJS REST API to send the message.
 
-In forwarding a message, you only need to send specific data when preparing the request body. Specifically, in this case you specify:
+In forwarding a message, you only need to send certain data when preparing the request body. Specifically, in this case you provide:
 
 - `text` – the body text of the message, which you get directly from the message that the user chose to forward
 - `sender` – the user ID of the current user who is forwarding the message
