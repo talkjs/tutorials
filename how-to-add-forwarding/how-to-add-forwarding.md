@@ -333,7 +333,7 @@ This code makes a GET request to TalkJS REST API to get all conversations for a 
 photoUrl: conversation.photoUrl || 'https://www.example.com/image.jpg',
 ```
 
-Any conversation that lacks a `subject` property will shows up in the conversation selection modal without a title. Setting a default conversation subject is not recommended though, as it may make it more difficult to distinguish between conversations.
+Any conversation that lacks a `subject` property will show up in the conversation selection modal without a title. Setting a default conversation subject is not recommended though, as it may make it more difficult to distinguish between conversations.
 
 2. Next, to define a route to get conversations for a given user, using the `getUserConversations` you’ve just specified, also add the following code to your `server.js` file:
 
