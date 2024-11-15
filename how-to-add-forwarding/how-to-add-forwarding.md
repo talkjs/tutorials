@@ -35,9 +35,10 @@ To follow along with this guide, you’ll need:
 
 Start by adding a custom message action that someone can use to forward a message:
 
-1. On the **Chat UI** page of your [TalkJS dashboard](https://talkjs.com/dashboard/), in the section ‘Custom message actions’, select **Add action** to add a new message action.
-2. Give your action the name `forward`, and the label `Forward`.
-3. Select which messages the user should be able to forward messages to, and who can do the forwarding. For the purposes of this guide, under **Which messages** select that the action should be available for `All messages`, and under **Action available to**, select `Everyone`.
+1. On the **Chat UI** page of your [TalkJS dashboard](https://talkjs.com/dashboard/), select the role for which you'd like to edit the settings. This guide uses the `default` role.
+2. Still on the **Chat UI** page, in the section 'Custom message actions', select **Add action** to add a message action.
+3. Give your action the name `forward` and the label `Forward`.
+4. Select which messages can be forwarded, and who can do the forwarding. For the purposes of this guide, for **Which messages** select that the action should be available for `All messages`, and for **Action available to**, select `Everyone`.
 
 If you now go to a message in your chat, and select the message action menu from the three horizontal dots on the right-hand side of the message, then the **Forward** option should show up.
 
@@ -484,7 +485,7 @@ function forwardMessage(event) {
 
 	// Ensures that a conversation has been selected
 	if (!selectedConversationId) {
-    	alert("Select a conversation to forward the message to.");
+    	alert("Please select a conversation to forward the message to.");
     	return;
 	}
 
