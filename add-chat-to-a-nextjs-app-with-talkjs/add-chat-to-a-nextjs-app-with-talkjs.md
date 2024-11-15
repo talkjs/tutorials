@@ -22,7 +22,7 @@ NEXT_PUBLIC_APP_ID="<APP_ID>"
 
 You can find your App ID in the **Settings** tab of the [TalkJS dashboard](https://talkjs.com/dashboard/login). For this tutorial, we recommend using the App ID for TalkJS's [Test Mode](/Features/Environments/), which has built-in sample users and conversations that you can use.
 
-We've prefixed the enviroment variable with `NEXT_PUBLIC_` so that Next.js makes it accessible in the browser – see Next.js's docs on [Bundling environment variables for the browser](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser).
+We've prefixed the environment variable with `NEXT_PUBLIC_` so that Next.js makes it accessible in the browser – see Next.js's docs on [Bundling environment variables for the browser](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser).
 
 Then install `@talkjs/react` in your app along with the regular `talkjs` package.
 
