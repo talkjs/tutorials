@@ -12,9 +12,19 @@ You'll need a Next.js app to add TalkJS to. If you don't have an existing app, y
 
 For the complete example code, see the [GitHub repo](https://github.com/talkjs/talkjs-examples/tree/master/react/next.js) for this tutorial.
 
-## Install TalkJS
+## Set up your project
 
-To get started, install `@talkjs/react` in your app along with the regular `talkjs` package.
+First, add your TalkJS App ID as an environment variable. In your `.env` file, add the following line (if you're using the Next.js starter app, create a `.env` file in the root directory):
+
+```.env
+NEXT_PUBLIC_APP_ID="<APP_ID>"
+```
+
+You can find your App ID in the **Settings** tab of the [TalkJS dashboard](https://talkjs.com/dashboard/login). For this tutorial, we recommend using the App ID for TalkJS's [Test Mode](/Features/Environments/), which has built-in sample users and conversations that you can use.
+
+We've prefixed the enviroment variable with `NEXT_PUBLIC_` so that Next.js makes it accessible in the browser – see Next.js's docs on [Bundling environment variables for the browser](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser).
+
+Then install `@talkjs/react` in your app along with the regular `talkjs` package.
 
 To install with `npm`, run:
 
@@ -46,15 +56,19 @@ Next, add the `Session` component:
 import { Session } from "@talkjs/react";
 
 function Chat() {
-  return <Session appId="<APP_ID>" userId="sample_user_alice"></Session>;
+  return (
+    <Session
+      appId={process.env.NEXT_PUBLIC_APP_ID}
+      userId="sample_user_alice"
+    ></Session>
+  );
+  s;
 }
 
 export default Chat;
 ```
 
-You'll need to provide the `Session` component with your TalkJS App ID through the `appId` prop. You can find your App ID in the **Settings** tab of the [TalkJS dashboard](https://talkjs.com/dashboard/login). For this tutorial, we recommend using the App ID for TalkJS's [Test Mode](/Features/Environments/), which has built-in sample users and conversations that you can use.
-
-You'll also need to specify a [current user](/Reference/Concepts/Sessions/#me) to send messages as. In this example, we've used the [`userId` prop](/Reference/React_SDK/Components/Session/#userId) to specify the user ID of an existing user, the `sample_user_alice` sample user.
+The `appID` prop of the `Session` component takes your TalkJS App ID, which you provided in the `.env` file. You'll also need to specify a [current user](/Reference/Concepts/Sessions/#me) to send messages as. In this example, we've used the [`userId` prop](/Reference/React_SDK/Components/Session/#userId) to specify the user ID of an existing user, the `sample_user_alice` sample user.
 
 ## View an existing conversation
 
