@@ -360,3 +360,5 @@ If you want to learn more about TalkJS, here are some good places to start:
 - [TalkJS tutorials](https://talkjs.com/resources/tag/tutorials/) provide how-to guides for many common TalkJS use cases.
 - The [talkjs-examples](https://github.com/talkjs/talkjs-examples) GitHub repo has larger complete examples that demonstrate how to integrate with other libraries and frameworks.
 - Try our [demos](https://talkjs.com/demo/) to see TalkJS features in action.
+
+If you're ready to get started with building your chat app, [try TalkJS for free](https://talkjs.com/dashboard/signup/premium/).
