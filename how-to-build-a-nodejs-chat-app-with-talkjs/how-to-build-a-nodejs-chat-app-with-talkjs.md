@@ -344,7 +344,7 @@ Try sending a message! You can also try replacing `me: sebastian` with `me: alic
 
 ## Conclusion
 
-You now have a working demonstration of how use to TalkJS together with a Node.js backend to create a real-time chat application. To recap, you've
+You now have a working demonstration of how to use TalkJS together with a Node.js backend to create a real-time JavaScript chat application. To recap, you've
 
 - Set up a backend server and lightweight database
 - Created server endpoints for getting and creating user data
