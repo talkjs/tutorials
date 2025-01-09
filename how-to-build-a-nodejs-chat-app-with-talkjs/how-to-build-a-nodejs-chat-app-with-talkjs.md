@@ -35,7 +35,7 @@ To follow along with this tutorial, you’ll need:
 
 ## Step 1: Set up the backend server
 
-In this section, you'll install and initialize the dependencies you need for your backend server.s
+In this section, you'll install and initialize the dependencies you need for your backend server.
 
 ### Create the project structure
 
