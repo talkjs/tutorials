@@ -9,7 +9,7 @@ In this tutorial, we'll show you how to integrate the [TalkJS](https://talkjs.co
 
 Node.js lets you run JavaScript outside of web browsers, for example when building web servers and other backend tools. It's a popular choice for web developers because it lets you use the same language for both frontend and backend development.
 
-In this tutorial you'll use an [Express](https://expressjs.com/) web server with Node.js to serve user data from a REST endpoint. You'll then use this data in your frontend to create TalkJS users with the [JavaScript SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/) and start a chat between them. To keep things simple, this tutorial will use a lightweight [LowDB database](https://github.com/typicode/lowdb), but you can swap this out for other database options.
+In this tutorial, you'll use an [Express](https://expressjs.com/) web server with Node.js to serve user data from a REST endpoint. You'll then use this data in your frontend to create TalkJS users with the [JavaScript SDK](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/) and start a chat between them. To keep things simple, this tutorial will use a lightweight [LowDB database](https://github.com/typicode/lowdb), but you can swap this out for other database options.
 
 If you'd rather get started with a working example, you can find the full source code for this project in our [GitHub examples repo](https://github.com/talkjs/talkjs-examples/tree/master/nodejs).
 
