@@ -44,7 +44,7 @@ As an example, we'll use a Sendbird group channel that we want to export:
   <img class="kg-image" src="<URL>" alt="Example group channel with 3 members, on the subject of migrating to TalkJS"/>
 </figure>
 
-Sendbird have three main types of entity that you must import to TalkJS: users, channels and messages. Users and messages are similar to the TalkJS concepts, while Sendbird's channels are similar to TalkJS conversations:
+Sendbird has three main types of entity that you must import to TalkJS: users, channels and messages. Users and messages are similar to the TalkJS concepts, while Sendbird's channels are similar to TalkJS conversations:
 
 | Sendbird | TalkJS                                                                     |
 | -------- | -------------------------------------------------------------------------- |
