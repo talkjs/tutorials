@@ -101,7 +101,7 @@ Replace the placeholders with the following:
 - `<DATA_TYPE>`: this is either `users`, `channels` or `messages`, depending on which export you want.
 - `<START_TIME>` and `<END_TIME>`: the start and end time in [Unix milliseconds](https://en.wikipedia.org/wiki/Unix_time), up to 7 days apart. If you want more data, you will need to submit multiple requests.
 
-The request must be an HTTP POST and the body requires just two parameters, the ‘_start_ts’_ and ‘_end_ts’_. Both of these are in UNIX milliseconds. Sendbird allows you to fetch messages within a 7-day timeframe only even when using the API, so if you have more data, you must submit multiple requests.
+The request must be an HTTP POST and the body requires just two parameters, the ‘_start_ts’_ and ‘_end_ts’_. Both of these are in UNIX milliseconds. Sendbird allows you to fetch messages within a 7-day timeframe only, even when using the API, so if you have more data, you must submit multiple requests.
 
 You should get a response similar to this:
 
