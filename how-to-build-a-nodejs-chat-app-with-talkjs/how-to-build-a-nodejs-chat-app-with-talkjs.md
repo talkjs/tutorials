@@ -22,9 +22,9 @@ If you'd rather get started with a working example, you can find the full source
 ## Contents
 
 - [Prerequisites](#prerequisites)
-- [Step 1: Set up the backend server](#step-1-set-up-the-backend-server)
-- [Step 2: Create the API endpoints](#step-2-create-the-api-endpoints)
-- [Step 3: Create a frontend with a TalkJS chatbox](#step-3-create-a-frontend-with-a-talkjs-chatbox)
+- [Set up the backend server](#set-up-the-backend-server)
+- [Create the API endpoints](#create-the-api-endpoints)
+- [Create a frontend with a TalkJS chatbox](#create-a-frontend-with-a-talkjs-chatbox)
 
 ## Prerequisites
 
@@ -33,11 +33,11 @@ To follow along with this tutorial, you’ll need:
 - A [TalkJS account](https://talkjs.com/dashboard/login). TalkJS provides a ready-to-use chat client for your application. Your account gives you access to TalkJS's free development environment.
 - An installation of [Node.js](https://nodejs.org/) along with the [npm](https://www.npmjs.com/) package manager. You’ll use this to create your backend server.
 
-## Step 1: Set up the backend server
+## Set up the backend server
 
 In this section, you'll install and initialize the dependencies you need for your backend server.
 
-### Create the project structure
+### Step 1: Create the project structure
 
 Create a top-level directory (called for example `nodejs-example`), and add a `nodejs-backend` directory inside it.
 
@@ -61,7 +61,7 @@ Inside `talkjs-backend`, create the following `package.json` file:
 
 This provides `npm` with the information it will need to start the application.
 
-### Install dependencies
+### Step 2: Install dependencies
 
 Run the following command inside `talkjs-backend`:
 
@@ -83,7 +83,7 @@ import cors from "cors";
 import { LowSync, JSONFileSync } from "lowdb";
 ```
 
-### Set up LowDB
+### Step 3: Set up LowDB
 
 To get started with LowDB, it will be useful to have some example data ready to go. Inside `talkjs-backend`, create the following `users.json` file with some initial user data for your app:
 
@@ -120,7 +120,7 @@ db.read();
 db.data ||= { users: [] };
 ```
 
-### Set up Express
+### Step 4: Set up Express
 
 To create and initialize your Express server, add the following code to `server.js`:
 
@@ -143,11 +143,11 @@ npm start
 
 You should see the message "Server up and running on port 3000" in your console window.
 
-## Step 2: Create the API endpoints
+## Create the API endpoints
 
 You're now ready to create the server endpoints. In this section, you'll add a `/createUser` endpoint to create a user and add them to the database, and a `/getUser` endpoint to retrieve a user's data from the database given an ID.
 
-### Create user endpoint
+### Step 5: add the "Create user" endpoint
 
 Add the following code to your `server.js` file:
 
@@ -207,7 +207,7 @@ You should see a third user added to `users.json`:
 }
 ```
 
-### Get user endpoint
+### Step 6: Add the "Get user" endpoint
 
 Next, add the following code to `server.js`:
 
@@ -246,9 +246,11 @@ You should receive a JSON response with the following user data:
 }
 ```
 
-### Step 3: Create a frontend with a TalkJS chatbox
+## Create a frontend with a TalkJS chatbox
 
 In this section, you'll create a frontend chat application that displays a TalkJS [chatbox](/Features/Chat_UI_Modes/The_Chatbox/) with a [1-to-1 chat](https://talkjs.com/use-cases/1-on-1-chat/) between two users, similar to the one in our [getting started guide](/Getting_Started/JavaScript_SDK/1_On_1_Chat/). The main difference is that you'll call the `/getUser` server endpoint that you created in the previous section to get the data for the two users.
+
+### Step 7: Create the chatbox
 
 In your top-level project directory, create a new `talkjs-frontend` directory and add the following `index.html` file:
 
