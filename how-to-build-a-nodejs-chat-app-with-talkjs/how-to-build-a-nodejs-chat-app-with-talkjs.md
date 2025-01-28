@@ -354,11 +354,6 @@ There are many ways you could extend this project. You could [add more users](/F
 
 You may also want to extend the frontend logic to call the `/createUser` server endpoint as well – for example, you could add a form that creates a new user, and then add them to the conversation.
 
-If you want to learn more about TalkJS, here are some good places to start:
-
-- The [TalkJS docs](https://talkjs.com/docs/) help you get started with TalkJS.
-- [TalkJS tutorials](https://talkjs.com/resources/tag/tutorials/) provide how-to guides for many common TalkJS use cases.
-- The [talkjs-examples](https://github.com/talkjs/talkjs-examples) GitHub repo has larger complete examples that demonstrate how to integrate with other libraries and frameworks.
-- Try our [demos](https://talkjs.com/demo/) to see TalkJS features in action.
+If you want to learn more about TalkJS, our [docs](https://talkjs.com/docs/) and [tutorials](https://talkjs.com/resources/tag/tutorials/) have you covered. Or try our [demos](https://talkjs.com/demo/) to see TalkJS features in action.
 
 If you're ready to get started with building your chat app, [try TalkJS for free](https://talkjs.com/dashboard/signup/premium/).
