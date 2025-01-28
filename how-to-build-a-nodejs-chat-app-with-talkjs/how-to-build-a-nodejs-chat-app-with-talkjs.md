@@ -25,6 +25,7 @@ If you'd rather get started with a working example, you can find the full source
 - [Set up the backend server](#set-up-the-backend-server)
 - [Create the API endpoints](#create-the-api-endpoints)
 - [Create a frontend with a TalkJS chatbox](#create-a-frontend-with-a-talkjs-chatbox)
+- [Conclusion](#conclusion)
 
 ## Prerequisites
 
