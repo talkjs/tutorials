@@ -248,7 +248,7 @@ You should receive a JSON response with the following user data:
 
 ### Step 3: Create a frontend with a TalkJS chatbox
 
-In this section, you'll create a frontend chat application that displays a TalkJS [chatbox](/Features/Chat_UI_Modes/The_Chatbox/) with a conversation between two users, similar to the one in our [getting started guide](/Getting_Started/JavaScript_SDK/1_On_1_Chat/). The main difference is that you'll call the `/getUser` server endpoint that you created in the previous section to get the data for the two users.
+In this section, you'll create a frontend chat application that displays a TalkJS [chatbox](/Features/Chat_UI_Modes/The_Chatbox/) with a [1-to-1 chat](https://talkjs.com/use-cases/1-on-1-chat/) between two users, similar to the one in our [getting started guide](/Getting_Started/JavaScript_SDK/1_On_1_Chat/). The main difference is that you'll call the `/getUser` server endpoint that you created in the previous section to get the data for the two users.
 
 In your top-level project directory, create a new `talkjs-frontend` directory and add the following `index.html` file:
 
@@ -340,7 +340,7 @@ Open the `index.html` file in your browser. You should now see a chatbox with a 
   <img class="kg-image" src="<URL>" alt="Chatbox with Sebastian's view of the conversation with Alice"/>
 </figure>
 
-Try sending a message! You can also try replacing `me: sebastian` with `me: alice` in `script.js` to see Alice's side of the conversation.
+Try sending a message! You can also try replacing `me: sebastian` with `me: alice` in `script.js` to see Alice's side of the conversation. Or add your third user, `nina`, to create a [group chat](https://talkjs.com/use-cases/group-chat/).
 
 ## Conclusion
 
