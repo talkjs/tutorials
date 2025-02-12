@@ -320,7 +320,7 @@ messaging.onBackgroundMessage((payload) => {
 
 As with `index.html`, replace the placeholder object in `firebase.initializeApp` with the `firebaseConfig` object that you saved in Step 2 of the previous section.
 
-This service worker handles incoming messages and adds logging and custom notification text. It's currently configured to only show notifications when the web page is in the background. If you want to instead show notifications when the web page is in the foreground, copy the code inside `onBackgroundMessage` into the `onMessage` handler.
+This service worker handles incoming messages and adds logging and custom notification text. It's currently configured to only show notifications when the web page is in the background, to prevent users getting notified when they are already viewing the chat. If you want to instead show notifications when the web page is in the foreground, copy the code inside `onBackgroundMessage` into the `onMessage` handler.
 
 ### Step 4: Style the app
 
@@ -385,7 +385,7 @@ You should now see a TalkJS chatbox and a **Request token** button:
 
 ### Step 2: Send a message from another user
 
-TalkJS only sends notifications where you are currently not viewing a conversation, to save users from getting unnecessary notifications. For more information on exactly when TalkJS sends notifications, see [our notifications docs](https://talkjs.com/docs/Features/Notifications/#when-are-notifications-sent). So to test notifications, you will need to switch to another tab and then send a message from a different user:
+We've set up our service worker to only show notifications when the web page is in the background, to save users from getting unnecessary notifications when they are already viewing the chat. So to test notifications, you will need to switch to another tab and then send a message from a different user:
 
 - On the device where you want to receive push notifications, go to `https://<APP_NAME>.web.app` and click the **Request token** button. Select to allow push notifications if prompted.
 - Switch to a different website in another different tab, or to a different app.
