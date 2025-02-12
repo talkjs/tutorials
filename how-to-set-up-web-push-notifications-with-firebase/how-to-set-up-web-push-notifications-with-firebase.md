@@ -5,7 +5,7 @@ In this tutorial, we'll show you how to use [Firebase Cloud Messaging](https://f
 <!-- TODO: add 1-demo.jpg -->
 
 <figure class="kg-image-card">
-  <img class="kg-image" src="Demo of the feature. The user, Alice, selects to allow push notifications and then clicks the 'Request token' button. She then switches to another tab. The other participant in the conversation, Sebastian, then sends a message. This triggers a push notification for Alice." alt="<ALT>"/>
+  <img class="kg-image" src="<URL>" alt="Demo of the feature. The user, Alice, selects to allow push notifications and then clicks the 'Request token' button. She then switches to another tab. The other participant in the conversation, Sebastian, then sends a message. This triggers a push notification for Alice."/>
   <figcaption>Demo of the feature. Alice selects to allow push notifications and then clicks the 'Request token' button. She then switches to another tab. Sebastian then sends a message, which triggers a push notification for Alice.</figcaption>
 </figure>
 
