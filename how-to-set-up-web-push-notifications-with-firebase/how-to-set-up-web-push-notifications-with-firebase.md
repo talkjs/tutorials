@@ -418,7 +418,7 @@ To recap, you have:
 - Added a service worker to handle messages
 - Tested that notifications worked
 
-For the full example code for this tutorial, see our [GitHub examples repo](https://github.com/talkjs/talkjs-examples/tree/master/firebase.notifications-example). Or for more ideas on how to use TalkJS, browse our [tutorials](https://talkjs.com/resources/tag/tutorials/) and [demos](https://talkjs.com/demo/).
+For the full example code for this tutorial, see our [GitHub examples repo](https://github.com/talkjs/talkjs-examples/tree/master/firebase/notifications-example). Or for more ideas on how to use TalkJS, browse our [tutorials](https://talkjs.com/resources/tag/tutorials/) and [demos](https://talkjs.com/demo/).
 
 ---
 
