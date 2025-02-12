@@ -388,7 +388,7 @@ You should now see a TalkJS chatbox and a **Request token** button:
 TalkJS only sends notifications where you are currently not viewing a conversation, to save users from getting unnecessary notifications. For more information on exactly when TalkJS sends notifications, see [our notifications docs](https://talkjs.com/docs/Features/Notifications/#when-are-notifications-sent). So to test notifications, you will need to switch to another tab and then send a message from a different user:
 
 - On the device where you want to receive push notifications, go to `https://<APP_NAME>.web.app` and click the **Request token** button. Select to allow push notifications if prompted.
-- Switch to a different website in another different tab
+- Switch to a different website in another different tab, or to a different app.
 - Add a new message to the TalkJS `sample_conversation` conversation from the other user, `sample_user_alice`. A simple way to do this is to go to the **Chat UI** tab of the TalkJS dashboard](https://talkjs.com/dashboard) and add a message from the **Preview** chatbox UI:
 
 <!-- TODO: add 4-dashboard-test.jpg -->
