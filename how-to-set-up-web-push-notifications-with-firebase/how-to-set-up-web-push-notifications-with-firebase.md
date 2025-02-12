@@ -67,7 +67,7 @@ Answer the questions when prompted:
 
 - Select to associate your new project directory with an existing Firebase project or create a new one. If you create a new one, or you haven't yet set up Firebase Cloud Messaging in the TalkJS dashboard, see [Configure Firebase Cloud Messaging](https://talkjs.com/docs/Features/Notifications/Mobile_Push_Notifications/Configure_FCM/) in our docs.
 - Select to use the default (`public`) as your public directory
-- Select Yes for "Configure as a single-page app?"
+- Select whether to configure as a single-page app (in this example we've selected "Yes", but you can use either)
 - Choose whether to set up automatic builds and deploys with GitHub
 
 Once initialization is complete, you should see some config files in your directory, along with a `public` directory with an `index.html` file. We'll update this file in a later step.
