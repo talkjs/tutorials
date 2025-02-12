@@ -255,9 +255,9 @@ This adds a button to your site that will request the token. Add the following s
 </script>
 ```
 
-Replace the placeholder object in `firebase.initializeApp` with the `firebaseConfig` object that you saved in Step 2 of the previous section.
+Replace the placeholder object in `firebase.initializeApp` with the `firebaseConfig` object that you saved in [Step 2 of the previous section](#step-2-create-a-new-firebase-app).
 
-Also, replace `<FIREBASE_PUBLIC_KEY>` with the public key that you saved in Step 3 of the previous section.
+Also, replace `<FIREBASE_PUBLIC_KEY>` with the public key that you saved in [Step 3 of the previous section](#step-3-generate-your-public-key).
 
 When you press the **Request token** button, the event listener will get your token with Firebase's [`messaging.getToken` method](https://firebase.google.com/docs/reference/js/v8/firebase.messaging.Messaging#gettoken). It will then call TalkJS's [`setPushRegistration` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Session#Session__setPushRegistration) with the token to register for FCM push notifications.
 
