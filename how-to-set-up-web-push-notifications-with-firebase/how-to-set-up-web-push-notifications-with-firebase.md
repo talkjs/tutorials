@@ -320,7 +320,7 @@ messaging.onBackgroundMessage((payload) => {
 
 As with `index.html`, replace the placeholder object in `firebase.initializeApp` with the `firebaseConfig` object that you saved in Step 2 of the previous section.
 
-This service worker handles incoming messages and adds logging and custom notification text.
+This service worker handles incoming messages and adds logging and custom notification text. It's currently configured to only show notifications when the web page is in the background. If you want to instead show notifications when the web page is in the foreground, copy the code inside `onBackgroundMessage` into the `onMessage` handler.
 
 ### Step 4: Style the app
 
