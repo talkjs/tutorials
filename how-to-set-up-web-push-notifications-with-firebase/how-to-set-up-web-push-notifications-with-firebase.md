@@ -181,7 +181,7 @@ This will deploy the website at a URL like `https://<FIREBASE_APP_NAME>.web.app`
 
 ### Step 2: Add the Firebase event listener
 
-Next, we'll load and initialize Firebase. In the `head` tag of `index.html`, add the following scripts to load the [Firebase App SDK](https://firebase.google.com/docs/reference/js/app.md?_gl=1*rwe4iq*_up*MQ..*_ga*MTEzODkxNDU1LjE3MzgzMzA0NjY.*_ga_CW55HF8NVT*MTczODMzMDQ2NS4xLjAuMTczODMzMDQ2NS4wLjAuMA..#app_package) and the [Firebase Cloud Messaging SDK](https://firebase.google.com/docs/reference/js/messaging_?_gl=1*u25wvd*_up*MQ..*_ga*MTEzODkxNDU1LjE3MzgzMzA0NjY.*_ga_CW55HF8NVT*MTczODMzMDQ2NS4xLjAuMTczODMzMDQ2NS4wLjAuMA..):
+Next, we'll load and initialize Firebase. In the `head` tag of `index.html`, add the following scripts to load the [Firebase App SDK](https://firebase.google.com/docs/reference/js/v8/firebase.app.App) and the [Firebase Cloud Messaging SDK](https://firebase.google.com/docs/reference/js/v8/firebase.messaging):
 
 ```html
 <!-- update the version number as needed -->
