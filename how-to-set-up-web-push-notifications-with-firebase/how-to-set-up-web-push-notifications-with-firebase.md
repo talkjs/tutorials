@@ -47,7 +47,7 @@ To follow along with this tutorial, you'll need:
 
 ## Set up Firebase
 
-In this section, you'll initialize Firebase Hosting and configure the necessary settings.
+In this section, you'll initialize Firebase Hosting with the [Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli), create a new Firebase app and generate a key to encrypt push notifications.
 
 ### Step 1: Initialize Firebase Hosting
 
