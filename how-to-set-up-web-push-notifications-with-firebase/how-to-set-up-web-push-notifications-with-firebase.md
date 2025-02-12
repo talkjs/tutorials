@@ -259,7 +259,7 @@ Replace the placeholder object in `firebase.initializeApp` with the `firebaseCon
 
 Also, replace `<FIREBASE_PUBLIC_KEY>` with the public key that you saved in Step 3 of the previous section.
 
-When you press the **Request token** button, the event listener will get your token with Firebase's [`messaging.getToken` method](https://firebase.google.com/docs/reference/js/messaging_.md?_gl=1*13rj7jn*_up*MQ..*_ga*MjA5OTY5NTk5OS4xNzM4MjM4MTc5*_ga_CW55HF8NVT*MTczODIzODE3OC4xLjAuMTczODIzODE3OC4wLjAuMA..#gettoken_b538f38). It will then call TalkJS's [`setPushRegistration` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Session/?ref=talkjs.com#Session__setPushRegistration) with the token to register for FCM push notifications.
+When you press the **Request token** button, the event listener will get your token with Firebase's [`messaging.getToken` method](https://firebase.google.com/docs/reference/js/v8/firebase.messaging.Messaging#gettoken). It will then call TalkJS's [`setPushRegistration` method](https://talkjs.com/docs/Reference/JavaScript_Chat_SDK/Session#Session__setPushRegistration) with the token to register for FCM push notifications.
 
 To receive these notifications, you will need a [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API). By default, Firebase will look for a service worker file called `firebase-messaging-sw.js` in the `public` directory. We'll create this file in the next step.
 
