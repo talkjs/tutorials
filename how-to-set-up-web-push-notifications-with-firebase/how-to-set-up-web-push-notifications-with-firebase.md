@@ -21,8 +21,6 @@ If you'd rather get started with a working example, you can find the full source
 
 ## Contents
 
-# Contents
-
 - [Prerequisites](#prerequisites)
 - [Set up Firebase](#set-up-firebase)
   - [Step 1: Initialize Firebase](#step-1-initialize-firebase)
