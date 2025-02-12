@@ -49,7 +49,7 @@ To follow along with this tutorial, you'll need:
 
 In this section, you'll initialize Firebase Hosting and configure the necessary settings.
 
-### Step 1: Initialize Firebase
+### Step 1: Initialize Firebase Hosting
 
 Log in to Firebase if you haven't already:
 
