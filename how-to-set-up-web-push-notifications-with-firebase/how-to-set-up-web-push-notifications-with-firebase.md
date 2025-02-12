@@ -359,7 +359,7 @@ Finally, let's add some styling to the page. In the `head` tag of `index.html`, 
 </style>
 ```
 
-This styles the **Request token** button and the loading
+This styles the **Request token** button and the loading text.
 
 ## Test your app
 
