@@ -51,7 +51,7 @@ In this section, you'll initialize Firebase Hosting and configure the necessary 
 
 ### Step 1: Initialize Firebase Hosting
 
-Log in to Firebase if you haven't already:
+Log in to Firebase with the Firebase CLI if you haven't already:
 
 ```sh
 firebase login
