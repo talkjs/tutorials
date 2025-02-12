@@ -13,7 +13,7 @@ TalkJS can be set up to send a variety of types of [notifications](https://talkj
 
 We'll then set up a web page with a TalkJS chatbox, along with a [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) that can handle FCM notifications. Service workers only run over HTTPS for security reasons. In this tutorial we'll host our service worker and webpage with [Firebase Hosting](https://firebase.google.com/docs/hosting), which provides secure HTTPS by default, but you can use a different service if you prefer.
 
-If you'd rather get started with a working example, you can find the full source code for this project in our [GitHub examples repo](https://github.com/talkjs/talkjs-examples/tree/master/firebase.notifications-example).
+If you'd rather get started with a working example, you can find the full source code for this project in our [GitHub examples repo](https://github.com/talkjs/talkjs-examples/tree/master/firebase/notifications-example).
 
 <div style="background-color: #F7F7F7; padding: 15px;">
   <p><strong>Note:</strong> This tutorial assumes you're already familiar with TalkJS basics. If you're new to TalkJS, we recommend starting with our <a href="https://talkjs.com/docs/Getting_Started/JavaScript_SDK/1_On_1_Chat/">getting started guide</a>.</p>
