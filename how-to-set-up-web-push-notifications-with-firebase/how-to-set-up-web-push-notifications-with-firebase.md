@@ -41,7 +41,7 @@ If you'd rather get started with a working example, you can find the full source
 To follow along with this tutorial, you'll need:
 
 - A [TalkJS account](https://talkjs.com/dashboard/login)
-- A [Firebase account](https://console.firebase.google.com/) with a Firebase project set up. If you don't yet have a Firebase project, follow [their guides](https://firebase.google.com/docs/guides?_gl=1*qyyupu*_up*MQ..*_ga*MTQxMDg5NTA2Ni4xNzM4MjQ2OTI5*_ga_CW55HF8NVT*MTczODI0NjkyOS4xLjAuMTczODI0NjkyOS4wLjAuMA..) to get started.
+- A [Firebase account](https://console.firebase.google.com/) with a Firebase project set up. If you don't yet have a Firebase project, follow [the Firebase fundamentals guides](https://firebase.google.com/docs/guides) to get started.
 - Firebase Cloud Messaging configured for your TalkJS account. For instructions on how to set this up in the TalkJS dashboard, see [Configure Firebase Cloud Messaging](https://talkjs.com/docs/Features/Notifications/Mobile_Push_Notifications/Configure_FCM/).
 - The [Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli)
 
