@@ -1,6 +1,6 @@
 # Tutorials
 
-This is our repo for draft tutorials. We'll review them here and then upload to our [Resources](https://talkjs.com/resources/) site, which uses the [Ghost](https://ghost.org/) platform.
+This is the [TalkJS](https://talkjs.com) repo for draft tutorials. We'll review them here and then upload to our [Resources](https://talkjs.com/resources/) site, which uses the [Ghost](https://ghost.org/) platform.
 
 ## Notes for writers
 
