@@ -9,9 +9,7 @@ To follow along with this guide, you need:
 - A TalkJS account. TalkJS provides a ready-to-use chat client for your application. [Get started for free.](https://talkjs.com/dashboard/signup)
 - An existing project with an AI chatbot, to which you’d like to add a typing indicator.
 
-💡
-
-Are you getting started with [AI chatbots](https://talkjs.com/use-cases/ai-chatbots/) in your chat? Check out the guides to create a custom AI chatbot using OpenAI’s [ChatGPT](https://talkjs.com/resources/how-to-make-a-customizable-chatbot-frontend-with-talkjs-and-the-openai-api/), Google’s [Gemini](https://talkjs.com/resources/create-a-chatbot-with-talkjs-and-gemini/), or Anthropic’s [Claude](https://talkjs.com/resources/how-to-integrate-claude-into-your-talkjs-chat-with-the-anthropic-api/).
+<div class="kg-card kg-callout-card kg-callout-card-grey"><div class="kg-callout-emoji">💡</div><div class="kg-callout-text">Are you getting started with <a href="https://talkjs.com/use-cases/ai-chatbots/" target="_blank" rel="noopener noreferrer"><u>AI chatbots</u></a> in your chat? Check out the guides to create a custom AI chatbot using OpenAI’s <a href="https://talkjs.com/resources/how-to-make-a-customizable-chatbot-frontend-with-talkjs-and-the-openai-api/" target="_blank" rel="noopener noreferrer"><u>ChatGPT</u></a>, Google’s <a href="https://talkjs.com/resources/create-a-chatbot-with-talkjs-and-gemini/" target="_blank" rel="noopener noreferrer"><u>Gemini</u></a>, or Anthropic’s <a href="https://talkjs.com/resources/how-to-integrate-claude-into-your-talkjs-chat-with-the-anthropic-api/" target="_blank" rel="noopener noreferrer"><u>Claude</u></a>.</div></div>
 
 ## What are typing indicators?
 
