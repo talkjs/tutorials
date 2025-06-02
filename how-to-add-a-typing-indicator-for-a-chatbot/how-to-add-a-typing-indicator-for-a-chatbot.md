@@ -27,7 +27,7 @@ Typing indicators can come in many different forms. A common form of typing icon
   <figcaption>A text-based typing indicator</figcaption>
 </figure>
 
-Popular messaging apps, such as Slack, WhatsApp, Facebook Messenger, or Telegram, all make use of typing indicators.
+Popular messaging apps, such as Slack, WhatsApp, Facebook Messenger, or Telegram, all make use of typing indicators. TalkJS themes all provide a typing indicator that displays when other users are typing, and with a bit of customization, you can add it to chatbot responses too. As an example, try out the [interactive AI chatbot demo](https://talkjs.com/demo/ai-chatbot/) on TalkJS's website.
 
 ## Why are typing indicators important?
 
@@ -41,135 +41,60 @@ To make chatting with AI bots more effective, you can add a custom typing indica
 
 Here’s how to add a real-time typing indicator to your TalkJS chat.
 
-### Step 1: Create a typing indicator theme component
+### Step 1: Add a bot typing indicator to your theme
 
-Begin by creating a custom typing indicator component:
+First, go to the **Themes** tab, and select to **Edit** the theme you currently use. (In this tutorial we'll edit the `default` theme, but it would work similarly for the other themes.)
 
-1.  In your [TalkJS dashboard](https://talkjs.com/dashboard/), go to the **Themes** page.
-2.  In the sidebar panel, from the section **Custom Components**, select the **+** (plus) icon to add a new component.
-3.  Enter a name for your component. This guide uses the name `BotTypingIndicator`. Select **OK** to save your new custom component.
-4.  Add the following inside the `BotTypingIndicator` component:
+Select the `UserMessage` component from the list of **Built-in components**. Replace the existing `MessageBody` component with the following:
 
-```HTML
-<!-- A typing indicator for a bot -->
+```html
+<div t:if="{{ custom.isTyping == 'true' }}" class="typing-indicator">
+  <TypingIndicator />
+</div>
 
-<template>
-    <div class="message-row by-other UserMessage">
-        <Avatar photoUrl="https://talkjs.com/new-web/avatar-1.jpg" />
-
-        <t:set showAuthor="{{ true }}" />
-        <div class="message {{ showAuthor | then: 'has-author' }}">
-            <!-- in group chats, show the message sender name in a random color -->
-            <div t:if="{{ showAuthor }}" class="message-author" style="color: black">
-                AI chatbot
-            </div>
-
-            <div class="text timestamp-float-{{ floatTimestamp }}">
-                <div class="typing-indicator">
-                    <TypingIndicator />
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
-
-<style scoped>
-.message-row {
-    margin-bottom: 16px;
-    margin-left: 16px;
-    margin-top: 0;
-    display: flex;
-    align-items: center;
-}
-
-.message {
-    white-space: normal;
-    overflow: hidden;
-    border-radius: 0.75rem;
-    border-width: 1px;
-    border-style: solid;
-    word-wrap: break-word;
-    position: relative;
-    display: inline-block;
-    max-width: calc(100% - 6rem - 0.25rem - 0.25rem);
-    border-color: #ececec;
-    background-color: #f7f7f7;
-    color: #111;
-}
-
-.by-other .message {
-    margin-left: 0.50rem;
-}
-
-.message-author {
-    font-size: 75%;
-    font-weight: bold;
-    padding: 0.75rem 1rem 0 1rem;
-    margin-bottom: -0.75rem;
-}
-
-.text {
-    padding: 0.75rem 1rem;
-    white-space: pre-wrap;
-}
-
-</style>
+<MessageBody
+  t:else
+  body="{{ body }}"
+  timestamp="{{ timestamp }}"
+  floatTimestamp="auto"
+  showStatus="{{ sender.isMe }}"
+  isLongEmailMessage="{{isLongEmailMessage}}"
+  darkenMenuArea="{{ darkenMenuArea }}"
+  hasReferencedMessage="{{ hasReferencedMessage }}"
+/>
 ```
 
-Your changes are saved automatically.
+This code adds TalkJS's `TypingIndicator` component to the user message if an `isTyping` [custom message property](https://talkjs.com/resources/Reference/Concepts/Messages/#custom) is set on the message. Otherwise, it displays the `MessageBody` as normal.
 
-This code does the following:
+If you wanted you could instead create a custom typing indicator component for the bot in the Theme Editor, but we'll use the standard one that comes with the theme.
 
-- Adds a user avatar and the display name `AI chatbot` to the component.
-- Uses the built-in [typing indicator](/Features/Themes/Components/TypingIndicator/) component.
-- Styles the typing indicator as belonging to the other user in the chat. You can adjust the styling to fit your own needs.
+Your typing indicator won't show up yet. To fix that, we'll set the `isTyping` property to `true` on messages while the bot is typing.
 
-You now have a custom bot typing indicator component in your theme. But your typing indicator currently doesn’t show up yet. Let’s change that.
+### Step 2: Set a custom property while the bot is typing
 
-### Step 2: Detect when the bot is typing
+To set a custom `isTyping` property whenever the bot is composing its response, you can use TalkJS's REST API in your backend server code:
 
-To make the typing indicator show up whenever the bot is typing, you can use [custom conversation properties](/Reference/Concepts/Conversations/#custom). Custom conversation properties allow your theme to detect when the bot is typing.
+1.  When you receive the request to the chatbot, use the REST API to [create a new message](https://talkjs.com/docs/Reference/REST_API/Messages/#send-a-message-on-behalf-of-a-user) with some placeholder text and a custom `isTyping` message property set to true. Your theme code from the previous section will replace the placeholder text with a typing indicator.
+2.  Once your AI chatbot has generated its response, again use the REST API to [edit the message](https://talkjs.com/docs/Reference/REST_API/Messages/#edit-a-message). Set the text of the message to the bot's response, and set the custom property `isTyping` to `false`, or clear it altogether. Your theme code will then replace the typing indicator with a normal `MessageBody` that contains the text of the bot's response.
 
-How does this work? Let your theme check for a specific custom conversation property that’s present whenever the AI chatbot is typing. (You’ll set the custom property itself in [step 3](#step-3-set-a-custom-property-while-the-bot-is-typing).) If the custom property is present, then your theme shows the typing indicator. If the custom property isn’t present, then your theme doesn’t show the typing indicator.
+The exact implementation will depend on the details of your backend code, and the specific AI service that you use. For a Node.js example that uses OpenAI's API to generate responses, see our [Create a custom chatbot with TalkJS and the OpenAI API](https://talkjs.com/resources/how-to-make-a-customizable-chatbot-frontend-with-talkjs-and-the-openai-api/#optional-add-a-typing-indicator) tutorial, which gives detailed step-by-step instructions, and the accompanying [example code](https://github.com/talkjs/talkjs-examples/tree/master/chatbot-integration/openai-chatgpt).
 
-Take the following steps:
+### Step 3: Lock the conversation to read-only when the bot is typing
 
-1.  On the **Themes** page of your TalkJS dashboard, in the section **Built-in Components**, go to the `MessageField` built-in theme component.
-2.  Add the following code to the top of the `MessageField` component, right after the opening of the `<template>` tag:
+There's one final tweak that we need. Currently you can send more messages before the bot replies. As well as being potentially confusing, this can lead to having typing indicators appear above other messages. To prevent this, use the REST API to [update participation details](https://talkjs.com/resources/Reference/REST_API/Participation/#modify-participation) for the current user. Set the [`access`](https://talkjs.com/resources/Reference/Concepts/Participants/#access) field to `Read` while the bot generates its response, and back to `ReadWrite` when it finishes.
 
-```HTML
-<BotTypingIndicator t:if="{{ conversation.custom.typing == 'true' }}"/>
-
-<!--- rest of the MessageField code --->
-```
-
-Your changes are saved automatically.
-
-This code does the following:
-
-- Detects if, for a given conversation, the custom property `typing` is `true`.
-- If `typing` is `true`, then it shows your `BotTypingIndicator` custom theme component.
-- If `typing` is either missing or set to `false`, then your theme shows no typing indicator.
-
-Your theme is now ready to show the bot typing indicator whenever the custom property `typing` is true for a conversation.
-
-But currently your conversations don’t have any custom property typing set to them yet. Let’s change that too, so that your theme can detect when to show the bot typing indicator.
-
-### Step 3: Set a custom property while the bot is typing
-
-To set a custom property whenever the bot is composing its response, you can use the REST API:
-
-1.  When you receive the request to the chatbot, use the [REST API to set a custom property](/Reference/REST_API/Conversations/#setting-conversation-data) `typing` to `true` for your conversation. Your theme now automatically shows the custom typing indicator in the chat.
-2.  Once your AI chatbot has generated its response, again use the REST API to set the custom property `typing` to `false`, or clear it altogether. The bot typing indicator then disappears from the chat.
+As before, the exact implementation details will depend on your server code. See the OpenAI [tutorial](https://talkjs.com/resources/how-to-make-a-customizable-chatbot-frontend-with-talkjs-and-the-openai-api/#optional-add-a-typing-indicator) and [example code](https://github.com/talkjs/talkjs-examples/tree/master/chatbot-integration/openai-chatgpt) for one way to do this.
 
 The result should look something like the following:
 
+<!-- TODO: upload 1-typing-indicator.jpg -->
+
 <figure class="kg-image-card">
-  <img class="kg-image" src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdyccJ2QIFlnJ3kI7S-OpwoKxwx6xY0BsI1PtjMtzMunOaDfrEkH7R7d_hi-jSQd-FGWHIrOnTGAhfkuUoun0DXHwvT8xjJ-w2YAGXIs2bzgX2418_uwVOtplSenFmMMpK964im0g?key=OYb6h5wE6xMJmnrFx6QHtZwJ" alt="A conversation with one message that states ‘Can you help? 🙂’, and another message from the AI chatbot with a typing indicator."/>
+  <img class="kg-image" src="<URL>" alt="A conversation with a user message that asks ‘How do I try TalkJS?’, and a reply from the AI chatbot with a typing indicator. The message field displays 'You can read, but not send messages'."/>
   <figcaption>A typing indicator for an AI chatbot</figcaption>
 </figure>
 
-This way, the bot’s typing indicator shows up whenever the bot is generating its response.
+The typing indicator shows up whenever the bot is generating its response, and the message field is locked to read-only.
 
 ## Next steps
 
