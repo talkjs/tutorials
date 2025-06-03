@@ -87,10 +87,8 @@ As before, the exact implementation details will depend on your server code. See
 
 The result should look something like the following:
 
-<!-- TODO: upload 1-typing-indicator.jpg -->
-
 <figure class="kg-image-card">
-  <img class="kg-image" src="<URL>" alt="A conversation with a user message that asks ‘How do I try TalkJS?’, and a reply from the AI chatbot with a typing indicator. The message field displays 'You can read, but not send messages'."/>
+  <img class="kg-image" src="https://talkjs.com/resources/content/images/2025/06/1-typing-indicator.jpg" alt="A conversation with a user message that asks ‘How do I try TalkJS?’, and a reply from the AI chatbot with a typing indicator. The message field displays 'You can read, but not send messages'."/>
   <figcaption>A typing indicator for an AI chatbot</figcaption>
 </figure>
 
